@@ -1,0 +1,321 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[catalan]{babel}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{enumitem}
+\geometry{a4paper, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{FITXA D'INTEGRALS}} \\
+    \vspace{0.2cm}
+    \textsc{Matemàtiques 2n Batxillerat}
+\end{center}
+
+\vspace{0.5cm}
+
+\section*{Integrals indefinides immediates i quasi-immediates}
+
+\begin{enumerate}[label=\arabic*.]
+    \item Calcula les següents integrals indefinides:
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int (3x^2-2x+5)\,dx$
+        \item $\displaystyle \int \dfrac{1}{x}\,dx$
+        \item $\displaystyle \int e^x\,dx$
+        \item $\displaystyle \int \sin x\,dx$
+        \item $\displaystyle \int \cos x\,dx$
+    \end{enumerate}
+
+    \item Calcula les integrals quasi-immediates:
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int \dfrac{x}{x^2+1}\,dx$
+        \item $\displaystyle \int x e^{x^2}\,dx$
+        \item $\displaystyle \int \sin x \cos x\,dx$
+        \item $\displaystyle \int \dfrac{\cos x}{\sin x}\,dx$
+        \item $\displaystyle \int \dfrac{1}{\sqrt{1-x^2}}\,dx$
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Mètodes d'integració}
+
+\begin{enumerate}[label=\arabic*.]
+    \setcounter{enumi}{2}
+    \item Integrals racionals:
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int \dfrac{1}{x^2-1}\,dx$
+        \item $\displaystyle \int \dfrac{1}{x^2+4x+5}\,dx$
+        \item $\displaystyle \int \dfrac{x+1}{x^2+2x+5}\,dx$
+        \item $\displaystyle \int \dfrac{x^2}{x+1}\,dx$
+        \item $\displaystyle \int \dfrac{2x+3}{x^2-3x+2}\,dx$
+    \end{enumerate}
+
+    \item Integració per parts:
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int x e^x\,dx$
+        \item $\displaystyle \int x \sin x\,dx$
+        \item $\displaystyle \int \ln x\,dx$
+        \item $\displaystyle \int x^2 e^x\,dx$
+        \item $\displaystyle \int x \cos(2x)\,dx$
+    \end{enumerate}
+
+    \item Canvi de variable:
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int \dfrac{dx}{x\sqrt{x^2-1}}$
+        \item $\displaystyle \int \sqrt{9-x^2}\,dx$
+        \item $\displaystyle \int \dfrac{e^x}{e^x+1}\,dx$
+        \item $\displaystyle \int \dfrac{1}{1+\sin x}\,dx$
+        \item $\displaystyle \int \dfrac{1}{1+\cos x}\,dx$
+    \end{enumerate}
+
+    \item Integrals trigonomètriques:
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int \sin^2 x\,dx$
+        \item $\displaystyle \int \sin^3 x \cos^5 x\,dx$
+        \item $\displaystyle \int \dfrac{5}{1-\cos x}\,dx$
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Integrals definides i àrees}
+
+\begin{enumerate}[label=\arabic*.]
+    \setcounter{enumi}{6}
+    \item Calcula les integrals definides:
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int_0^1 x^2\,dx$
+        \item $\displaystyle \int_0^\pi \sin x\,dx$
+        \item $\displaystyle \int_1^e \dfrac{1}{x}\,dx$
+        \item $\displaystyle \int_0^1 e^x\,dx$
+    \end{enumerate}
+
+    \item Calcula l'àrea del recinte limitat per:
+    \begin{enumerate}[label=\alph*)]
+        \item La funció $f(x)=x^2-4x+3$ i l'eix $OX$ entre $x=1$ i $x=3$.
+        \item La funció $f(x)=\cos x$ i l'eix $OX$ entre $x=0$ i $x=2\pi$.
+        \item Les funcions $f(x)=x^2$ i $g(x)=2x-x^2$.
+        \item La paràbola $y=x^2$ i la recta $y=x+2$.
+    \end{enumerate}
+
+    \item Aplicacions de la integral definida:
+    \begin{enumerate}[label=\alph*)]
+        \item Calcula el volum de l'esfera de radi $R$ generada en girar la semicircumferència $y=\sqrt{R^2-x^2}$ al voltant de l'eix $OX$.
+        \item Un moll té una constant $k=200$ N/m. Quin treball es necessita per estirar-la des de $x=0$ fins a $x=0.2$ m?
+    \end{enumerate}
+\end{enumerate}
+
+\newpage
+
+\section*{Solucionari}
+
+\subsection*{Exercici 1}
+\begin{enumerate}[label=\alph*)]
+    \item $x^3-x^2+5x+C$
+    \item $\ln|x|+C$
+    \item $e^x+C$
+    \item $-\cos x+C$
+    \item $\sin x+C$
+\end{enumerate}
+
+\subsection*{Exercici 2}
+\begin{enumerate}[label=\alph*)]
+    \item $\frac{1}{2}\ln(x^2+1)+C$
+    \item $\frac{1}{2}e^{x^2}+C$
+    \item $\frac{1}{2}\sin^2 x+C$ (o $-\frac{1}{2}\cos^2 x+C$)
+    \item $\ln|\sin x|+C$
+    \item $\arcsin x+C$
+\end{enumerate}
+
+\subsection*{Exercici 3}
+\begin{enumerate}[label=\alph*)]
+    \item $\frac{1}{2}\ln\left|\frac{x-1}{x+1}\right|+C$
+    \item $\arctan(x+2)+C$
+    \item $\frac{1}{2}\ln(x^2+2x+5)+C$
+    \item $\frac{x^2}{2}-x+\ln|x+1|+C$
+    \item $7\ln|x-2|-5\ln|x-1|+C$
+\end{enumerate}
+
+\subsection*{Exercici 4}
+\begin{enumerate}[label=\alph*)]
+    \item $e^x(x-1)+C$
+    \item $-x\cos x+\sin x+C$
+    \item $x\ln x-x+C$
+    \item $e^x(x^2-2x+2)+C$
+    \item $\frac{x}{2}\sin(2x)+\frac{1}{4}\cos(2x)+C$
+\end{enumerate}
+
+\subsection*{Exercici 5}
+\begin{enumerate}[label=\alph*)]
+    \item $\arctan(\sqrt{x^2-1})+C$
+    \item $\frac{9}{2}\arcsin\left(\frac{x}{3}\right)+\frac{x}{2}\sqrt{9-x^2}+C$
+    \item $\ln(e^x+1)+C$
+    \item $\tan x-\sec x+C$ (o $\tan\left(\frac{x}{2}\right)$ amb canvi)
+    \item $\tan\left(\frac{x}{2}\right)+C$
+\end{enumerate}
+
+\subsection*{Exercici 6}
+\begin{enumerate}[label=\alph*)]
+    \item $\frac{x}{2}-\frac{\sin 2x}{4}+C$
+    \item $\frac{\cos^8 x}{8}-\frac{\cos^6 x}{6}+C$ (o $\frac{\sin^4 x}{4}-\frac{\sin^6 x}{3}+\frac{\sin^8 x}{8}+C$)
+    \item $-\frac{5}{\tan(x/2)}+C$
+\end{enumerate}
+
+\subsection*{Exercici 7}
+\begin{enumerate}[label=\alph*)]
+    \item $\frac{1}{3}$
+    \item $2$
+    \item $1$
+    \item $e-1$
+\end{enumerate}
+
+\subsection*{Exercici 8}
+\begin{enumerate}[label=\alph*)]
+    \item $\frac{4}{3}$
+    \item $4$ (perquè $\cos x$ és positiu a $[0,\pi/2]$ i $[3\pi/2,2\pi]$, negatiu a $[\pi/2,3\pi/2]$; l'àrea total és $1+2+1=4$).
+    \item $\frac{1}{3}$
+    \item $\frac{9}{2}$
+\end{enumerate}
+
+\subsection*{Exercici 9}
+\begin{enumerate}[label=\alph*)]
+    \item $V=\pi\int_{-R}^{R}(R^2-x^2)\,dx=\frac{4}{3}\pi R^3$
+    \item $W=\int_0^{0.2}200x\,dx=4$ J
+\end{enumerate}
+
+
+
+\newpage
+
+\begin{center}
+    {\Large \textbf{FITXA D'INTEGRALS - NIVELL ALT}} \\
+    \vspace{0.2cm}
+    \textsc{Matemàtiques 2n Batxillerat (CCTT)}
+\end{center}
+
+\vspace{0.5cm}
+
+\section*{Integrals racionals complexes}
+
+\begin{enumerate}[label=\arabic*.]
+    \item Calcula les integrals racionals següents (algunes requereixen divisió prèvia o fraccions parcials amb arrels complexes):
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int \dfrac{x^2+1}{x^3-x^2+x-1}\,dx$
+        \item $\displaystyle \int \dfrac{1}{x^4-1}\,dx$
+        \item $\displaystyle \int \dfrac{x^3}{(x-1)^2(x+1)}\,dx$
+        \item $\displaystyle \int \dfrac{x^2+3x+1}{x(x^2+1)}\,dx$
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Integrals trigonomètriques avançades}
+
+\begin{enumerate}[label=\arabic*.]
+    \setcounter{enumi}{1}
+    \item Calcula:
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int \sec^3 x\,dx$ \quad (Clàssica: integració per parts)
+        \item $\displaystyle \int \tan^4 x\,dx$
+        \item $\displaystyle \int \dfrac{1}{\sin x + \cos x + 1}\,dx$ \quad (Indicació: canvi $t=\tan(x/2)$)
+        \item $\displaystyle \int \sin(3x)\cos(5x)\,dx$ \quad (Utilitza producte-suma)
+        \item $\displaystyle \int \dfrac{\sin x + \cos x}{\sin x - \cos x}\,dx$
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Integrals amb radicals (substitucions especials)}
+
+\begin{enumerate}[label=\arabic*.]
+    \setcounter{enumi}{2}
+    \item Calcula:
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int \dfrac{1}{x^2\sqrt{x^2+1}}\,dx$ \quad (Indicació: $x=\tan t$ o $x=\sinh t$)
+        \item $\displaystyle \int \sqrt{x^2-4}\,dx$ \quad (Indicació: $x=2\sec t$)
+        \item $\displaystyle \int \dfrac{\sqrt{x^2-1}}{x}\,dx$ \quad (Indicació: $x=\sec t$)
+        \item $\displaystyle \int \sqrt{4x-x^2}\,dx$ \quad (Completa quadrats: $4x-x^2 = 4-(x-2)^2$)
+    \end{enumerate}
+\end{enumerate}
+
+\section*{Integrals definides i teoremes}
+
+\begin{enumerate}[label=\arabic*.]
+    \setcounter{enumi}{3}
+    \item Calcula les integrals definides següents (tenint cura del signe):
+    \begin{enumerate}[label=\alph*)]
+        \item $\displaystyle \int_0^2 |x-1|\,dx$
+        \item $\displaystyle \int_{-2}^2 \sqrt{4-x^2}\,dx$ \quad (Interpretació geomètrica: semicircumferència)
+        \item $\displaystyle \int_0^{\pi} |\cos x|\,dx$
+        \item $\displaystyle \int_0^1 \arcsin x\,dx$ \quad (Integració per parts)
+    \end{enumerate}
+
+    \item Sigui $f(x) = \displaystyle \int_0^x e^{-t^2}\,dt$. Calcula $f'(x)$ i $f''(x)$. (Aplicació del teorema fonamental del càlcul.)
+
+    \item Demostra la següent propietat: Si $f$ és contínua en $[a,b]$, aleshores existeix $c \in (a,b)$ tal que:
+    \[
+    \int_a^b f(x)\,dx = f(c)(b-a)
+    \]
+    (Teorema del valor mitjà del càlcul integral.) Indicació: aplica el teorema del valor mitjà del càlcul diferencial a la funció $F(x)=\int_a^x f(t)\,dt$.
+\end{enumerate}
+
+\section*{Càlcul d'àrees i volums (problemes complexos)}
+
+\begin{enumerate}[label=\arabic*.]
+    \setcounter{enumi}{6}
+    \item Calcula l'àrea de la regió tancada compresa entre les corbes $y=x^3$ i $y=x$ (estudia els intervals on una és superior a l'altra).
+
+    \item Troba l'àrea de la regió limitada per les corbes $y = x^2$ i $y = 2x - x^2$, i per les rectes $x=0$ i $x=1$. (Atenció: es tallen a dins de l'interval.)
+
+    \item La regió limitada per $y = x^2$ i $y = 2x$ gira al voltant de l'eix $OY$. Calcula el volum del sòlid generat (mètode de les closques cilíndriques).
+
+    \item Calcula el volum del sòlid obtingut en girar la regió limitada per $y = \sqrt{x}$, $y = 0$, $x=4$ al voltant de la recta $x=4$ (mètode de les arestes o discos, segons convingui).
+\end{enumerate}
+
+\newpage
+
+\section*{Solucionari (amb indicacions)}
+
+\begin{enumerate}[label=\arabic*.]
+    \item 
+    \begin{enumerate}[label=\alph*)]
+        \item Descomposició: $\frac{x^2+1}{(x-1)(x^2+1)} = \frac{1}{x-1}$. Per tant integral $=\ln|x-1|+C$ (sorprenentment simple!).
+        \item $\frac{1}{(x-1)(x+1)(x^2+1)} = \frac{1/4}{x-1} - \frac{1/4}{x+1} - \frac{1/2}{x^2+1}$. Integral: $\frac{1}{4}\ln|x-1| - \frac{1}{4}\ln|x+1| - \frac{1}{2}\arctan x + C$.
+        \item Divisió: $x^3 = (x-1)^2(x+1)\cdot 1 + ...$. Realment: $\frac{x^3}{(x-1)^2(x+1)} = 1 + \frac{...}{...}$. Fraccions parcials. Resultat: $\frac{x^2}{2} + 2\ln|x-1| - \frac{1}{2}\ln|x+1| - \frac{1}{2(x-1)} + C$. (Cal comprovar els coeficients).
+        \item $\frac{x^2+3x+1}{x(x^2+1)} = \frac{1}{x} + \frac{3}{x^2+1} + \frac{?}{...}$ Realment: $= \frac{A}{x} + \frac{Bx+C}{x^2+1}$. Resolent: $A=1$, $B=0$, $C=3$. Per tant integral: $\ln|x| + 3\arctan x + C$.
+    \end{enumerate}
+
+    \item 
+    \begin{enumerate}[label=\alph*)]
+        \item $\int \sec^3 x dx = \frac{1}{2}(\sec x \tan x + \ln|\sec x + \tan x|) + C$ (clàssica per parts: $u=\sec x, dv=\sec^2 x dx$).
+        \item $\int \tan^4 x dx = \int \tan^2 x(\sec^2 x -1) dx = \frac{\tan^3 x}{3} - \tan x + x + C$.
+        \item Amb $t=\tan(x/2)$: $\sin x = 2t/(1+t^2)$, $\cos x = (1-t^2)/(1+t^2)$, $dx=2dt/(1+t^2)$. Denominador: $\frac{2t+1-t^2}{1+t^2} + 1 = \frac{2t+2}{1+t^2} = \frac{2(1+t)}{1+t^2}$. Integral: $\int \frac{2/(1+t^2)}{2(1+t)/(1+t^2)} dt = \int \frac{dt}{1+t} = \ln|1+t|+C = \ln|1+\tan(x/2)|+C$.
+        \item $\sin(3x)\cos(5x) = \frac{1}{2}[\sin(8x) + \sin(-2x)] = \frac{1}{2}[\sin(8x) - \sin(2x)]$. Integral: $-\frac{1}{16}\cos(8x) + \frac{1}{4}\cos(2x)+C$.
+        \item Numerador és derivada del denominador (canvi $u=\sin x-\cos x$, $du=(\cos x+\sin x)dx$). Integral: $\ln|\sin x - \cos x|+C$.
+    \end{enumerate}
+
+    \item 
+    \begin{enumerate}[label=\alph*)]
+        \item $x=\tan t$, $dx=\sec^2 t dt$, $\sqrt{x^2+1}=\sec t$. Integral $\int \frac{\sec^2 t}{\tan^2 t \sec t}dt = \int \frac{\cos t}{\sin^2 t}dt = -\csc t + C = -\frac{\sqrt{x^2+1}}{x}+C$.
+        \item $x=2\sec t$, $dx=2\sec t \tan t dt$, $\sqrt{x^2-4}=2\tan t$. Integral $\int 4 \sec t \tan^2 t dt = 4\int \sec t(\sec^2 t-1)dt = 4(\frac{1}{2}\sec t\tan t + \frac{1}{2}\ln|\sec t+\tan t| - \ln|\sec t+\tan t|) + C = 2(\sec t\tan t - \ln|\sec t+\tan t|)+C = \frac{x}{2}\sqrt{x^2-4} - 2\ln|x+\sqrt{x^2-4}|+C$.
+        \item $x=\sec t$, $dx=\sec t\tan t dt$, $\sqrt{x^2-1}=\tan t$. Integral $\int \tan^2 t dt = \tan t - t + C = \sqrt{x^2-1} - \arcsec x + C$.
+        \item $\int \sqrt{4-(x-2)^2} dx$. Canvi $u=x-2$, després $u=2\sin t$. Resultat: $2\arcsin((x-2)/2) + \frac{x-2}{2}\sqrt{4x-x^2} + C$.
+    \end{enumerate}
+
+    \item 
+    \begin{enumerate}[label=\alph*)]
+        \item $\int_0^1 (1-x) dx + \int_1^2 (x-1) dx = 1/2 + 1/2 = 1$.
+        \item Semicircumferència radi 2 $\Rightarrow$ àrea $= 2\pi$.
+        \item $\int_0^{\pi/2} \cos x dx + \int_{\pi/2}^{\pi} -\cos x dx = 1 + 1 = 2$.
+        \item Parts: $u=\arcsin x$, $dv=dx$ $\Rightarrow$ $[x\arcsin x]_0^1 - \int_0^1 \frac{x}{\sqrt{1-x^2}}dx = \pi/2 - [-\sqrt{1-x^2}]_0^1 = \pi/2 - 1$.
+    \end{enumerate}
+
+    \item $f'(x)=e^{-x^2}$, $f''(x)=-2x e^{-x^2}$.
+
+    \item Sigui $F(x)=\int_a^x f(t)dt$. Pel TFC, $F$ és derivable i $F'=f$. Pel TVM del càlcul diferencial aplicat a $F$ en $[a,b]$, existeix $c\in(a,b)$ tal que $F'(c)=\frac{F(b)-F(a)}{b-a}$. Però $F'(c)=f(c)$ i $F(b)-F(a)=\int_a^b f(t)dt$. Per tant $\int_a^b f(t)dt = f(c)(b-a)$.
+
+    \item Punts de tall: $x^3=x \Rightarrow x(x^2-1)=0 \Rightarrow x=-1,0,1$. Àrea $= \int_{-1}^0 (x^3-x) dx + \int_0^1 (x - x^3) dx = \frac{1}{4} + \frac{1}{4} = \frac{1}{2}$.
+
+    \item Tall: $x^2 = 2x-x^2 \Rightarrow x=0,1$. En $(0,1)$, $g(x)\ge f(x)$. Àrea $= \int_0^1 (2x-2x^2)dx = 1-2/3 = 1/3$.
+
+    \item Closques: $V = 2\pi \int_a^b (\text{radi})(\text{alçada}) dx$. Radi = $x$, alçada = $2x - x^2$ (superior) - $x^2$ (inferior) = $2x-2x^2$. Límits $0$ a $1$. $V=2\pi \int_0^1 x(2x-2x^2)dx = 4\pi \int_0^1 (x^2-x^3)dx = 4\pi(1/3-1/4)=\pi/3$.
+
+    \item Girem al voltant de $x=4$. Utilitzem el mètode de les arestes (volums per diferència de discs). Radi exterior $R=4-x$, radi interior $r=0$. Alçada variable $y=\sqrt{x}$ (de 0 a 2). Àrea de la secció: $\pi(4-x)^2$. $V=\pi\int_0^4 (4-x)^2 dx = \pi\int_0^4 (x-4)^2 dx = \pi [ (x-4)^3/3 ]_0^4 = \pi(0 - (-64/3)) = 64\pi/3$.
+\end{enumerate}
+
+\end{document}
