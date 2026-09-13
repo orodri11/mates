@@ -22,41 +22,6 @@ jobs:
           mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT
 
       # -----------------------------------------------------------------
-      # CREACIÓ DEL PLANTILLA PDF "EN CONSTRUCCIÓ"
-      # -----------------------------------------------------------------
-      - name: Crear plantilla 'En construcció'
-        run: |
-          mkdir -p placeholder
-          cat << 'EOF' > placeholder/en_construccio.tex
-          \documentclass[12pt,a4paper]{article}
-          \usepackage[utf8]{utf8}
-          \usepackage[catalan]{babel}
-          \usepackage{xcolor}
-          \usepackage{geometry}
-          \geometry{margin=2.5cm}
-          \usepackage{lmodern}
-
-          \definecolor{brandblue}{RGB}{2, 132, 199}
-          \definecolor{textgrey}{RGB}{100, 116, 139}
-
-          \begin{document}
-          \thispagestyle{empty}
-          \vspace*{4cm}
-          \begin{center}
-              {\Huge \bfseries \color{brandblue} 🛠️ Material en construcció}\\[1.5cm]
-              {\Large Aquest document estarà disponible pròximament.}\\[0.8cm]
-              {\large \color{textgrey} Prof. Oscar Rodriguez --- Matemàtiques de Batxillerat}
-          \end{center}
-          \end{document}
-          EOF
-
-      - name: Compilar plantilla 'En construcció'
-        uses: xu-cheng/latex-action@v3
-        with:
-          root_file: en_construccio.tex
-          working_directory: placeholder
-
-      # -----------------------------------------------------------------
       # COMPILACIÓ DELS TEMES EXISTENTS
       # -----------------------------------------------------------------
       # 1r BATX MACS
@@ -283,24 +248,46 @@ jobs:
           working_directory: 2BATX_CCTT/Tema8
 
       # -----------------------------------------------------------------
-      # PUBLICACIÓ I PLACEMENT DE PLACEHOLDERS PER ELS FALTANTS
+      # CREAR PAGINA HTML "EN CONSTRUCCIÓ" I ORGANITZAR PDFS
       # -----------------------------------------------------------------
-      - name: Organitzar PDFs i Assignar 'En construcció' si falta el PDF
+      - name: Organitzar PDFs i Assignar fallback si falta el fitxer
         run: |
+          # Crear una pàgina d'avís elegant en HTML quan un PDF no existeix
+          cat << 'EOF' > public/en_construccio.html
+          <!DOCTYPE html>
+          <html lang="ca">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Material en construcció</title>
+              <style>
+                  body { font-family: 'Segoe UI', system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f6f9; color: #1f2937; text-align: center; }
+                  .card { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); max-width: 450px; }
+                  h1 { color: #0284c7; margin-top: 0; }
+                  p { color: #64748b; font-size: 1.1em; }
+                  .btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #0284c7; color: white; border-radius: 8px; text-decoration: none; font-weight: bold; }
+              </style>
+          </head>
+          <body>
+              <div class="card">
+                  <h1>🛠️ Material en construcció</h1>
+                  <p>Aquest document encara no s'ha publicat. Estarà disponible molt aviat!</p>
+                  <a href="javascript:history.back()" class="btn">⬅ Tornar enrere</a>
+              </div>
+          </body>
+          </html>
+          EOF
+
           for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT; do
             for i in {1..10}; do
               # Apunts
               if [ -f "$curs/Tema$i/main.pdf" ]; then
                 cp "$curs/Tema$i/main.pdf" "public/$curs/Tema${i}_apunts.pdf"
-              else
-                cp "placeholder/en_construccio.pdf" "public/$curs/Tema${i}_apunts.pdf"
               fi
               
               # Exercicis
               if [ -f "$curs/Tema$i/exercicis.pdf" ]; then
                 cp "$curs/Tema$i/exercicis.pdf" "public/$curs/Tema${i}_exercicis.pdf"
-              else
-                cp "placeholder/en_construccio.pdf" "public/$curs/Tema${i}_exercicis.pdf"
               fi
             done
           done
