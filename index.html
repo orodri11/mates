@@ -348,25 +348,33 @@
   </footer>
 
   <script>
+    // =================================================================
+    // 1. CONFIGURACIÓ DE BOTONS I VERIFICACIÓ DE PDF
+    // =================================================================
     const botonsPerTema = [
       { etiqueta: "📄 Apunts", sufix: "apunts", classe: "primary" },
       { etiqueta: "✏️ Exercicis", sufix: "exercicis", classe: "secondary" }
     ];
 
-    async function obrirRecurs(event, rutaPDF) {
+    async function obrirPDF(event, rutaPDF) {
       event.preventDefault();
+
       try {
         const resposta = await fetch(rutaPDF, { method: 'HEAD' });
+
         if (resposta.ok) {
           window.open(rutaPDF, '_blank', 'noopener,noreferrer');
         } else {
-          window.location.href = 'en_construccio.html';
+          alert("⚠️ Aquest material encara està en construcció. Disculpa les molèsties!");
         }
       } catch (error) {
-        window.location.href = 'en_construccio.html';
+        alert("⚠️ Aquest material encara està en construcció. Disculpa les molèsties!");
       }
     }
 
+    // =================================================================
+    // 2. ESTRUCTURA DE CURSOS I TEMES
+    // =================================================================
     const estructuraWeb = [
       {
         idNivell: "ESO",
@@ -562,6 +570,9 @@
       }
     ];
 
+    // =================================================================
+    // 3. LÒGICA DE NAVEGACIÓ I RENDERITZAT
+    // =================================================================
     let nivellSeleccionat = null;
     let cursSeleccionat = null;
 
@@ -628,7 +639,7 @@
 
       let html = `<div class="topics-list">`;
 
-cursSeleccionat.temes.forEach((nomTema, idx) => {
+      cursSeleccionat.temes.forEach((nomTema, idx) => {
         const numTema = idx + 1;
         html += `
           <div class="topic-card">
@@ -641,8 +652,7 @@ cursSeleccionat.temes.forEach((nomTema, idx) => {
           html += `
             <a class="btn-link ${boto.classe}" 
                href="${rutaPDF}" 
-               target="_blank" 
-               rel="noopener noreferrer">
+               onclick="obrirPDF(event, '${rutaPDF}')">
               ${boto.etiqueta}
             </a>
           `;
@@ -666,6 +676,7 @@ cursSeleccionat.temes.forEach((nomTema, idx) => {
       }
     }
 
+    // Inicialització
     mostrarNivells();
   </script>
 </body>
