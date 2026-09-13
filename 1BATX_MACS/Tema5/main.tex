@@ -1,0 +1,1134 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{matrix, calc, arrows.meta}
+\usepackage{tcolorbox}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}
+
+\setlength{\headheight}{16pt}
+\geometry{a4paper, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MACS 1r Batxillerat}
+\fancyhead[R]{\leftmark}
+\fancyfoot[L]{\href{mailto:oscar.rodriguez@insjoseplladonosa.cat}{oscar.rodriguez@insjoseplladonosa.cat}}
+\fancyfoot[R]{\thepage}
+
+% Entorns personalitzats
+\newtcolorbox{concept}[1][]{colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries, title=Concepte, #1}
+\newtcolorbox{exemple}[1][]{colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries, title=Exemple, #1}
+\newtcolorbox{exercici}[1][]{colback=yellow!10!white, colframe=yellow!75!black, fonttitle=\bfseries, title=Exercici, #1}
+\newtcolorbox{solucio}[1][]{colback=orange!5!white, colframe=orange!75!black, fonttitle=\bfseries, title=Solució, #1}
+\newtcolorbox{resum}[1][]{colback=purple!5!white, colframe=purple!75!black, fonttitle=\bfseries, title=Resum de fórmules, #1}
+
+\hypersetup{pageanchor=false}
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    \vspace*{0.5cm}
+    {\Large \textbf{INS Josep Lladonosa} \par}
+    \vspace{0.3cm}
+    {\large Matemàtiques Aplicades a les Ciències Socials -- 1r de Batxillerat \par}
+    \vspace{1.5cm}
+    {\Huge \textbf{Tema 5: Matemàtica Financera} \par}
+    \vspace{0.8cm}
+    {\Large Dossier de Teoria i Exercicis \par}
+    \vspace{1.5cm}
+
+    \includegraphics[width=0.45\textwidth]{financera.jpg}
+
+    \vspace{1.5cm}
+    \textbf{Professor:} Òscar Rodríguez \\
+    \href{mailto:oscar.rodriguez@insjoseplladonosa.cat}{oscar.rodriguez@insjoseplladonosa.cat}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\hypersetup{pageanchor=true}
+\pagenumbering{arabic}
+
+% =========================================================
+\section{Percentatges i Percentatges Encadenats}
+
+% ---------------------------------------------------------
+\subsection{Repàs: concepte de percentatge}
+
+\begin{concept}
+\textbf{Percentatge}\\
+Un \textbf{percentatge} és una fracció amb denominador 100. Expressar una quantitat com a percentatge equival a multiplicar-la per $\dfrac{1}{100}$.
+\[
+x\% = \dfrac{x}{100}
+\]
+
+\textbf{Factor multiplicador}\\
+Per aplicar un percentatge a una quantitat $C$, n'hi ha prou de multiplicar-la pel \textbf{factor multiplicador}:
+\begin{itemize}
+    \item \textbf{Augment} del $x\%$: $\quad C \cdot \left(1 + \dfrac{x}{100}\right)$
+    \item \textbf{Disminució} del $x\%$: $\quad C \cdot \left(1 - \dfrac{x}{100}\right)$
+\end{itemize}
+
+\textbf{Variació percentual entre dos valors}\\
+Donats un valor inicial $V_i$ i un valor final $V_f$, la variació percentual és:
+\[
+\text{Variació \%} = \dfrac{V_f - V_i}{V_i} \cdot 100
+\]
+Si el resultat és positiu, hi ha hagut un augment; si és negatiu, una disminució.
+\end{concept}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1, >=Stealth]
+    \node[draw, rounded corners, fill=blue!15, minimum width=2.5cm, minimum height=1cm] (C) at (0,0) {$C$};
+    \node[draw, rounded corners, fill=green!15, minimum width=2.5cm, minimum height=1cm] (A) at (5,1.2) {$C \cdot \left(1+\frac{x}{100}\right)$};
+    \node[draw, rounded corners, fill=red!15, minimum width=2.5cm, minimum height=1cm] (D) at (5,-1.2) {$C \cdot \left(1-\frac{x}{100}\right)$};
+    \draw[->, thick, green!60!black] (C) -- (A) node[midway, above, sloped] {\small augment $x\%$};
+    \draw[->, thick, red!70!black] (C) -- (D) node[midway, below, sloped] {\small disminució $x\%$};
+\end{tikzpicture}
+\caption{El factor multiplicador aplica augments o disminucions percentuals.}
+\end{figure}
+
+\begin{exemple}
+\textbf{Càlcul de percentatges}
+\begin{enumerate}[label=\alph*)]
+    \item Un producte de 80 € augmenta un 15\%. Nou preu:
+    \[
+    80 \cdot \left(1 + \dfrac{15}{100}\right) = 80 \cdot 1{,}15 = 92 \text{ €}
+    \]
+    \item Un producte de 120 € es rebaixa un 25\%. Nou preu:
+    \[
+    120 \cdot \left(1 - \dfrac{25}{100}\right) = 120 \cdot 0{,}75 = 90 \text{ €}
+    \]
+    \item Si un sou passa de 1\,500 € a 1\,650 €, la variació percentual és:
+    \[
+    \dfrac{1650-1500}{1500} \cdot 100 = 10\%
+    \]
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 1.1}\\
+Calcula:
+\begin{enumerate}[label=\alph*)]
+    \item El 18\% de 250.
+    \item El preu final d'un article de 45 € amb un IVA del 21\%.
+    \item El preu final d'un article de 80 € amb un descompte del 30\%.
+    \item La variació percentual si un valor passa de 200 a 250.
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+\subsection{Percentatges encadenats}
+
+\begin{concept}
+\textbf{Augments i disminucions successius}\\
+Quan sobre una quantitat s'apliquen diversos percentatges successius, el resultat final s'obté multiplicant pel \textbf{producte de tots els factors multiplicadors}:
+\[
+C_f = C_0 \cdot \left(1 + \dfrac{x_1}{100}\right) \cdot \left(1 + \dfrac{x_2}{100}\right) \cdots \left(1 + \dfrac{x_n}{100}\right)
+\]
+(on cada $x_i$ pot ser positiu per a augments o negatiu per a disminucions).
+
+\textbf{Important:} els percentatges encadenats \textbf{no se sumen}. L'ordre d'aplicació tampoc no altera el resultat final.
+
+\textbf{Factor acumulat}\\
+El producte de tots els factors s'anomena \textbf{factor acumulat}:
+\[
+F = \prod_{i=1}^{n} \left(1 + \dfrac{x_i}{100}\right)
+\]
+La variació percentual total és:
+\[
+\text{Variació total \%} = (F - 1) \cdot 100
+\]
+\end{concept}
+
+\begin{exemple}
+\textbf{Percentatges encadenats}
+\begin{enumerate}[label=\alph*)]
+    \item Un producte de 100 € puja un 10\% i després baixa un 10\%:
+    \[
+    100 \cdot 1{,}10 \cdot 0{,}90 = 99 \text{ €}
+    \]
+    (No torna a 100 €! Ha perdut un 1\%.)
+    \item Un article de 200 € pateix un descompte del 20\% i després un altre del 15\%:
+    \[
+    200 \cdot 0{,}80 \cdot 0{,}85 = 136 \text{ €}
+    \]
+    La variació total és: $(0{,}80 \cdot 0{,}85 - 1) \cdot 100 = -32\%$ (no és $-35\%$).
+    \item Un sou de 1\,200 € puja un 3\% el primer any, un 2\% el segon i un 4\% el tercer:
+    \[
+    1200 \cdot 1{,}03 \cdot 1{,}02 \cdot 1{,}04 = 1310{,}19 \text{ €}
+    \]
+    La variació total: $(1{,}03 \cdot 1{,}02 \cdot 1{,}04 - 1) \cdot 100 \approx 9{,}18\%$.
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 1.2}\\
+\begin{enumerate}[label=\alph*)]
+    \item Un mòbil de 400 € puja un 12\% i després baixa un 8\%. Quin és el preu final?
+    \item Una acció val 50 € i puja un 20\% el primer mes, un 5\% el segon i baixa un 10\% el tercer. Quin és el seu valor final?
+    \item Un lloguer de 850 € puja un 2{,}5\% el 2024, un 3\% el 2025 i un 4\% el 2026. Quin serà el lloguer el 2026?
+    \item La variació percentual total del cas c).
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL BLOC 1
+% ---------------------------------------------------------
+\begin{resum}[title=Resum 1: Percentatges]
+\textbf{Factor multiplicador}
+\[
+\text{Augment } x\%: \times \left(1+\dfrac{x}{100}\right) \qquad
+\text{Disminució } x\%: \times \left(1-\dfrac{x}{100}\right)
+\]
+
+\textbf{Variació percentual}
+\[
+\text{Variació \%} = \dfrac{V_f - V_i}{V_i} \cdot 100
+\]
+
+\textbf{Percentatges encadenats}
+\[
+C_f = C_0 \cdot \prod_{i=1}^{n} \left(1 + \dfrac{x_i}{100}\right)
+\]
+\[
+\text{Variació total \%} = \left(\prod_{i=1}^{n}\left(1+\dfrac{x_i}{100}\right) - 1\right) \cdot 100
+\]
+\end{resum}
+
+\newpage
+
+% =========================================================
+\section{Interès Simple}
+
+% ---------------------------------------------------------
+\subsection{Concepte i elements}
+
+\begin{concept}
+\textbf{Interès simple}\\
+L'\textbf{interès simple} és el rendiment que produeix un capital $C_0$ durant un temps $t$ a un rèdit $i$, sense que els interessos generats es reinverteixin.
+
+\textbf{Elements:}
+\begin{itemize}
+    \item \textbf{Capital inicial} ($C_0$): diners prestats o invertits.
+    \item \textbf{Rèdit o tant per u} ($i$): interès anual expressat en tant per u. Si el tipus és del $x\%$, aleshores $i = \dfrac{x}{100}$.
+    \item \textbf{Temps} ($t$): durada de la inversió, expressada en anys.
+    \item \textbf{Interès} ($I$): benefici obtingut.
+    \item \textbf{Capital final} ($C_f$): capital inicial més els interessos.
+\end{itemize}
+\end{concept}
+
+% ---------------------------------------------------------
+\subsection{Fórmula de l'interès simple}
+
+\begin{concept}
+\textbf{Fórmules de l'interès simple}\\
+\[
+\boxed{I = C_0 \cdot i \cdot t}
+\]
+\[
+\boxed{C_f = C_0 + I = C_0(1 + i \cdot t)}
+\]
+
+\textbf{Aïllaments útils:}
+\[
+C_0 = \dfrac{C_f}{1+it}, \qquad
+i = \dfrac{I}{C_0 \cdot t}, \qquad
+t = \dfrac{I}{C_0 \cdot i}
+\]
+
+\textbf{Conversió del temps}\\
+Si el temps ve donat en mesos o dies, cal convertir-lo a anys:
+\[
+t_{\text{anys}} = \dfrac{\text{mesos}}{12} = \dfrac{\text{dies}}{365}
+\]
+\end{concept}
+
+\begin{exemple}
+\textbf{Càlcul d'interès simple}
+\begin{enumerate}[label=\alph*)]
+    \item Invertim 2\,000 € al 4\% anual durant 3 anys.
+    \[
+    I = 2000 \cdot 0{,}04 \cdot 3 = 240 \text{ €} \qquad C_f = 2000 + 240 = 2240 \text{ €}
+    \]
+    \item Dipositem 5\,000 € al 3\% anual durant 8 mesos.
+    \[
+    t = \dfrac{8}{12} = \dfrac{2}{3} \text{ anys} \qquad
+    I = 5000 \cdot 0{,}03 \cdot \dfrac{2}{3} = 100 \text{ €}
+    \]
+    \item Volem obtenir 500 € d'interessos invertint 10\,000 € al 2{,}5\% anual. Quant de temps cal?
+    \[
+    t = \dfrac{500}{10000 \cdot 0{,}025} = 2 \text{ anys}
+    \]
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 2.1}\\
+\begin{enumerate}[label=\alph*)]
+    \item Calcula l'interès que produeixen 3\,500 € al 5\% anual durant 4 anys.
+    \item Quin capital final tindrem si invertim 1\,200 € al 3\% anual durant 18 mesos?
+    \item Quant temps cal perquè 8\,000 € al 4\% anual produeixin 960 € d'interessos?
+    \item Quin rèdit anual s'ha aplicat si 2\,500 € han generat 150 € en 2 anys?
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL BLOC 2
+% ---------------------------------------------------------
+\begin{resum}[title=Resum 2: Interès Simple]
+\textbf{Fórmules principals}
+\[
+I = C_0 \cdot i \cdot t, \qquad C_f = C_0(1 + i \cdot t)
+\]
+
+\textbf{Aïllaments}
+\[
+C_0 = \dfrac{C_f}{1+it}, \qquad
+i = \dfrac{I}{C_0 \cdot t}, \qquad
+t = \dfrac{I}{C_0 \cdot i}
+\]
+
+\textbf{Conversió del temps}
+\[
+t_{\text{anys}} = \dfrac{\text{mesos}}{12} = \dfrac{\text{dies}}{365}
+\]
+\end{resum}
+
+\newpage
+
+% =========================================================
+\section{Interès Compost}
+
+% ---------------------------------------------------------
+\subsection{Concepte i fórmula fonamental}
+
+\begin{concept}
+\textbf{Interès compost}\\
+L'\textbf{interès compost} és el rendiment que produeix un capital quan els interessos generats es reinverteixen periòdicament (capitalització). És a dir, els interessos es van acumulant al capital i al seu torn generen nous interessos.
+
+\textbf{Fórmula fonamental:}
+\[
+\boxed{C_f = C_0 \cdot (1 + i)^n}
+\]
+on:
+\begin{itemize}
+    \item $C_0$ és el capital inicial,
+    \item $i$ és el tant per u per període,
+    \item $n$ és el nombre de períodes de capitalització.
+\end{itemize}
+
+\textbf{Interessos generats:}
+\[
+I = C_f - C_0 = C_0\left[(1+i)^n - 1\right]
+\]
+\end{concept}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.85]
+    \draw[->, thick] (-0.5,0) -- (11,0) node[right] {$n$ (anys)};
+    \draw[->, thick] (0,-0.3) -- (0,6.5) node[above] {$C_f$};
+    % Interès simple: C_f = 1 + 0.5*n
+    \draw[blue, thick, domain=0:10, samples=2]
+        plot (\x, {1 + 0.4*\x});
+    \node[blue, right] at (9.5, 5.2) {\small Simple};
+    % Interès compost: C_f = 1 * (1.15)^n
+    \draw[red, thick, smooth, domain=0:10, samples=100]
+        plot (\x, {1.15^(\x)});
+    \node[red, right] at (9.3, 4.5) {\small Compost};
+    % Marques
+    \foreach \x in {1,2,3,4,5,6,7,8,9,10}
+        \draw (\x, 0.05) -- (\x, -0.05) node[below, font=\scriptsize] {\x};
+\end{tikzpicture}
+\caption{Comparació entre interès simple i interès compost amb el mateix capital inicial i tipus.}
+\end{figure}
+
+\begin{exemple}
+\textbf{Càlcul d'interès compost}
+\begin{enumerate}[label=\alph*)]
+    \item Invertim 1\,000 € al 5\% anual durant 5 anys.
+    \[
+    C_f = 1000 \cdot (1{,}05)^5 = 1000 \cdot 1{,}27628 = 1276{,}28 \text{ €}
+    \]
+    Interessos: $1276{,}28 - 1000 = 276{,}28$ €.
+    \item Dipositem 4\,000 € al 3\% anual compost durant 8 anys.
+    \[
+    C_f = 4000 \cdot (1{,}03)^8 = 4000 \cdot 1{,}26677 = 5067{,}08 \text{ €}
+    \]
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 3.1}\\
+\begin{enumerate}[label=\alph*)]
+    \item Calcula el capital final si invertim 2\,500 € al 4\% anual compost durant 6 anys.
+    \item Quant haurem de tornar si demanem 10\,000 € al 6\% anual compost durant 3 anys?
+    \item Invertim 500 € al 7\% anual compost. Quant tindrem al cap de 10 anys?
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+\subsection{Càlcul del capital inicial, rèdit o temps}
+
+\begin{concept}
+\textbf{Aïllament de variables}\\
+A partir de la fórmula $C_f = C_0(1+i)^n$, podem aïllar:
+
+\textbf{Capital inicial:}
+\[
+C_0 = \dfrac{C_f}{(1+i)^n} = C_f \cdot (1+i)^{-n}
+\]
+
+\textbf{Tant per u:}
+\[
+i = \sqrt[n]{\dfrac{C_f}{C_0}} - 1
+\]
+
+\textbf{Nombre de períodes} (cal usar logaritmes):
+\[
+n = \dfrac{\log(C_f / C_0)}{\log(1+i)}
+\]
+\end{concept}
+
+\begin{exemple}
+\textbf{Càlcul de variables}
+\begin{enumerate}[label=\alph*)]
+    \item Volem obtenir 5\,000 € al cap de 4 anys amb un interès del 3\% anual. Quin capital hem d'invertir?
+    \[
+    C_0 = \dfrac{5000}{(1{,}03)^4} = \dfrac{5000}{1{,}12551} = 4442{,}43 \text{ €}
+    \]
+    \item Un capital de 2\,000 € s'ha convertit en 2\,431{,}01 € al cap de 5 anys. Quin ha estat el tant?
+    \[
+    i = \sqrt[5]{\dfrac{2431{,}01}{2000}} - 1 = \sqrt[5]{1{,}2155} - 1 = 0{,}04 = 4\%
+    \]
+    \item Quant temps trigarà un capital de 3\,000 € a doblar-se al 5\% anual compost?
+    \[
+    n = \dfrac{\log(2)}{\log(1{,}05)} = \dfrac{0{,}30103}{0{,}02119} \approx 14{,}21 \text{ anys}
+    \]
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 3.2}\\
+\begin{enumerate}[label=\alph*)]
+    \item Quin capital inicial cal dipositar al 3{,}5\% anual compost per tenir 8\,000 € en 7 anys?
+    \item Un capital de 5\,000 € s'ha convertit en 6\,077{,}53 € al cap de 4 anys. Quin ha estat el tant anual?
+    \item Quant temps trigarà un capital a multiplicar-se per 1{,}5 al 4\% anual compost?
+    \item Si invertim 1\,500 € al 2{,}5\% anual compost, quant temps trigarà a arribar a 2\,000 €?
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL BLOC 3
+% ---------------------------------------------------------
+\begin{resum}[title=Resum 3: Interès Compost]
+\textbf{Fórmula fonamental}
+\[
+C_f = C_0(1+i)^n, \qquad I = C_0\left[(1+i)^n - 1\right]
+\]
+
+\textbf{Aïllaments}
+\[
+C_0 = \dfrac{C_f}{(1+i)^n} = C_f(1+i)^{-n}
+\]
+\[
+i = \sqrt[n]{\dfrac{C_f}{C_0}} - 1
+\]
+\[
+n = \dfrac{\log(C_f/C_0)}{\log(1+i)}
+\]
+\end{resum}
+
+\newpage
+
+% =========================================================
+\section{Capitalització i Actualització}
+
+% ---------------------------------------------------------
+\subsection{Concepte}
+
+\begin{concept}
+\textbf{Capitalitzar i actualitzar}\\
+\begin{itemize}
+    \item \textbf{Capitalitzar}: portar un capital del present al futur. S'aplica la fórmula de l'interès compost:
+    \[
+    C_f = C_0(1+i)^n
+    \]
+    \item \textbf{Actualitzar (o descomptar)}: portar un capital del futur al present. S'aïlla el capital inicial:
+    \[
+    C_0 = \dfrac{C_f}{(1+i)^n} = C_f \cdot (1+i)^{-n}
+    \]
+\end{itemize}
+El factor $(1+i)^{-n}$ s'anomena \textbf{factor d'actualització} o \textbf{factor de descompte}.
+\end{concept}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1, >=Stealth]
+    \draw[->, thick] (-1,0) -- (11,0);
+    \foreach \x/\lab in {0/{$t=0$}, 5/{$t=n$}}
+        \draw[thick] (\x,0.1) -- (\x,-0.1) node[below] {\lab};
+    \node[blue, above] at (0,0.4) {$C_0$};
+    \node[blue, above] at (5,0.4) {$C_f$};
+    \draw[->, blue, ultra thick] (0.2,0.15) -- (4.8,0.15);
+    \node[blue, below] at (2.5,-0.15) {\small \textbf{Capitalitzar}: $\times (1+i)^n$};
+    \draw[<-, red, ultra thick] (0.2,-0.35) -- (4.8,-0.35);
+    \node[red, below] at (2.5,-0.6) {\small \textbf{Actualitzar}: $\times (1+i)^{-n}$};
+\end{tikzpicture}
+\caption{Línia temporal de la capitalització i l'actualització.}
+\end{figure}
+
+\begin{exemple}
+\textbf{Capitalització i actualització}
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Capitalitzar}: Si avui tenim 3\,000 € i els invertim al 4\% anual durant 5 anys, el capital final serà:
+    \[
+    C_f = 3000 \cdot (1{,}04)^5 = 3649{,}96 \text{ €}
+    \]
+    \item \textbf{Actualitzar}: Volem saber quin valor té avui un capital de 5\,000 € que rebrem d'aquí a 3 anys, amb un tipus de descompte del 5\% anual.
+    \[
+    C_0 = \dfrac{5000}{(1{,}05)^3} = \dfrac{5000}{1{,}157625} = 4319{,}19 \text{ €}
+    \]
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 4.1}\\
+\begin{enumerate}[label=\alph*)]
+    \item Capitalitza 1\,500 € al 3\% anual durant 4 anys.
+    \item Actualitza 8\,000 € que rebrem d'aquí a 5 anys al 4\% anual.
+    \item Quin valor té avui un deute de 3\,000 € que venç d'aquí a 2 anys si el tipus de descompte és del 6\% anual?
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+\subsection{Equivalència de capitals i descompte}
+
+\begin{concept}
+\textbf{Equivalència de capitals}\\
+Dos capitals $C_1$ (disponible a $t_1$) i $C_2$ (disponible a $t_2$) són \textbf{equivalents} si actualitzats al mateix moment tenen el mateix valor.
+
+\textbf{Descompte comercial i racional}\\
+Quan es descompta un efecte (per exemple, un pagaré), hi ha dues maneres de calcular el descompte:
+\begin{itemize}
+    \item \textbf{Descompte comercial (bancari)}: es calcula sobre el valor nominal $N$.
+    \[
+    D_c = N \cdot i \cdot t, \qquad E = N - D_c
+    \]
+    on $E$ és l'efectiu.
+    \item \textbf{Descompte racional}: es calcula sobre l'efectiu $E$.
+    \[
+    D_r = \dfrac{N \cdot i \cdot t}{1 + i \cdot t}, \qquad E = N - D_r
+    \]
+\end{itemize}
+En la pràctica bancària, s'usa habitualment el \textbf{descompte comercial}.
+\end{concept}
+
+\begin{exemple}
+\textbf{Descompte d'un pagaré}\\
+Tenim un pagaré de 5\,000 € que venç d'aquí a 6 mesos i el descomptem al 6\% anual.
+
+\textbf{Descompte comercial:}
+\[
+t = \dfrac{6}{12} = 0{,}5 \text{ anys}, \quad
+D_c = 5000 \cdot 0{,}06 \cdot 0{,}5 = 150 \text{ €}, \quad
+E = 5000 - 150 = 4850 \text{ €}
+\]
+
+\textbf{Descompte racional:}
+\[
+D_r = \dfrac{5000 \cdot 0{,}06 \cdot 0{,}5}{1 + 0{,}06 \cdot 0{,}5} = \dfrac{150}{1{,}03} = 145{,}63 \text{ €}, \quad
+E = 5000 - 145{,}63 = 4854{,}37 \text{ €}
+\]
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 4.2}\\
+\begin{enumerate}[label=\alph*)]
+    \item Volem descomptar un pagaré de 3\,000 € que venç d'aquí a 4 mesos al 5\% anual. Calcula l'efectiu amb descompte comercial i racional.
+    \item Un pagaré de 10\,000 € que venç d'aquí a 9 mesos es descompta al 7\% anual. Calcula l'efectiu amb descompte comercial.
+    \item Si rebem 4\,900 € pel descompte comercial d'un pagaré de 5\,000 € al 6\% anual, quants mesos falten per al venciment?
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL BLOC 4
+% ---------------------------------------------------------
+\begin{resum}[title=Resum 4: Capitalització i Actualització]
+\textbf{Capitalitzar}
+\[
+C_f = C_0(1+i)^n
+\]
+
+\textbf{Actualitzar}
+\[
+C_0 = \dfrac{C_f}{(1+i)^n} = C_f(1+i)^{-n}
+\]
+
+\textbf{Descompte comercial}
+\[
+D_c = N \cdot i \cdot t, \qquad E = N - D_c
+\]
+
+\textbf{Descompte racional}
+\[
+D_r = \dfrac{N \cdot i \cdot t}{1 + i \cdot t}, \qquad E = N - D_r
+\]
+\end{resum}
+
+\newpage
+
+% =========================================================
+\section{TAE i TIN}
+
+% ---------------------------------------------------------
+\subsection{Concepte de TIN i TAE}
+
+\begin{concept}
+\textbf{TIN (Taxa d'Interès Nominal)}\\
+El \textbf{TIN} és el tipus d'interès anual nominal expressat en percentatge. Indica el rèdit anual sense tenir en compte la periodicitat de la capitalització.
+
+Si el TIN anual és $i$ i la capitalització es fa $k$ vegades l'any, aleshores el tant per període és:
+\[
+i_k = \dfrac{i}{k}
+\]
+
+\textbf{TAE (Taxa Anual Equivalent)}\\
+La \textbf{TAE} és el tipus efectiu anual que, amb una sola capitalització a l'any, produeix el mateix interès que el TIN amb $k$ capitalitzacions. Serveix per comparar ofertes financeres amb periodicitats diferents.
+\[
+\boxed{\text{TAE} = \left(1 + \dfrac{i}{k}\right)^k - 1}
+\]
+on $i$ és el TIN expressat en tant per u i $k$ el nombre de capitalitzacions per any.
+
+\textbf{Periodicitats habituals:}
+\begin{itemize}
+    \item Anual: $k = 1$ (TAE = TIN).
+    \item Semestral: $k = 2$.
+    \item Trimestral: $k = 4$.
+    \item Mensual: $k = 12$.
+    \item Diària: $k = 365$.
+\end{itemize}
+\end{concept}
+
+\begin{exemple}
+\textbf{Càlcul de la TAE}
+\begin{enumerate}[label=\alph*)]
+    \item Un banc ofereix un dipòsit amb un TIN del 4\% anual amb capitalització mensual.
+    \[
+    \text{TAE} = \left(1 + \dfrac{0{,}04}{12}\right)^{12} - 1 = (1{,}003333)^{12} - 1 \approx 0{,}04074 = 4{,}074\%
+    \]
+    \item Un altre banc ofereix el mateix 4\% però amb capitalització trimestral:
+    \[
+    \text{TAE} = \left(1 + \dfrac{0{,}04}{4}\right)^{4} - 1 = (1{,}01)^4 - 1 \approx 0{,}04060 = 4{,}060\%
+    \]
+    La primera oferta és lleugerament millor.
+    \item Si el TIN és del 6\% amb capitalització semestral:
+    \[
+    \text{TAE} = (1{,}03)^2 - 1 = 0{,}0609 = 6{,}09\%
+    \]
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 5.1}\\
+\begin{enumerate}[label=\alph*)]
+    \item Calcula la TAE d'un TIN del 5\% amb capitalització trimestral.
+    \item Calcula la TAE d'un TIN del 3\% amb capitalització mensual.
+    \item Un dipòsit ofereix un TIN del 4{,}5\% amb capitalització diària ($k=365$). Calcula'n la TAE.
+    \item Quin TIN caldria perquè amb capitalització mensual obtinguéssim una TAE del 6\%?
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL BLOC 5
+% ---------------------------------------------------------
+\begin{resum}[title=Resum 5: TAE i TIN]
+\textbf{TIN}
+\[
+i_k = \dfrac{i}{k} \qquad \text{(tant per període)}
+\]
+
+\textbf{TAE}
+\[
+\text{TAE} = \left(1 + \dfrac{i}{k}\right)^k - 1
+\]
+
+\textbf{Relació inversa} (TIN a partir de la TAE)
+\[
+i = k \left[(1+\text{TAE})^{1/k} - 1\right]
+\]
+
+\textbf{Periodicitats}: anual $k=1$, semestral $k=2$, trimestral $k=4$, mensual $k=12$, diària $k=365$.
+\end{resum}
+
+\newpage
+
+% =========================================================
+\section{Amortització de Préstecs}
+
+% ---------------------------------------------------------
+\subsection{Concepte de préstec i sistema francès}
+
+\begin{concept}
+\textbf{Préstec i amortització}\\
+Un \textbf{préstec} és una operació financera en què una entitat presta un capital $C_0$ a un particular o empresa, que es compromet a tornar-lo en una sèrie de pagaments periòdics anomenats \textbf{quotes}.
+
+\textbf{Sistema d'amortització francès (quota constant)}\\
+És el sistema més habitual. Cada període es paga la mateixa quantitat $a$ (la quota), que inclou:
+\begin{itemize}
+    \item Una part d'\textbf{interessos} sobre el capital pendent.
+    \item Una part d'\textbf{amortització} que redueix el capital pendent.
+\end{itemize}
+
+\textbf{Fórmula de la quota:}
+\[
+\boxed{a = C_0 \cdot \dfrac{i}{1 - (1+i)^{-n}}}
+\]
+on $C_0$ és el capital prestat, $i$ el tant per període i $n$ el nombre de períodes.
+\end{concept}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.9, >=Stealth]
+    % Eix temporal
+    \draw[->, thick] (-1,0) -- (11,0) node[right] {$t$};
+    \foreach \x/\lab in {0/{0}, 2/{1}, 4/{2}, 6/{3}, 8/{n-1}, 10/{n}}
+        \draw[thick] (\x,0.1) -- (\x,-0.1) node[below] {\small \lab};
+    % Capital prestat
+    \node[blue, above] at (0,0.5) {\small $C_0$};
+    \draw[->, blue, ultra thick] (0,0.3) -- (0.8,0.3);
+    % Quotes
+    \foreach \x in {2,4,6,8,10}
+        \draw[red, ->, thick] (\x,0.7) -- (\x,0.15);
+    \node[red, above] at (4,0.9) {\small $a$};
+    \node[red, above] at (10,0.9) {\small $a$};
+    % Descomposició d'una quota
+    \node[draw, rounded corners, fill=yellow!20, minimum width=2.8cm] at (4,-1.3) {\small Interessos};
+    \node[draw, rounded corners, fill=green!20, minimum width=2.8cm] at (7,-1.3) {\small Amortització};
+    \draw[->, gray] (4,-0.9) -- (4,-0.5);
+    \draw[->, gray] (7,-0.9) -- (8,-0.5);
+\end{tikzpicture}
+\caption{Esquema d'un préstec amb quotes constants (sistema francès).}
+\end{figure}
+
+\begin{exemple}
+\textbf{Càlcul de la quota d'un préstec}\\
+Demanem un préstec de 10\,000 € a tornar en 5 anys amb un interès del 5\% anual.
+
+\[
+i = 0{,}05, \quad n = 5
+\]
+\[
+a = 10000 \cdot \dfrac{0{,}05}{1 - (1{,}05)^{-5}} = 10000 \cdot \dfrac{0{,}05}{1 - 0{,}78353} = 10000 \cdot \dfrac{0{,}05}{0{,}21647} \approx 2309{,}75 \text{ €}
+\]
+
+La quota anual és de 2\,309{,}75 €. El total pagat serà $5 \cdot 2309{,}75 = 11\,548{,}75$ €, dels quals 1\,548{,}75 € són interessos.
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 6.1}\\
+\begin{enumerate}[label=\alph*)]
+    \item Calcula la quota anual d'un préstec de 20\,000 € al 4\% anual a tornar en 8 anys.
+    \item Calcula la quota mensual d'un préstec de 15\,000 € al 6\% anual (TIN) a tornar en 5 anys (60 mesos).
+    \item Quant haurem pagat en total per un préstec de 8\,000 € al 5\% anual en 3 anys?
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+\subsection{Taula d'amortització}
+
+\begin{concept}
+\textbf{Taula d'amortització}\\
+Per a cada període, es calculen:
+\begin{itemize}
+    \item \textbf{Interessos del període}: $I_k = i \cdot C_{k-1}$ (sobre el capital pendent).
+    \item \textbf{Amortització del període}: $A_k = a - I_k$.
+    \item \textbf{Capital pendent al final}: $C_k = C_{k-1} - A_k$.
+\end{itemize}
+En acabar tots els períodes, el capital pendent és zero.
+\end{concept}
+
+\begin{exemple}
+\textbf{Taula d'amortització d'un préstec}\\
+Préstec de 5\,000 € al 5\% anual a tornar en 3 anys. Quota:
+\[
+a = 5000 \cdot \dfrac{0{,}05}{1 - (1{,}05)^{-3}} = 5000 \cdot \dfrac{0{,}05}{0{,}13616} \approx 1836{,}05 \text{ €}
+\]
+
+\begin{center}
+\small
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Any} & \textbf{Capital inicial} & \textbf{Interessos} & \textbf{Amortització} & \textbf{Capital pendent} \\ \hline
+1 & 5000{,}00 & 250{,}00 & 1586{,}05 & 3413{,}95 \\ \hline
+2 & 3413{,}95 & 170{,}70 & 1665{,}35 & 1748{,}60 \\ \hline
+3 & 1748{,}60 & 87{,}43 & 1748{,}62 & 0 \\ \hline
+\end{tabular}
+\end{center}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 6.2}\\
+\begin{enumerate}[label=\alph*)]
+    \item Construeix la taula d'amortització d'un préstec de 3\,000 € al 4\% anual a tornar en 3 anys.
+    \item Construeix la taula d'amortització d'un préstec de 10\,000 € al 6\% anual a tornar en 4 anys.
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL BLOC 6
+% ---------------------------------------------------------
+\begin{resum}[title=Resum 6: Amortització de Préstecs]
+\textbf{Quota (sistema francès)}
+\[
+a = C_0 \cdot \dfrac{i}{1 - (1+i)^{-n}}
+\]
+
+\textbf{Taula d'amortització}
+\begin{itemize}
+    \item Interessos del període: $I_k = i \cdot C_{k-1}$
+    \item Amortització: $A_k = a - I_k$
+    \item Capital pendent: $C_k = C_{k-1} - A_k$
+\end{itemize}
+
+\textbf{Total pagat} $= n \cdot a$; \quad \textbf{Total interessos} $= n \cdot a - C_0$.
+\end{resum}
+
+\newpage
+
+% =========================================================
+\section{IPC i Inflació}
+
+% ---------------------------------------------------------
+\subsection{Concepte d'IPC i inflació}
+
+\begin{concept}
+\textbf{IPC (Índex de Preus al Consum)}\\
+L'\textbf{IPC} és un índex que mesura l'evolució dels preus d'un conjunt de béns i serveis representatius del consum de les llars. Serveix per calcular la \textbf{inflació}.
+
+\textbf{Inflació}\\
+La \textbf{inflació} és l'augment generalitzat i sostingut dels preus. Es mesura com la variació percentual de l'IPC entre dos moments:
+\[
+\text{Inflació} = \dfrac{\text{IPC}_f - \text{IPC}_i}{\text{IPC}_i} \cdot 100
+\]
+
+\textbf{Inflació acumulada}\\
+Quan hi ha diverses taxes d'inflació anuals, la inflació acumulada en un període de $n$ anys és:
+\[
+\text{Inflació acumulada} = \left[(1+i_1)(1+i_2)\cdots(1+i_n) - 1\right] \cdot 100\%
+\]
+(on cada $i_k$ és la inflació de l'any $k$ expressada en tant per u).
+\end{concept}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.75]
+    \draw[->, thick] (-0.5,0) -- (11,0) node[right] {Any};
+    \draw[->, thick] (0,-0.3) -- (0,6) node[above] {IPC};
+    % IPC amb increments del 2%, 3%, 1.5%, 4%, 2.5%
+    \def\ipc{100}
+    \foreach \x/\inc in {0/100, 1/102, 2/105.06, 3/106.64, 4/110.90, 5/113.67}
+        \filldraw[blue] (\x,\inc/20) circle (3pt);
+    \draw[red, thick] (0,5) -- (1,5.1) -- (2,5.25) -- (3,5.33) -- (4,5.55) -- (5,5.68);
+    \foreach \x/\y in {1/5.1, 2/5.25, 3/5.33, 4/5.55, 5/5.68}
+        \draw[red, dashed] (\x,0) -- (\x,\y);
+    \node[blue, above] at (5,5.9) {\small IPC};
+\end{tikzpicture}
+\caption{Evolució de l'IPC al llarg de 5 anys.}
+\end{figure}
+
+\begin{exemple}
+\textbf{Càlcul de la inflació}
+\begin{enumerate}[label=\alph*)]
+    \item Si l'IPC passa de 100 a 103 en un any, la inflació ha estat:
+    \[
+    \dfrac{103-100}{100} \cdot 100 = 3\%
+    \]
+    \item Si durant 3 anys la inflació ha estat del 2\%, 3\% i 1{,}5\%, la inflació acumulada és:
+    \[
+    (1{,}02 \cdot 1{,}03 \cdot 1{,}015 - 1) \cdot 100 = (1{,}0665 - 1) \cdot 100 = 6{,}65\%
+    \]
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 7.1}\\
+\begin{enumerate}[label=\alph*)]
+    \item Si l'IPC passa de 105 a 108, quina ha estat la inflació?
+    \item Si la inflació ha estat del 2\% durant 5 anys seguits, quina ha estat la inflació acumulada?
+    \item Si els IPC anuals han estat 100, 102, 104, 105 i 107, quina és la inflació acumulada en aquests 5 anys?
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+\subsection{Actualització de rendes i poder adquisitiu}
+
+\begin{concept}
+\textbf{Pèrdua de poder adquisitiu}\\
+Si els sous no s'actualitzen segons la inflació, es perd poder de compra. El \textbf{sou real} (en euros constants) es calcula:
+\[
+\text{Sou real} = \dfrac{\text{Sou nominal}}{\text{Factor d'inflació acumulada}}
+\]
+
+\textbf{Actualització de rendes}\\
+Per mantenir el poder adquisitiu, un sou s'ha d'actualitzar multiplicant-lo pel factor d'inflació acumulada:
+\[
+\text{Sou actualitzat} = \text{Sou inicial} \cdot (1+i_1)(1+i_2)\cdots(1+i_n)
+\]
+
+\textbf{Deflactació}\\
+Passar un valor nominal a valor real (euros constants) s'anomena \textbf{deflactar}. Es fa dividint pel factor acumulat d'inflació.
+\end{concept}
+
+\begin{exemple}
+\textbf{Pèrdua de poder adquisitiu}
+\begin{enumerate}[label=\alph*)]
+    \item Un sou de 1\,800 € no s'actualitza durant 3 anys amb una inflació del 2\%, 3\% i 2{,}5\%. El sou real al cap de 3 anys és:
+    \[
+    \text{Sou real} = \dfrac{1800}{1{,}02 \cdot 1{,}03 \cdot 1{,}025} = \dfrac{1800}{1{,}077} \approx 1671{,}50 \text{ €}
+    \]
+    Ha perdut uns 128{,}50 € de poder adquisitiu.
+    \item Per mantenir el poder adquisitiu, el sou s'hauria d'actualitzar a:
+    \[
+    1800 \cdot 1{,}077 = 1938{,}60 \text{ €}
+    \]
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 7.2}\\
+\begin{enumerate}[label=\alph*)]
+    \item Un sou de 2\,200 € no s'actualitza durant 4 anys. Si la inflació ha estat del 2\%, 2{,}5\%, 3\% i 1{,}5\%, quin és el sou real al cap de 4 anys?
+    \item Quin sou hauria de tenir per mantenir el poder adquisitiu inicial?
+    \item Un producte valia 50 € fa 5 anys. Si la inflació acumulada ha estat del 10\%, quin és el seu valor actual equivalent?
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL BLOC 7
+% ---------------------------------------------------------
+\begin{resum}[title=Resum 7: IPC i Inflació]
+\textbf{Inflació anual}
+\[
+\text{Inflació} = \dfrac{\text{IPC}_f - \text{IPC}_i}{\text{IPC}_i} \cdot 100
+\]
+
+\textbf{Inflació acumulada}
+\[
+\text{Inflació acumulada} = \left[\prod_{k=1}^{n}(1+i_k) - 1\right] \cdot 100\%
+\]
+
+\textbf{Sou real (pèrdua de poder adquisitiu)}
+\[
+\text{Sou real} = \dfrac{\text{Sou nominal}}{\text{Factor d'inflació acumulada}}
+\]
+
+\textbf{Actualització de rendes}
+\[
+\text{Sou actualitzat} = \text{Sou inicial} \cdot \prod_{k=1}^{n}(1+i_k)
+\]
+\end{resum}
+
+\newpage
+
+% =========================================================
+\section{Problemes Mixtos}
+
+\begin{exemple}
+\textbf{Problema mixt 1}\\
+Una empresa inverteix 20\,000 € al 4\% anual compost durant 5 anys. Al cap d'aquests 5 anys, reinverteix el capital obtingut al 3\% anual compost durant 3 anys més. Quin és el capital final?
+\[
+C_1 = 20000 \cdot (1{,}04)^5 = 20000 \cdot 1{,}21665 = 24333{,}06 \text{ €}
+\]
+\[
+C_f = 24333{,}06 \cdot (1{,}03)^3 = 24333{,}06 \cdot 1{,}09273 = 26590{,}02 \text{ €}
+\]
+\end{exemple}
+
+\begin{exemple}
+\textbf{Problema mixt 2}\\
+Una persona demana un préstec de 12\,000 € al 5\% anual (TIN) a tornar en 6 anys amb quotes anuals. Calcula la quota i el total d'interessos pagats.
+\[
+a = 12000 \cdot \dfrac{0{,}05}{1-(1{,}05)^{-6}} = 12000 \cdot \dfrac{0{,}05}{0{,}25378} \approx 2363{,}83 \text{ €}
+\]
+Total pagat: $6 \cdot 2363{,}83 = 14182{,}98$ €. Interessos: $14182{,}98 - 12000 = 2182{,}98$ €.
+\end{exemple}
+
+\begin{exemple}
+\textbf{Problema mixt 3}\\
+Un sou de 1\,500 € el 2020 hauria d'haver-se actualitzat amb la inflació. Si les inflacions anuals han estat 1{,}5\%, 3\%, 5\% i 2{,}5\% (2020--2024), quin sou equivalent hauria de cobrar el 2024?
+\[
+S = 1500 \cdot 1{,}015 \cdot 1{,}03 \cdot 1{,}05 \cdot 1{,}025 = 1500 \cdot 1{,}1255 = 1688{,}25 \text{ €}
+\]
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 8.1}\\
+Un banc ofereix un dipòsit amb un TIN del 3\% amb capitalització mensual. Calcula la TAE i el capital final si hi dipositem 5\,000 € durant 4 anys.
+\end{exercici}
+
+\begin{exercici}
+\textbf{Exercici 8.2}\\
+Volem comprar un cotxe de 18\,000 €. El concessionari ens ofereix finançar-lo al 7\% anual (TIN) en 5 anys amb quotes mensuals. Calcula la quota mensual i el total d'interessos.
+\end{exercici}
+
+\begin{exercici}
+\textbf{Exercici 8.3}\\
+Un producte valia 80 € el 2019. Si l'IPC ha passat de 100 a 112 en aquests anys, quin és el preu equivalent actual? Quant ha pujat en percentatge?
+\end{exercici}
+
+\begin{exercici}
+\textbf{Exercici 8.4}\\
+Dipositem 10\,000 € al 4\% anual compost durant 3 anys. Al cap d'aquests 3 anys, retirem 5\,000 € i la resta la deixem 2 anys més al mateix tipus. Quin és el capital final?
+\end{exercici}
+
+% =========================================================
+% SOLUCIONS
+% =========================================================
+\newpage
+\appendix
+\section{Solucions dels Exercicis Proposats}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 1: Percentatges}
+\begin{itemize}
+    \item \textbf{Exercici 1.1:}
+    \begin{enumerate}[label=\alph*)]
+        \item $250 \cdot 0{,}18 = 45$.
+        \item $45 \cdot 1{,}21 = 54{,}45$ €.
+        \item $80 \cdot 0{,}70 = 56$ €.
+        \item $\dfrac{250-200}{200} \cdot 100 = 25\%$ (augment).
+    \end{enumerate}
+    \item \textbf{Exercici 1.2:}
+    \begin{enumerate}[label=\alph*)]
+        \item $400 \cdot 1{,}12 \cdot 0{,}92 = 412{,}16$ €.
+        \item $50 \cdot 1{,}20 \cdot 1{,}05 \cdot 0{,}90 = 56{,}70$ €.
+        \item $850 \cdot 1{,}025 \cdot 1{,}03 \cdot 1{,}04 = 933{,}05$ €.
+        \item $(1{,}025 \cdot 1{,}03 \cdot 1{,}04 - 1) \cdot 100 \approx 9{,}77\%$.
+    \end{enumerate}
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 2: Interès Simple}
+\begin{itemize}
+    \item \textbf{Exercici 2.1:}
+    \begin{enumerate}[label=\alph*)]
+        \item $I = 3500 \cdot 0{,}05 \cdot 4 = 700$ €.
+        \item $t = \dfrac{18}{12} = 1{,}5$; $C_f = 1200(1 + 0{,}03 \cdot 1{,}5) = 1254$ €.
+        \item $t = \dfrac{960}{8000 \cdot 0{,}04} = 3$ anys.
+        \item $i = \dfrac{150}{2500 \cdot 2} = 0{,}03 = 3\%$.
+    \end{enumerate}
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 3: Interès Compost}
+\begin{itemize}
+    \item \textbf{Exercici 3.1:}
+    \begin{enumerate}[label=\alph*)]
+        \item $C_f = 2500 \cdot (1{,}04)^6 = 3163{,}30$ €.
+        \item $C_f = 10000 \cdot (1{,}06)^3 = 11910{,}16$ €.
+        \item $C_f = 500 \cdot (1{,}07)^{10} = 983{,}58$ €.
+    \end{enumerate}
+    \item \textbf{Exercici 3.2:}
+    \begin{enumerate}[label=\alph*)]
+        \item $C_0 = \dfrac{8000}{(1{,}035)^7} = 6286{,}28$ €.
+        \item $i = \sqrt[4]{\dfrac{6077{,}53}{5000}} - 1 \approx 0{,}05 = 5\%$.
+        \item $n = \dfrac{\log(1{,}5)}{\log(1{,}04)} \approx 10{,}34$ anys.
+        \item $n = \dfrac{\log(2000/1500)}{\log(1{,}025)} \approx 11{,}65$ anys.
+    \end{enumerate}
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 4: Capitalització i Actualització}
+\begin{itemize}
+    \item \textbf{Exercici 4.1:}
+    \begin{enumerate}[label=\alph*)]
+        \item $C_f = 1500 \cdot (1{,}03)^4 = 1688{,}26$ €.
+        \item $C_0 = \dfrac{8000}{(1{,}04)^5} = 6575{,}41$ €.
+        \item $C_0 = \dfrac{3000}{(1{,}06)^2} = 2670{,}49$ €.
+    \end{enumerate}
+    \item \textbf{Exercici 4.2:}
+    \begin{enumerate}[label=\alph*)]
+        \item Comercial: $t = \dfrac{4}{12}$; $D_c = 3000 \cdot 0{,}05 \cdot \dfrac{4}{12} = 50$; $E = 2950$ €. \\
+        Racional: $D_r = \dfrac{3000 \cdot 0{,}05 \cdot \frac{4}{12}}{1 + 0{,}05 \cdot \frac{4}{12}} \approx 49{,}18$; $E \approx 2950{,}82$ €.
+        \item $t = \dfrac{9}{12} = 0{,}75$; $D_c = 10000 \cdot 0{,}07 \cdot 0{,}75 = 525$; $E = 9475$ €.
+        \item $D_c = 100$; $t = \dfrac{100}{5000 \cdot 0{,}06} = \dfrac{1}{3}$ any $= 4$ mesos.
+    \end{enumerate}
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 5: TAE i TIN}
+\begin{itemize}
+    \item \textbf{Exercici 5.1:}
+    \begin{enumerate}[label=\alph*)]
+        \item $\text{TAE} = (1 + 0{,}05/4)^4 - 1 \approx 0{,}05095 = 5{,}095\%$.
+        \item $\text{TAE} = (1 + 0{,}03/12)^{12} - 1 \approx 0{,}03042 = 3{,}042\%$.
+        \item $\text{TAE} = (1 + 0{,}045/365)^{365} - 1 \approx 0{,}04603 = 4{,}603\%$.
+        \item $i = 12 \cdot [(1{,}06)^{1/12} - 1] \approx 0{,}05841 = 5{,}841\%$.
+    \end{enumerate}
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 6: Amortització de Préstecs}
+\begin{itemize}
+    \item \textbf{Exercici 6.1:}
+    \begin{enumerate}[label=\alph*)]
+        \item $a = 20000 \cdot \dfrac{0{,}04}{1-(1{,}04)^{-8}} \approx 2963{,}18$ €.
+        \item $i = 0{,}06/12 = 0{,}005$, $n=60$; $a = 15000 \cdot \dfrac{0{,}005}{1-(1{,}005)^{-60}} \approx 290{,}00$ €.
+        \item $a = 8000 \cdot \dfrac{0{,}05}{1-(1{,}05)^{-3}} \approx 2937{,}68$ €; total $= 3 \cdot 2937{,}68 = 8813{,}04$ €.
+    \end{enumerate}
+    \item \textbf{Exercici 6.2:} (Es mostren els resultats)
+    \begin{enumerate}[label=\alph*)]
+        \item Préstec 3\,000 €, 4\%, 3 anys: $a \approx 1080{,}35$ €.
+        \item Préstec 10\,000 €, 6\%, 4 anys: $a \approx 2885{,}91$ €.
+    \end{enumerate}
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 7: IPC i Inflació}
+\begin{itemize}
+    \item \textbf{Exercici 7.1:}
+    \begin{enumerate}[label=\alph*)]
+        \item $\dfrac{108-105}{105} \cdot 100 \approx 2{,}86\%$.
+        \item $(1{,}02)^5 - 1 \approx 0{,}10408 = 10{,}41\%$.
+        \item $\dfrac{107}{100} - 1 = 0{,}07 = 7\%$.
+    \end{enumerate}
+    \item \textbf{Exercici 7.2:}
+    \begin{enumerate}[label=\alph*)]
+        \item Factor $= 1{,}02 \cdot 1{,}025 \cdot 1{,}03 \cdot 1{,}015 \approx 1{,}0928$. Sou real: $2200/1{,}0928 \approx 2013{,}19$ €.
+        \item Sou actualitzat: $2200 \cdot 1{,}0928 \approx 2404{,}16$ €.
+        \item $50 \cdot 1{,}10 = 55$ €.
+    \end{enumerate}
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 8: Problemes Mixtos}
+\begin{itemize}
+    \item \textbf{Exercici 8.1:} $\text{TAE} = (1+0{,}03/12)^{12}-1 \approx 3{,}042\%$. $C_f = 5000 \cdot (1+0{,}03/12)^{48} \approx 5637{,}39$ €.
+    \item \textbf{Exercici 8.2:} $i = 0{,}07/12 \approx 0{,}005833$, $n = 60$. $a \approx 356{,}42$ €/mes. Total: $60 \cdot 356{,}42 = 21385{,}20$ €. Interessos: $3385{,}20$ €.
+    \item \textbf{Exercici 8.3:} Preu equivalent: $80 \cdot 1{,}12 = 89{,}60$ €. Pujada del 12\%.
+    \item \textbf{Exercici 8.4:} $C_1 = 10000 \cdot (1{,}04)^3 = 11248{,}64$ €. Resta: $6248{,}64$ €. $C_f = 6248{,}64 \cdot (1{,}04)^2 = 6758{,}65$ €.
+\end{itemize}
+\end{solucio}
+
+\end{document}
