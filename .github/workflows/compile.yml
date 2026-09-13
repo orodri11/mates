@@ -21,10 +21,45 @@ jobs:
         run: |
           mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT
 
-      # ==========================================
+      # -----------------------------------------------------------------
+      # CREACIÓ DEL PLANTILLA PDF "EN CONSTRUCCIÓ"
+      # -----------------------------------------------------------------
+      - name: Crear plantilla 'En construcció'
+        run: |
+          mkdir -p placeholder
+          cat << 'EOF' > placeholder/en_construccio.tex
+          \documentclass[12pt,a4paper]{article}
+          \usepackage[utf8]{utf8}
+          \usepackage[catalan]{babel}
+          \usepackage{xcolor}
+          \usepackage{geometry}
+          \geometry{margin=2.5cm}
+          \usepackage{lmodern}
+
+          \definecolor{brandblue}{RGB}{2, 132, 199}
+          \definecolor{textgrey}{RGB}{100, 116, 139}
+
+          \begin{document}
+          \thispagestyle{empty}
+          \vspace*{4cm}
+          \begin{center}
+              {\Huge \bfseries \color{brandblue} 🛠️ Material en construcció}\\[1.5cm]
+              {\Large Aquest document estarà disponible pròximament.}\\[0.8cm]
+              {\large \color{textgrey} Prof. Oscar Rodriguez --- Matemàtiques de Batxillerat}
+          \end{center}
+          \end{document}
+          EOF
+
+      - name: Compilar plantilla 'En construcció'
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: en_construccio.tex
+          working_directory: placeholder
+
+      # -----------------------------------------------------------------
+      # COMPILACIÓ DELS TEMES EXISTENTS
+      # -----------------------------------------------------------------
       # 1r BATX MACS
-      # ==========================================
-      # Tema 1
       - name: Compilar 1BATX_MACS Tema 1 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -38,7 +73,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 1BATX_MACS/Tema1
 
-      # Tema 2
       - name: Compilar 1BATX_MACS Tema 2 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -52,7 +86,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 1BATX_MACS/Tema2
 
-      # Tema 3
       - name: Compilar 1BATX_MACS Tema 3 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -66,7 +99,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 1BATX_MACS/Tema3
 
-      # Tema 4
       - name: Compilar 1BATX_MACS Tema 4 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -80,7 +112,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 1BATX_MACS/Tema4
 
-      # Tema 5
       - name: Compilar 1BATX_MACS Tema 5 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -94,7 +125,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 1BATX_MACS/Tema5
 
-      # Tema 6
       - name: Compilar 1BATX_MACS Tema 6 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -108,7 +138,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 1BATX_MACS/Tema6
 
-      # Tema 7
       - name: Compilar 1BATX_MACS Tema 7 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -122,7 +151,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 1BATX_MACS/Tema7
 
-      # Tema 8
       - name: Compilar 1BATX_MACS Tema 8 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -136,7 +164,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 1BATX_MACS/Tema8
 
-      # Tema 9
       - name: Compilar 1BATX_MACS Tema 9 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -150,10 +177,7 @@ jobs:
           root_file: exercicis.tex
           working_directory: 1BATX_MACS/Tema9
 
-      # ==========================================
       # 2n BATX CCTT
-      # ==========================================
-      # Tema 1
       - name: Compilar 2BATX_CCTT Tema 1 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -167,7 +191,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 2BATX_CCTT/Tema1
 
-      # Tema 2
       - name: Compilar 2BATX_CCTT Tema 2 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -181,7 +204,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 2BATX_CCTT/Tema2
 
-      # Tema 3
       - name: Compilar 2BATX_CCTT Tema 3 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -195,7 +217,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 2BATX_CCTT/Tema3
 
-      # Tema 4
       - name: Compilar 2BATX_CCTT Tema 4 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -209,7 +230,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 2BATX_CCTT/Tema4
 
-      # Tema 5
       - name: Compilar 2BATX_CCTT Tema 5 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -223,7 +243,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 2BATX_CCTT/Tema5
 
-      # Tema 6
       - name: Compilar 2BATX_CCTT Tema 6 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -237,7 +256,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 2BATX_CCTT/Tema6
 
-      # Tema 7
       - name: Compilar 2BATX_CCTT Tema 7 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -251,7 +269,6 @@ jobs:
           root_file: exercicis.tex
           working_directory: 2BATX_CCTT/Tema7
 
-      # Tema 8
       - name: Compilar 2BATX_CCTT Tema 8 Apunts
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
@@ -265,18 +282,26 @@ jobs:
           root_file: exercicis.tex
           working_directory: 2BATX_CCTT/Tema8
 
-
-      # ==========================================
-      # COPIAR TOTS ELS PDFS GENERATS A LA WEB
-      # ==========================================
-      - name: Organitzar PDFs i Web
+      # -----------------------------------------------------------------
+      # PUBLICACIÓ I PLACEMENT DE PLACEHOLDERS PER ELS FALTANTS
+      # -----------------------------------------------------------------
+      - name: Organitzar PDFs i Assignar 'En construcció' si falta el PDF
         run: |
           for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT; do
             for i in {1..10}; do
-              # Si hi ha main.pdf (Apunts)
-              cp $curs/Tema$i/main.pdf public/$curs/Tema${i}_apunts.pdf 2>/dev/null || true
-              # Si hi ha exercicis.pdf
-              cp $curs/Tema$i/exercicis.pdf public/$curs/Tema${i}_exercicis.pdf 2>/dev/null || true
+              # Apunts
+              if [ -f "$curs/Tema$i/main.pdf" ]; then
+                cp "$curs/Tema$i/main.pdf" "public/$curs/Tema${i}_apunts.pdf"
+              else
+                cp "placeholder/en_construccio.pdf" "public/$curs/Tema${i}_apunts.pdf"
+              fi
+              
+              # Exercicis
+              if [ -f "$curs/Tema$i/exercicis.pdf" ]; then
+                cp "$curs/Tema$i/exercicis.pdf" "public/$curs/Tema${i}_exercicis.pdf"
+              else
+                cp "placeholder/en_construccio.pdf" "public/$curs/Tema${i}_exercicis.pdf"
+              fi
             done
           done
           cp index.html public/
