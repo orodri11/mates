@@ -5,127 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matemàtiques de Batxillerat — Oscar Rodriguez</title>
     <style>
-        body { 
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
-            max-width: 900px; 
-            margin: 40px auto; 
-            padding: 0 20px; 
-            background: #f4f6f9; 
-            color: #1f2937; 
-        }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; max-width: 950px; margin: 40px auto; padding: 0 20px; background: #f4f6f9; color: #1f2937; }
+        header { text-align: center; margin-bottom: 35px; }
+        .author-badge { display: inline-block; background: #e0edff; color: #0284c7; font-size: 0.9em; font-weight: 700; padding: 6px 16px; border-radius: 20px; margin-bottom: 12px; }
+        h1 { color: #0f172a; font-size: 2.2em; margin: 0 0 8px 0; font-weight: 800; }
+        p.subtitle { color: #64748b; font-size: 1.05em; margin: 0; }
         
-        header { 
-            text-align: center; 
-            margin-bottom: 35px; 
-        }
-
-        .author-badge {
-            display: inline-block;
-            background: #e0edff;
-            color: #0284c7;
-            font-size: 0.9em;
-            font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            letter-spacing: 0.5px;
-        }
+        .tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; }
+        .tab-btn { padding: 10px 18px; border: none; background: #e2e8f0; color: #475569; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9em; transition: all 0.2s ease; }
+        .tab-btn:hover { background: #cbd5e1; }
+        .tab-btn.active { background: #0284c7; color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
         
-        h1 { 
-            color: #0f172a; 
-            font-size: 2.3em;
-            margin: 0 0 8px 0; 
-            font-weight: 800;
-        }
-
-        p.subtitle {
-            color: #64748b;
-            font-size: 1.05em;
-            margin: 0;
-        }
+        .tab-content { display: none; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
+        .tab-content.active { display: block; }
+        h2 { font-size: 1.3em; color: #0f172a; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
         
-        /* Sistema de Pestanyes */
-        .tabs { 
-            display: flex; 
-            justify-content: center; 
-            gap: 12px; 
-            margin-bottom: 25px; 
-        }
-
-        .tab-btn { 
-            padding: 12px 24px; 
-            border: none; 
-            background: #e2e8f0; 
-            color: #475569;
-            border-radius: 10px; 
-            font-weight: 700; 
-            cursor: pointer; 
-            font-size: 0.95em; 
-            transition: all 0.2s ease; 
-        }
-
-        .tab-btn:hover {
-            background: #cbd5e1;
-        }
-
-        .tab-btn.active { 
-            background: #0284c7; 
-            color: white; 
-            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
-        }
-        
-        .tab-content { 
-            display: none; 
-            background: white; 
-            padding: 30px; 
-            border-radius: 16px; 
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); 
-        }
-
-        .tab-content.active { 
-            display: block; 
-        }
-
-        h2 {
-            font-size: 1.3em;
-            color: #0f172a;
-            margin-top: 0;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #f1f5f9;
-            padding-bottom: 10px;
-        }
-        
-        ul { 
-            list-style: none; 
-            padding: 0; 
-            margin: 0;
-        }
-
-        li { 
-            background: #f8fafc; 
-            margin: 12px 0; 
-            padding: 16px 20px; 
-            border-radius: 10px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            border-left: 5px solid #0284c7; 
-        }
-
-        .btn { 
-            background: #0284c7; 
-            color: white; 
-            padding: 10px 18px; 
-            border-radius: 8px; 
-            text-decoration: none; 
-            font-weight: 700; 
-            font-size: 0.9em;
-            transition: background 0.2s ease;
-        }
-
-        .btn:hover { 
-            background: #0369a1; 
-        }
+        ul { list-style: none; padding: 0; margin: 0; }
+        li { background: #f8fafc; margin: 10px 0; padding: 14px 18px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #0284c7; }
+        .btn { background: #0284c7; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85em; }
+        .btn:hover { background: #0369a1; }
+        .empty-msg { color: #94a3b8; font-style: italic; text-align: center; padding: 20px 0; }
     </style>
 </head>
 <body>
@@ -136,31 +35,53 @@
         <p class="subtitle">Dossiers, apunts i materials d'estudi de classe</p>
     </header>
 
-    <!-- Botons de Pestanyes -->
     <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('macs')">1r BATX — MACS</button>
-        <button class="tab-btn" onclick="openTab('cctt')">2n BATX — CCTT</button>
+        <button class="tab-btn active" onclick="openTab('1macs')">1r BATX — MACS</button>
+        <button class="tab-btn" onclick="openTab('1cctt')">1r BATX — CCTT</button>
+        <button class="tab-btn" onclick="openTab('2macs')">2n BATX — MACS</button>
+        <button class="tab-btn" onclick="openTab('2cctt')">2n BATX — CCTT</button>
     </div>
 
-    <!-- Contingut 1r MACS -->
-    <div id="macs" class="tab-content active">
+    <!-- 1r BATX MACS -->
+    <div id="1macs" class="tab-content active">
         <h2>1r de Batxillerat — MACS (Social)</h2>
         <ul>
-            <li>
-                <span><strong>Tema 1:</strong> Nombres Reals i Àlgebra</span>
-                <a class="btn" href="./1BATX_MACS/Tema1.pdf" target="_blank">📄 Obrir PDF</a>
-            </li>
+            <li><span><strong>UD 1:</strong> Nombres reals</span><a class="btn" href="./1BATX_MACS/Tema1.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>UD 2:</strong> Polinomis i fraccions algebraiques</span><a class="btn" href="./1BATX_MACS/Tema2.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>UD 3:</strong> Equacions, inequacions i sistemes</span><a class="btn" href="./1BATX_MACS/Tema3.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>UD 4:</strong> Successions i progressions</span><a class="btn" href="./1BATX_MACS/Tema4.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>UD 5:</strong> Matemàtica financera</span><a class="btn" href="./1BATX_MACS/Tema5.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>UD 6:</strong> Introducció a les funcions i Funcions elementals</span><a class="btn" href="./1BATX_MACS/Tema6.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>UD 7:</strong> Límits i continuïtat</span><a class="btn" href="./1BATX_MACS/Tema7.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>UD 8:</strong> Derivades</span><a class="btn" href="./1BATX_MACS/Tema8.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>UD 9:</strong> Conceptes d’estadística i probabilitat</span><a class="btn" href="./1BATX_MACS/Tema9.pdf" target="_blank">📄 Obrir PDF</a></li>
         </ul>
     </div>
 
-    <!-- Contingut 2n CCTT -->
-    <div id="cctt" class="tab-content">
+    <!-- 1r BATX CCTT -->
+    <div id="1cctt" class="tab-content">
+        <h2>1r de Batxillerat — CCTT (Científic-Tecnològic)</h2>
+        <p class="empty-msg">Pròximament es afegiran els dossiers d'aquest curs.</p>
+    </div>
+
+    <!-- 2n BATX MACS -->
+    <div id="2macs" class="tab-content">
+        <h2>2n de Batxillerat — MACS (Social)</h2>
+        <p class="empty-msg">Pròximament es afegiran els dossiers d'aquest curs.</p>
+    </div>
+
+    <!-- 2n BATX CCTT -->
+    <div id="2cctt" class="tab-content">
         <h2>2n de Batxillerat — CCTT (Científic-Tecnològic)</h2>
         <ul>
-            <li>
-                <span><strong>Tema 1:</strong> Matrius i Determinants</span>
-                <a class="btn" href="./2BATX_CCTT/Tema1.pdf" target="_blank">📄 Obrir PDF</a>
-            </li>
+            <li><span><strong>Tema 1:</strong> Límits i continuïtat</span><a class="btn" href="./2BATX_CCTT/Tema1.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>Tema 2:</strong> Derivades i aplicacions</span><a class="btn" href="./2BATX_CCTT/Tema2.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>Tema 3:</strong> Estudi de funcions</span><a class="btn" href="./2BATX_CCTT/Tema3.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>Tema 4:</strong> Integrals i càlcul d'àrees</span><a class="btn" href="./2BATX_CCTT/Tema4.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>Tema 5:</strong> Matrius i determinants</span><a class="btn" href="./2BATX_CCTT/Tema5.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>Tema 6:</strong> Sistemes d'equacions lineals</span><a class="btn" href="./2BATX_CCTT/Tema6.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>Tema 7:</strong> Geometria en l'espai 3D</span><a class="btn" href="./2BATX_CCTT/Tema7.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li><span><strong>Tema 8:</strong> Probabilitat i Distribucions</span><a class="btn" href="./2BATX_CCTT/Tema8.pdf" target="_blank">📄 Obrir PDF</a></li>
         </ul>
     </div>
 
@@ -172,6 +93,5 @@
             event.currentTarget.classList.add('active');
         }
     </script>
-
 </body>
 </html>
