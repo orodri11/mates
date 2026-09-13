@@ -21,9 +21,12 @@
         h2 { font-size: 1.3em; color: #0f172a; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
         
         ul { list-style: none; padding: 0; margin: 0; }
-        li { background: #f8fafc; margin: 10px 0; padding: 14px 18px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #0284c7; }
-        .btn { background: #0284c7; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85em; }
+        li { background: #f8fafc; margin: 10px 0; padding: 14px 18px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #0284c7; flex-wrap: wrap; gap: 10px; }
+        .btn-group { display: flex; gap: 8px; }
+        .btn { background: #0284c7; color: white; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85em; }
         .btn:hover { background: #0369a1; }
+        .btn-sec { background: #64748b; }
+        .btn-sec:hover { background: #475569; }
         .empty-msg { color: #94a3b8; font-style: italic; text-align: center; padding: 20px 0; }
     </style>
 </head>
@@ -46,15 +49,27 @@
     <div id="1macs" class="tab-content active">
         <h2>1r de Batxillerat — MACS (Social)</h2>
         <ul>
-            <li><span><strong>UD 1:</strong> Nombres reals</span><a class="btn" href="./1BATX_MACS/Tema1.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 2:</strong> Polinomis i fraccions algebraiques</span><a class="btn" href="./1BATX_MACS/Tema2.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 3:</strong> Equacions, inequacions i sistemes</span><a class="btn" href="./1BATX_MACS/Tema3.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 4:</strong> Successions i progressions</span><a class="btn" href="./1BATX_MACS/Tema4.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 5:</strong> Matemàtica financera</span><a class="btn" href="./1BATX_MACS/Tema5.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 6:</strong> Introducció a les funcions i Funcions elementals</span><a class="btn" href="./1BATX_MACS/Tema6.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 7:</strong> Límits i continuïtat</span><a class="btn" href="./1BATX_MACS/Tema7.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 8:</strong> Derivades</span><a class="btn" href="./1BATX_MACS/Tema8.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 9:</strong> Conceptes d’estadística i probabilitat</span><a class="btn" href="./1BATX_MACS/Tema9.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li>
+                <span><strong>UD 1:</strong> Nombres reals</span>
+                <div class="btn-group">
+                    <a class="btn" href="./1BATX_MACS/Tema1_apunts.pdf" target="_blank">📖 Apunts</a>
+                    <a class="btn btn-sec" href="./1BATX_MACS/Tema1_exercicis.pdf" target="_blank">✏️ Exercicis</a>
+                </div>
+            </li>
+            <li>
+                <span><strong>UD 2:</strong> Polinomis i fraccions algebraiques</span>
+                <div class="btn-group">
+                    <a class="btn" href="./1BATX_MACS/Tema2_apunts.pdf" target="_blank">📖 Apunts</a>
+                    <a class="btn btn-sec" href="./1BATX_MACS/Tema2_exercicis.pdf" target="_blank">✏️ Exercicis</a>
+                </div>
+            </li>
+            <li><span><strong>UD 3:</strong> Equacions, inequacions i sistemes</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema3_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>UD 4:</strong> Successions i progressions</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema4_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>UD 5:</strong> Matemàtica financera</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema5_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>UD 6:</strong> Introducció a les funcions i Funcions elementals</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema6_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>UD 7:</strong> Límits i continuïtat</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema7_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>UD 8:</strong> Derivades</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema8_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>UD 9:</strong> Conceptes d’estadística i probabilitat</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema9_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
         </ul>
     </div>
 
@@ -74,14 +89,20 @@
     <div id="2cctt" class="tab-content">
         <h2>2n de Batxillerat — CCTT (Científic-Tecnològic)</h2>
         <ul>
-            <li><span><strong>Tema 1:</strong> Límits i continuïtat</span><a class="btn" href="./2BATX_CCTT/Tema1.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 2:</strong> Derivades i aplicacions</span><a class="btn" href="./2BATX_CCTT/Tema2.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 3:</strong> Estudi de funcions</span><a class="btn" href="./2BATX_CCTT/Tema3.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 4:</strong> Integrals i càlcul d'àrees</span><a class="btn" href="./2BATX_CCTT/Tema4.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 5:</strong> Matrius i determinants</span><a class="btn" href="./2BATX_CCTT/Tema5.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 6:</strong> Sistemes d'equacions lineals</span><a class="btn" href="./2BATX_CCTT/Tema6.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 7:</strong> Geometria en l'espai 3D</span><a class="btn" href="./2BATX_CCTT/Tema7.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 8:</strong> Probabilitat i Distribucions</span><a class="btn" href="./2BATX_CCTT/Tema8.pdf" target="_blank">📄 Obrir PDF</a></li>
+            <li>
+                <span><strong>Tema 1:</strong> Límits i continuïtat</span>
+                <div class="btn-group">
+                    <a class="btn" href="./2BATX_CCTT/Tema1_apunts.pdf" target="_blank">📖 Apunts</a>
+                    <a class="btn btn-sec" href="./2BATX_CCTT/Tema1_exercicis.pdf" target="_blank">✏️ Exercicis</a>
+                </div>
+            </li>
+            <li><span><strong>Tema 2:</strong> Derivades i aplicacions</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema2_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>Tema 3:</strong> Estudi de funcions</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema3_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>Tema 4:</strong> Integrals i càlcul d'àrees</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema4_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>Tema 5:</strong> Matrius i determinants</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema5_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>Tema 6:</strong> Sistemes d'equacions lineals</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema6_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>Tema 7:</strong> Geometria en l'espai 3D</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema7_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>Tema 8:</strong> Probabilitat i Distribucions</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema8_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
         </ul>
     </div>
 
