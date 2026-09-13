@@ -23,11 +23,10 @@
         ul { list-style: none; padding: 0; margin: 0; }
         li { background: #f8fafc; margin: 10px 0; padding: 14px 18px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #0284c7; flex-wrap: wrap; gap: 10px; }
         .btn-group { display: flex; gap: 8px; }
-        .btn { background: #0284c7; color: white; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85em; }
+        .btn { background: #0284c7; color: white; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85em; transition: background 0.2s; }
         .btn:hover { background: #0369a1; }
         .btn-sec { background: #64748b; }
         .btn-sec:hover { background: #475569; }
-        .empty-msg { color: #94a3b8; font-style: italic; text-align: center; padding: 20px 0; }
     </style>
 </head>
 <body>
@@ -49,60 +48,54 @@
     <div id="1macs" class="tab-content active">
         <h2>1r de Batxillerat — MACS (Social)</h2>
         <ul>
-            <li>
-                <span><strong>UD 1:</strong> Nombres reals</span>
-                <div class="btn-group">
-                    <a class="btn" href="./1BATX_MACS/Tema1_apunts.pdf" target="_blank">📖 Apunts</a>
-                    <a class="btn btn-sec" href="./1BATX_MACS/Tema1_exercicis.pdf" target="_blank">✏️ Exercicis</a>
-                </div>
-            </li>
-            <li>
-                <span><strong>UD 2:</strong> Polinomis i fraccions algebraiques</span>
-                <div class="btn-group">
-                    <a class="btn" href="./1BATX_MACS/Tema2_apunts.pdf" target="_blank">📖 Apunts</a>
-                    <a class="btn btn-sec" href="./1BATX_MACS/Tema2_exercicis.pdf" target="_blank">✏️ Exercicis</a>
-                </div>
-            </li>
-            <li><span><strong>UD 3:</strong> Equacions, inequacions i sistemes</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema3_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>UD 4:</strong> Successions i progressions</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema4_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>UD 5:</strong> Matemàtica financera</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema5_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>UD 6:</strong> Introducció a les funcions i Funcions elementals</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema6_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>UD 7:</strong> Límits i continuïtat</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema7_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>UD 8:</strong> Derivades</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema8_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>UD 9:</strong> Conceptes d’estadística i probabilitat</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema9_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>UD 1:</strong> Nombres reals</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema1_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_MACS/Tema1_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>UD 2:</strong> Polinomis i fraccions algebraiques</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema2_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_MACS/Tema2_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>UD 3:</strong> Equacions, inequacions i sistemes</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema3_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_MACS/Tema3_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>UD 4:</strong> Successions i progressions</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema4_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_MACS/Tema4_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>UD 5:</strong> Matemàtica financera</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema5_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_MACS/Tema5_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>UD 6:</strong> Introducció a les funcions i Funcions elementals</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema6_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_MACS/Tema6_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>UD 7:</strong> Límits i continuïtat</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema7_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_MACS/Tema7_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>UD 8:</strong> Derivades</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema8_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_MACS/Tema8_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>UD 9:</strong> Conceptes d’estadística i probabilitat</span><div class="btn-group"><a class="btn" href="./1BATX_MACS/Tema9_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_MACS/Tema9_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
         </ul>
     </div>
 
     <!-- 1r BATX CCTT -->
     <div id="1cctt" class="tab-content">
         <h2>1r de Batxillerat — CCTT (Científic-Tecnològic)</h2>
-        <p class="empty-msg">Pròximament es afegiran els dossiers d'aquest curs.</p>
+        <ul>
+            <li><span><strong>Tema 1:</strong> Nombres reals i àlgebra</span><div class="btn-group"><a class="btn" href="./1BATX_CCTT/Tema1_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_CCTT/Tema1_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 2:</strong> Trigonometria</span><div class="btn-group"><a class="btn" href="./1BATX_CCTT/Tema2_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_CCTT/Tema2_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 3:</strong> Geometria analítica</span><div class="btn-group"><a class="btn" href="./1BATX_CCTT/Tema3_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_CCTT/Tema3_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 4:</strong> Nombres complexos</span><div class="btn-group"><a class="btn" href="./1BATX_CCTT/Tema4_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_CCTT/Tema4_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 5:</strong> Funcions i límits</span><div class="btn-group"><a class="btn" href="./1BATX_CCTT/Tema5_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_CCTT/Tema5_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 6:</strong> Derivades</span><div class="btn-group"><a class="btn" href="./1BATX_CCTT/Tema6_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./1BATX_CCTT/Tema6_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+        </ul>
     </div>
 
     <!-- 2n BATX MACS -->
     <div id="2macs" class="tab-content">
         <h2>2n de Batxillerat — MACS (Social)</h2>
-        <p class="empty-msg">Pròximament es afegiran els dossiers d'aquest curs.</p>
+        <ul>
+            <li><span><strong>Tema 1:</strong> Matrius i determinats</span><div class="btn-group"><a class="btn" href="./2BATX_MACS/Tema1_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_MACS/Tema1_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 2:</strong> Programació lineal</span><div class="btn-group"><a class="btn" href="./2BATX_MACS/Tema2_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_MACS/Tema2_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 3:</strong> Anàlisi i derivades</span><div class="btn-group"><a class="btn" href="./2BATX_MACS/Tema3_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_MACS/Tema3_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 4:</strong> Probabilitat</span><div class="btn-group"><a class="btn" href="./2BATX_MACS/Tema4_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_MACS/Tema4_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+        </ul>
     </div>
 
     <!-- 2n BATX CCTT -->
     <div id="2cctt" class="tab-content">
         <h2>2n de Batxillerat — CCTT (Científic-Tecnològic)</h2>
         <ul>
-            <li>
-                <span><strong>Tema 1:</strong> Límits i continuïtat</span>
-                <div class="btn-group">
-                    <a class="btn" href="./2BATX_CCTT/Tema1_apunts.pdf" target="_blank">📖 Apunts</a>
-                    <a class="btn btn-sec" href="./2BATX_CCTT/Tema1_exercicis.pdf" target="_blank">✏️ Exercicis</a>
-                </div>
-            </li>
-            <li><span><strong>Tema 2:</strong> Derivades i aplicacions</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema2_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>Tema 3:</strong> Estudi de funcions</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema3_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>Tema 4:</strong> Integrals i càlcul d'àrees</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema4_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>Tema 5:</strong> Matrius i determinants</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema5_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>Tema 6:</strong> Sistemes d'equacions lineals</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema6_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>Tema 7:</strong> Geometria en l'espai 3D</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema7_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
-            <li><span><strong>Tema 8:</strong> Probabilitat i Distribucions</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema8_apunts.pdf" target="_blank">📖 Apunts</a></div></li>
+            <li><span><strong>Tema 1:</strong> Límits i continuïtat</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema1_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_CCTT/Tema1_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 2:</strong> Derivades i aplicacions</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema2_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_CCTT/Tema2_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 3:</strong> Estudi de funcions</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema3_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_CCTT/Tema3_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 4:</strong> Integrals i càlcul d'àrees</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema4_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_CCTT/Tema4_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 5:</strong> Matrius i determinants</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema5_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_CCTT/Tema5_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 6:</strong> Sistemes d'equacions lineals</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema6_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_CCTT/Tema6_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 7:</strong> Geometria en l'espai 3D</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema7_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_CCTT/Tema7_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
+            <li><span><strong>Tema 8:</strong> Probabilitat i Distribucions</span><div class="btn-group"><a class="btn" href="./2BATX_CCTT/Tema8_apunts.pdf" target="_blank">📖 Apunts</a><a class="btn btn-sec" href="./2BATX_CCTT/Tema8_exercicis.pdf" target="_blank">✏️ Exercicis</a></div></li>
         </ul>
     </div>
 
