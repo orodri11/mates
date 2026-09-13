@@ -22,275 +22,57 @@ jobs:
           mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT
 
       # -----------------------------------------------------------------
-      # COMPILACIÓ DELS TEMES EXISTENTS
+      # COMPILACIÓ DINÀMICA DE TOTS ELS FITXERS LATEX EXISTENTS
       # -----------------------------------------------------------------
-      # 1r BATX MACS
-      - name: Compilar 1BATX_MACS Tema 1 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 1BATX_MACS/Tema1
-      - name: Compilar 1BATX_MACS Tema 1 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 1BATX_MACS/Tema1
-
-      - name: Compilar 1BATX_MACS Tema 2 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 1BATX_MACS/Tema2
-      - name: Compilar 1BATX_MACS Tema 2 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 1BATX_MACS/Tema2
-
-      - name: Compilar 1BATX_MACS Tema 3 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 1BATX_MACS/Tema3
-      - name: Compilar 1BATX_MACS Tema 3 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 1BATX_MACS/Tema3
-
-      - name: Compilar 1BATX_MACS Tema 4 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 1BATX_MACS/Tema4
-      - name: Compilar 1BATX_MACS Tema 4 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 1BATX_MACS/Tema4
-
-      - name: Compilar 1BATX_MACS Tema 5 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 1BATX_MACS/Tema5
-      - name: Compilar 1BATX_MACS Tema 5 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 1BATX_MACS/Tema5
-
-      - name: Compilar 1BATX_MACS Tema 6 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 1BATX_MACS/Tema6
-      - name: Compilar 1BATX_MACS Tema 6 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 1BATX_MACS/Tema6
-
-      - name: Compilar 1BATX_MACS Tema 7 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 1BATX_MACS/Tema7
-      - name: Compilar 1BATX_MACS Tema 7 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 1BATX_MACS/Tema7
-
-      - name: Compilar 1BATX_MACS Tema 8 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 1BATX_MACS/Tema8
-      - name: Compilar 1BATX_MACS Tema 8 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 1BATX_MACS/Tema8
-
-      - name: Compilar 1BATX_MACS Tema 9 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 1BATX_MACS/Tema9
-      - name: Compilar 1BATX_MACS Tema 9 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 1BATX_MACS/Tema9
-
-      # 2n BATX CCTT
-      - name: Compilar 2BATX_CCTT Tema 1 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 2BATX_CCTT/Tema1
-      - name: Compilar 2BATX_CCTT Tema 1 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 2BATX_CCTT/Tema1
-
-      - name: Compilar 2BATX_CCTT Tema 2 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 2BATX_CCTT/Tema2
-      - name: Compilar 2BATX_CCTT Tema 2 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 2BATX_CCTT/Tema2
-
-      - name: Compilar 2BATX_CCTT Tema 3 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 2BATX_CCTT/Tema3
-      - name: Compilar 2BATX_CCTT Tema 3 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 2BATX_CCTT/Tema3
-
-      - name: Compilar 2BATX_CCTT Tema 4 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 2BATX_CCTT/Tema4
-      - name: Compilar 2BATX_CCTT Tema 4 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 2BATX_CCTT/Tema4
-
-      - name: Compilar 2BATX_CCTT Tema 5 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 2BATX_CCTT/Tema5
-      - name: Compilar 2BATX_CCTT Tema 5 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 2BATX_CCTT/Tema5
-
-      - name: Compilar 2BATX_CCTT Tema 6 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 2BATX_CCTT/Tema6
-      - name: Compilar 2BATX_CCTT Tema 6 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 2BATX_CCTT/Tema6
-
-      - name: Compilar 2BATX_CCTT Tema 7 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 2BATX_CCTT/Tema7
-      - name: Compilar 2BATX_CCTT Tema 7 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 2BATX_CCTT/Tema7
-
-      - name: Compilar 2BATX_CCTT Tema 8 Apunts
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: main.tex
-          working_directory: 2BATX_CCTT/Tema8
-      - name: Compilar 2BATX_CCTT Tema 8 Exercicis
-        uses: xu-cheng/latex-action@v3
-        continue-on-error: true
-        with:
-          root_file: exercicis.tex
-          working_directory: 2BATX_CCTT/Tema8
-
-      # -----------------------------------------------------------------
-      # CREAR PAGINA HTML "EN CONSTRUCCIÓ" I ORGANITZAR PDFS
-      # -----------------------------------------------------------------
-      - name: Organitzar PDFs i Assignar fallback si falta el fitxer
+      - name: Compilar tots els fitxers main.tex i exercicis.tex
         run: |
-          # Crear una pàgina d'avís elegant en HTML quan un PDF no existeix
-          cat << 'EOF' > public/en_construccio.html
-          <!DOCTYPE html>
-          <html lang="ca">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>Material en construcció</title>
-              <style>
-                  body { font-family: 'Segoe UI', system-ui, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f4f6f9; color: #1f2937; text-align: center; }
-                  .card { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); max-width: 450px; }
-                  h1 { color: #0284c7; margin-top: 0; }
-                  p { color: #64748b; font-size: 1.1em; }
-                  .btn { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #0284c7; color: white; border-radius: 8px; text-decoration: none; font-weight: bold; }
-              </style>
-          </head>
-          <body>
-              <div class="card">
-                  <h1>🛠️ Material en construcció</h1>
-                  <p>Aquest document encara no s'ha publicat. Estarà disponible molt aviat!</p>
-                  <a href="javascript:history.back()" class="btn">⬅ Tornar enrere</a>
-              </div>
-          </body>
-          </html>
-          EOF
+          # Installem xelatex / pdflatex i paquets bàsics
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-lang-spanish texlive-fonts-recommended
 
+          for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT; do
+            for i in {1..10}; do
+              dir="$curs/Tema$i"
+              if [ -d "$dir" ]; then
+                echo "🔍 Revisant directori: $dir"
+                
+                # Compilar apunts (main.tex)
+                if [ -f "$dir/main.tex" ]; then
+                  echo "⚙️ Compilant $dir/main.tex..."
+                  pdflatex -interaction=nonstopmode -output-directory="$dir" "$dir/main.tex" || true
+                fi
+
+                # Compilar exercicis (exercicis.tex)
+                if [ -f "$dir/exercicis.tex" ]; then
+                  echo "⚙️ Compilant $dir/exercicis.tex..."
+                  pdflatex -interaction=nonstopmode -output-directory="$dir" "$dir/exercicis.tex" || true
+                fi
+              fi
+            done
+          done
+
+      # -----------------------------------------------------------------
+      # ORGANITZAR PDFS PER A GITHUB PAGES
+      # -----------------------------------------------------------------
+      - name: Organitzar PDFs i copiar a public
+        run: |
           for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT; do
             for i in {1..10}; do
               # Apunts
               if [ -f "$curs/Tema$i/main.pdf" ]; then
                 cp "$curs/Tema$i/main.pdf" "public/$curs/Tema${i}_apunts.pdf"
+                echo "✅ Copiat: public/$curs/Tema${i}_apunts.pdf"
               fi
               
               # Exercicis
               if [ -f "$curs/Tema$i/exercicis.pdf" ]; then
                 cp "$curs/Tema$i/exercicis.pdf" "public/$curs/Tema${i}_exercicis.pdf"
+                echo "✅ Copiat: public/$curs/Tema${i}_exercicis.pdf"
               fi
             done
           done
+          
+          # Copiar l'index.html principal
           cp index.html public/
 
       - name: Preparar artefacte
