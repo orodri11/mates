@@ -22,148 +22,298 @@ jobs:
           mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT
 
       # ==================== 1r BATX MACS ====================
-      - name: Compilar 1r MACS - Tema 1
+      - name: Compilar 1BATX_MACS - Tema 1
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 1BATX_MACS/Tema1
 
-      - name: Compilar 1r MACS - Tema 2
+      - name: Compilar 1BATX_MACS - Tema 2
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 1BATX_MACS/Tema2
 
-      - name: Compilar 1r MACS - Tema 3
+      - name: Compilar 1BATX_MACS - Tema 3
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 1BATX_MACS/Tema3
 
-      - name: Compilar 1r MACS - Tema 4
+      - name: Compilar 1BATX_MACS - Tema 4
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 1BATX_MACS/Tema4
 
-      - name: Compilar 1r MACS - Tema 5
+      - name: Compilar 1BATX_MACS - Tema 5
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 1BATX_MACS/Tema5
 
-      - name: Compilar 1r MACS - Tema 6
+      - name: Compilar 1BATX_MACS - Tema 6
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 1BATX_MACS/Tema6
 
-      - name: Compilar 1r MACS - Tema 7
+      - name: Compilar 1BATX_MACS - Tema 7
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 1BATX_MACS/Tema7
 
-      - name: Compilar 1r MACS - Tema 8
+      - name: Compilar 1BATX_MACS - Tema 8
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 1BATX_MACS/Tema8
 
-      - name: Compilar 1r MACS - Tema 9
+      - name: Compilar 1BATX_MACS - Tema 9
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 1BATX_MACS/Tema9
 
+      - name: Compilar 1BATX_MACS - Tema 10
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_MACS/Tema10
+
+      # ==================== 1r BATX CCTT ====================
+      - name: Compilar 1BATX_CCTT - Tema 1
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_CCTT/Tema1
+
+      - name: Compilar 1BATX_CCTT - Tema 2
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_CCTT/Tema2
+
+      - name: Compilar 1BATX_CCTT - Tema 3
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_CCTT/Tema3
+
+      - name: Compilar 1BATX_CCTT - Tema 4
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_CCTT/Tema4
+
+      - name: Compilar 1BATX_CCTT - Tema 5
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_CCTT/Tema5
+
+      - name: Compilar 1BATX_CCTT - Tema 6
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_CCTT/Tema6
+
+      - name: Compilar 1BATX_CCTT - Tema 7
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_CCTT/Tema7
+
+      - name: Compilar 1BATX_CCTT - Tema 8
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_CCTT/Tema8
+
+      - name: Compilar 1BATX_CCTT - Tema 9
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_CCTT/Tema9
+
+      - name: Compilar 1BATX_CCTT - Tema 10
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 1BATX_CCTT/Tema10
+
+      # ==================== 2n BATX MACS ====================
+      - name: Compilar 2BATX_MACS - Tema 1
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_MACS/Tema1
+
+      - name: Compilar 2BATX_MACS - Tema 2
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_MACS/Tema2
+
+      - name: Compilar 2BATX_MACS - Tema 3
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_MACS/Tema3
+
+      - name: Compilar 2BATX_MACS - Tema 4
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_MACS/Tema4
+
+      - name: Compilar 2BATX_MACS - Tema 5
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_MACS/Tema5
+
+      - name: Compilar 2BATX_MACS - Tema 6
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_MACS/Tema6
+
+      - name: Compilar 2BATX_MACS - Tema 7
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_MACS/Tema7
+
+      - name: Compilar 2BATX_MACS - Tema 8
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_MACS/Tema8
+
+      - name: Compilar 2BATX_MACS - Tema 9
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_MACS/Tema9
+
+      - name: Compilar 2BATX_MACS - Tema 10
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_MACS/Tema10
+
       # ==================== 2n BATX CCTT ====================
-      - name: Compilar 2n CCTT - Tema 1
+      - name: Compilar 2BATX_CCTT - Tema 1
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 2BATX_CCTT/Tema1
 
-      - name: Compilar 2n CCTT - Tema 2
+      - name: Compilar 2BATX_CCTT - Tema 2
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 2BATX_CCTT/Tema2
 
-      - name: Compilar 2n CCTT - Tema 3
+      - name: Compilar 2BATX_CCTT - Tema 3
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 2BATX_CCTT/Tema3
 
-      - name: Compilar 2n CCTT - Tema 4
+      - name: Compilar 2BATX_CCTT - Tema 4
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 2BATX_CCTT/Tema4
 
-      - name: Compilar 2n CCTT - Tema 5
+      - name: Compilar 2BATX_CCTT - Tema 5
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 2BATX_CCTT/Tema5
 
-      - name: Compilar 2n CCTT - Tema 6
+      - name: Compilar 2BATX_CCTT - Tema 6
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 2BATX_CCTT/Tema6
 
-      - name: Compilar 2n CCTT - Tema 7
+      - name: Compilar 2BATX_CCTT - Tema 7
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 2BATX_CCTT/Tema7
 
-      - name: Compilar 2n CCTT - Tema 8
+      - name: Compilar 2BATX_CCTT - Tema 8
         uses: xu-cheng/latex-action@v3
         continue-on-error: true
         with:
           root_file: main.tex
           working_directory: 2BATX_CCTT/Tema8
 
+      - name: Compilar 2BATX_CCTT - Tema 9
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_CCTT/Tema9
+
+      - name: Compilar 2BATX_CCTT - Tema 10
+        uses: xu-cheng/latex-action@v3
+        continue-on-error: true
+        with:
+          root_file: main.tex
+          working_directory: 2BATX_CCTT/Tema10
+
       # ==================== ORGANITZAR TOTS ELS PDF ====================
       - name: Copiar PDFs Generats i Web
         run: |
-          cp 1BATX_MACS/Tema1/main.pdf public/1BATX_MACS/Tema1.pdf 2>/dev/null || true
-          cp 1BATX_MACS/Tema2/main.pdf public/1BATX_MACS/Tema2.pdf 2>/dev/null || true
-          cp 1BATX_MACS/Tema3/main.pdf public/1BATX_MACS/Tema3.pdf 2>/dev/null || true
-          cp 1BATX_MACS/Tema4/main.pdf public/1BATX_MACS/Tema4.pdf 2>/dev/null || true
-          cp 1BATX_MACS/Tema5/main.pdf public/1BATX_MACS/Tema5.pdf 2>/dev/null || true
-          cp 1BATX_MACS/Tema6/main.pdf public/1BATX_MACS/Tema6.pdf 2>/dev/null || true
-          cp 1BATX_MACS/Tema7/main.pdf public/1BATX_MACS/Tema7.pdf 2>/dev/null || true
-          cp 1BATX_MACS/Tema8/main.pdf public/1BATX_MACS/Tema8.pdf 2>/dev/null || true
-          cp 1BATX_MACS/Tema9/main.pdf public/1BATX_MACS/Tema9.pdf 2>/dev/null || true
-
-          cp 2BATX_CCTT/Tema1/main.pdf public/2BATX_CCTT/Tema1.pdf 2>/dev/null || true
-          cp 2BATX_CCTT/Tema2/main.pdf public/2BATX_CCTT/Tema2.pdf 2>/dev/null || true
-          cp 2BATX_CCTT/Tema3/main.pdf public/2BATX_CCTT/Tema3.pdf 2>/dev/null || true
-          cp 2BATX_CCTT/Tema4/main.pdf public/2BATX_CCTT/Tema4.pdf 2>/dev/null || true
-          cp 2BATX_CCTT/Tema5/main.pdf public/2BATX_CCTT/Tema5.pdf 2>/dev/null || true
-          cp 2BATX_CCTT/Tema6/main.pdf public/2BATX_CCTT/Tema6.pdf 2>/dev/null || true
-          cp 2BATX_CCTT/Tema7/main.pdf public/2BATX_CCTT/Tema7.pdf 2>/dev/null || true
-          cp 2BATX_CCTT/Tema8/main.pdf public/2BATX_CCTT/Tema8.pdf 2>/dev/null || true
-
+          for i in {1..10}; do
+            cp 1BATX_MACS/Tema$i/main.pdf public/1BATX_MACS/Tema$i.pdf 2>/dev/null || true
+            cp 1BATX_CCTT/Tema$i/main.pdf public/1BATX_CCTT/Tema$i.pdf 2>/dev/null || true
+            cp 2BATX_MACS/Tema$i/main.pdf public/2BATX_MACS/Tema$i.pdf 2>/dev/null || true
+            cp 2BATX_CCTT/Tema$i/main.pdf public/2BATX_CCTT/Tema$i.pdf 2>/dev/null || true
+          done
           cp index.html public/
 
       - name: Preparar artefacte
