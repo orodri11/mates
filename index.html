@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossiers de Matemàtiques - Batxillerat</title>
+    <style>
+        :root {
+            --primary: #0056b3;
+            --accent-macs: #2e7d32;
+            --accent-cctt: #c62828;
+            --bg: #f8f9fa;
+        }
+        body { font-family: system-ui, -apple-system, sans-serif; max-width: 900px; margin: 40px auto; padding: 0 20px; background: var(--bg); color: #333; line-height: 1.6; }
+        header { text-align: center; margin-bottom: 40px; }
+        h1 { color: var(--primary); margin-bottom: 5px; }
+        .course-card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .course-title-macs { color: var(--accent-macs); border-bottom: 2px solid var(--accent-macs); padding-bottom: 8px; margin-top: 0; }
+        .course-title-cctt { color: var(--accent-cctt); border-bottom: 2px solid var(--accent-cctt); padding-bottom: 8px; margin-top: 0; }
+        ul { list-style: none; padding: 0; }
+        li { background: #f4f6f9; margin: 10px 0; padding: 12px 18px; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .btn { background: var(--primary); color: white; padding: 6px 14px; border-radius: 6px; text-decoration: none; font-size: 0.9em; font-weight: bold; transition: opacity 0.2s; }
+        .btn:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Dossiers de Matemàtiques</h1>
+        <p>Apunts i dossiers de classe actualitzats en format PDF</p>
+    </header>
+
+    <!-- 1r BATX MACS -->
+    <div class="course-card">
+        <h2 class="course-title-macs">1r de Batxillerat — MACS (Social)</h2>
+        <ul>
+            <li>
+                <span>Tema 1: Nombres Reals i Àlgebra</span>
+                <a class="btn" href="./1BATX_MACS/Tema1.pdf" target="_blank">Obrir PDF</a>
+            </li>
+            <!-- Afegiràs més temes aquí fàcilment -->
+        </ul>
+    </div>
+
+    <!-- 2n BATX CCTT -->
+    <div class="course-card">
+        <h2 class="course-title-cctt">2n de Batxillerat — CCTT (Científic-Tecnològic)</h2>
+        <ul>
+            <li>
+                <span>Tema 1: Matrius i Determinants</span>
+                <a class="btn" href="./2BATX_CCTT/Tema1.pdf" target="_blank">Obrir PDF</a>
+            </li>
+            <!-- Afegiràs més temes aquí fàcilment -->
+        </ul>
+    </div>
+
+</body>
+</html>
