@@ -1,0 +1,1035 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[catalan]{babel}
+\usepackage{amsmath, amssymb, amsfonts}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{matrix, calc}
+\usepackage{tcolorbox}
+\usepackage[colorlinks=true, linkcolor=blue]{hyperref}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{tabularx}
+\usepackage{booktabs}   % <-- AFEGIT: per a \toprule, \midrule, \bottomrule
+
+\setlength{\headheight}{16pt}   % <-- CANVIAT: 15pt era massa petit
+
+\geometry{a4paper, left=2cm, right=2cm, top=2.5cm, bottom=2.5cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MACS 1r Batxillerat}
+\fancyhead[R]{\leftmark}
+\fancyfoot[L]{\href{mailto:oscar.rodriguez@insjoseplladonosa.cat}{oscar.rodriguez@insjoseplladonosa.cat}}
+\fancyfoot[R]{\thepage}
+
+% Entorns personalitzats per a la teoria, exemples i exercicis
+\newtcolorbox{concept}[1][]{colback=blue!5!white, colframe=blue!75!black, fonttitle=\bfseries, title=Concepte, #1}
+\newtcolorbox{exemple}[1][]{colback=green!5!white, colframe=green!75!black, fonttitle=\bfseries, title=Exemple, #1}
+\newtcolorbox{exercici}[1][]{colback=yellow!10!white, colframe=yellow!75!black, fonttitle=\bfseries, title=Exercici, #1}
+\newtcolorbox{solucio}[1][]{colback=orange!5!white, colframe=orange!75!black, fonttitle=\bfseries, title=Solució, #1}
+% Entorn per als resums de fórmules
+\newtcolorbox{resum}[1][]{colback=purple!5!white, colframe=purple!75!black, fonttitle=\bfseries, title=Resum de fórmules, #1}
+
+\begin{document}
+
+\hypersetup{pageanchor=false}
+
+\begin{titlepage}
+    \centering
+    \vspace*{0.5cm}
+    {\Large \textbf{INS Josep Lladonosa} \par}
+    \vspace{0.3cm}
+    {\large Matemàtiques Aplicades a les Ciències Socials -- 1r de Batxillerat \par}
+    \vspace{1.5cm}
+    {\Huge \textbf{Tema 1: Els Nombres Reals} \par}
+    \vspace{0.8cm}
+    {\Large Dossier de Teoria i Exercicis \par}
+    \vspace{1.5cm}
+
+    % Imatge conceptual per al tema dels nombres reals
+    \includegraphics[width=0.45\textwidth]{nombresreals.png}
+
+    \vspace{1.5cm}
+    \textbf{Professor:} Òscar Rodríguez \\
+    \href{mailto:oscar.rodriguez@insjoseplladonosa.cat}{oscar.rodriguez@insjoseplladonosa.cat}
+\end{titlepage}
+
+\tableofcontents
+\newpage
+
+\section{Nombres Reals}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: CLASSIFICACIÓ DELS NOMBRES REALS
+% ---------------------------------------------------------
+\subsection{Classificació dels nombres reals}
+
+\begin{concept}
+\textbf{Els conjunts numèrics}\\
+Els nombres es classifiquen en diferents conjunts segons les seves propietats:
+\begin{itemize}
+    \item \textbf{Nombres Naturals ($\mathbb{N}$):} $\mathbb{N} = \{0, 1, 2, 3, 4, \dots\}$. S'utilitzen per comptar elements naturals.
+    \item \textbf{Nombres Enters ($\mathbb{Z}$):} Inclouen els naturals i els seus oposats negatius: $\mathbb{Z} = \{\dots, -3, -2, -1, 0, 1, 2, 3, \dots\}$. Permeten representar deutes, temperatures sota zero, soterranis, etc.
+    \item \textbf{Nombres Racionals ($\mathbb{Q}$):} Són tots aquells nombres que es poden expressar en forma de fracció $\frac{a}{b}$ on $a, b \in \mathbb{Z}$ i $b \neq 0$. En forma decimal, corresponen a decimals exactes o decimals periòdics (purs o mixtos).
+    \item \textbf{Nombres Irracionals ($\mathbb{I}$):} Són aquells nombres decimals que tenen infinites xifres decimals no periòdiques. No es poden expressar com a fracció. Exemples habituals: $\sqrt{2}, \sqrt{3}, \pi, e, \varphi$.
+    \item \textbf{Nombres Reals ($\mathbb{R}$):} És la unió del conjunt dels racionals i dels irracionals ($\mathbb{R} = \mathbb{Q} \cup \mathbb{I}$).
+\end{itemize}
+
+\textbf{Inclusió de conjunts:}
+\[ \mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R} \]
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % Reals (R)
+    \draw[thick, fill=gray!10] (-5,-3) rectangle (5,3);
+    \node at (-4.2,2.5) {\textbf{$\mathbb{R}$}};
+
+    % Irracionals (I)
+    \draw[thick, fill=red!10] (2,-2.5) rectangle (4.5,2);
+    \node at (3.25,1.5) {\textbf{$\mathbb{I}$}};
+    \node at (3.25,0.5) {$\sqrt{2}, \pi, e$};
+
+    % Racionals (Q)
+    \draw[thick, fill=blue!10] (-4.5,-2.5) rectangle (1.5,2);
+    \node at (-3.8,1.5) {\textbf{$\mathbb{Q}$}};
+    \node at (-3.2,0.8) {$\frac{3}{4}, 2.35$};
+
+    % Enters (Z)
+    \draw[thick, fill=green!10] (-4,-2) rectangle (1,0.3);
+    \node at (-3.5,-0.2) {\textbf{$\mathbb{Z}$}};
+    \node at (-2.8,-1.2) {$-3, -7$};
+
+    % Naturals (N)
+    \draw[thick, fill=yellow!20] (-2,-1.8) rectangle (0.5,-0.5);
+    \node at (-1.5,-0.9) {\textbf{$\mathbb{N}$}};
+    \node at (-0.5,-1.2) {$0, 1, 5$};
+\end{tikzpicture}
+\caption{Inclusió dels conjunts numèrics ($\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}$).}
+\end{figure}
+\end{concept}
+
+\begin{exemple}
+\textbf{Classificació de nombres}\\
+Classifica els següents nombres en el conjunt numèric més restrictiu al qual pertanyen:
+\begin{itemize}
+    \item $-7 \in \mathbb{Z}$ (Enter negatiu)
+    \item $\frac{12}{3} = 4 \in \mathbb{N}$ (Natural, ja que la divisió és exacta)
+    \item $\sqrt{5} \in \mathbb{I}$ (Irracional, arrel no exacta)
+    \item $2{,}353535\dots = 2{,}\overline{35} \in \mathbb{Q}$ (Racional, decimal periòdic pur)
+\end{itemize}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 1.1}\\
+Classifica els següents nombres indicant el conjunt més petit al qual pertanyen ($\mathbb{N}, \mathbb{Z}, \mathbb{Q}, \mathbb{I}$):
+\begin{enumerate}[label=\alph*)]
+    \item $\frac{15}{3}$
+    \item $\sqrt{16}$
+    \item $\sqrt{7}$
+    \item $3{,}141592\dots$
+    \item $1{,}25$
+    \item $\frac{22}{7}$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: LA RECTA REAL
+% ---------------------------------------------------------
+\subsection{La recta real i l'ordre}
+
+\begin{concept}
+\textbf{La Recta Real}\\
+A cada punt de la recta li correspon un únic nombre real, i a cada nombre real li correspon un únic punt de la recta.
+
+El conjunt dels nombres reals és un \textbf{conjunt ordenat}. Si $a$ i $b$ són dos nombres reals, diem que $a < b$ si el punt que representa $a$ es troba a l'esquerra del punt que representa $b$ a la recta real.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1]
+    \draw[->, thick] (-4,0) -- (5,0) node[right] {$\mathbb{R}$};
+    \foreach \x in {-3,-2,-1,0,1,2,3,4}
+        \draw[thick] (\x,0.1) -- (\x,-0.1);
+    \draw[thick] (-2,0.1) -- (-2,-0.1) node[below] {$a$};
+    \draw[thick] (2,0.1) -- (2,-0.1) node[below] {$b$};
+    \draw[<-, red, thick] (-2,0.7) -- (2,0.7);
+    \node[red, above] at (0,0.75) {$a < b$};
+    \filldraw[red] (-2,0) circle (2pt);
+    \filldraw[red] (2,0) circle (2pt);
+\end{tikzpicture}
+\caption{Ordenació a la recta real: \(a<b\) perquè \(a\) és a l'esquerra de \(b\).}
+\end{figure}
+
+\end{concept}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: VALOR ABSOLUT
+% ---------------------------------------------------------
+\subsection{Valor absolut}
+
+\begin{concept}
+\textbf{Definició de valor absolut}\\
+El valor absolut d'un nombre real $a$, representat per $|a|$, mesura la distància d'aquest nombre a l'origen $0$ a la recta real. Formalment es defineix com:
+\[ |a| = \begin{cases} a & \text{si } a \ge 0 \\ -a & \text{si } a < 0 \end{cases} \]
+
+\textbf{Propietats principals:}
+\begin{enumerate}
+    \item $|a| \ge 0$ per a tot $a \in \mathbb{R}$.
+    \item $|a \cdot b| = |a| \cdot |b|$.
+    \item $|x| = k \iff x = k \text{ o } x = -k \quad (k \ge 0)$.
+    \item $|x| \le k \iff -k \le x \le k \quad (k \ge 0)$.
+\end{enumerate}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+    \draw[->, thick] (-4,0) -- (4,0) node[right] {$x$};
+
+    \draw[thick] (0,0.1) -- (0,-0.1) node[below] {$0$};
+    \draw[thick] (3,0.1) -- (3,-0.1) node[below] {$a$};
+    \draw[thick] (-3,0.1) -- (-3,-0.1) node[below] {$-a$};
+
+    \draw[<->, red, thick] (0,0.5) -- (3,0.5) node[midway, above] {$|a|$};
+    \draw[<->, red, thick] (-3,0.5) -- (0,0.5) node[midway, above] {$|-a| = |a|$};
+\end{tikzpicture}
+\caption{El valor absolut com a distància respecte a l'origen.}
+\end{figure}
+\end{concept}
+
+\begin{exemple}
+\textbf{Resolució d'equacions amb valor absolut}
+\begin{enumerate}[label=\alph*)]
+    \item $|x - 3| = 5 \implies x - 3 = 5 \text{ o } x - 3 = -5 \implies x = 8 \text{ o } x = -2$.
+    \item $|2x + 1| \le 7 \implies -7 \le 2x + 1 \le 7 \implies -8 \le 2x \le 6 \implies -4 \le x \le 3$.
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 1.2}\\
+Calcula o resol les següents expressions i equacions amb valor absolut:
+\begin{enumerate}[label=\alph*)]
+    \item $|-8| + |3| - |-5|$
+    \item $|x| = 9$
+    \item $|x - 4| = 2$
+    \item $|2x + 6| = 10$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: INTERVALS
+% ---------------------------------------------------------
+\subsection{Intervals}
+
+\begin{concept}
+\textbf{Tipus d'intervals}\\
+Un interval és un subconjunt de la recta real definit entre dos extrems $a$ i $b$ ($a < b$).
+
+\begin{table}[H]
+\centering
+\small
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{|l|c|c|X|}
+\hline
+\textbf{Nom} & \textbf{Interval} & \textbf{Desigualtat} & \textbf{Descripció} \\ \hline
+Obert & $(a,b)$ & $a < x < b$ & Nombres estrictament entre $a$ i $b$ \\ \hline
+Tancat & $[a,b]$ & $a \le x \le b$ & Nombres entre $a$ i $b$, inclosos els extrems \\ \hline
+Semiobert per la dreta & $[a,b)$ & $a \le x < b$ & Inclou $a$, però no inclou $b$ \\ \hline
+Semiobert per l'esquerra & $(a,b]$ & $a < x \le b$ & No inclou $a$, inclou $b$ \\ \hline
+Semirecta oberta & $(a, +\infty)$ & $x > a$ & Tots els nombres més grans que $a$ \\ \hline
+Semirecta tancada & $(-\infty, b]$ & $x \le b$ & Tots els nombres més petits o iguals que $b$ \\ \hline
+\end{tabularx}
+\end{table}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.9]
+    \def\drawinterval#1#2#3#4#5{
+        \draw[<->, thick] (-0.5,#1) -- (5.5,#1);
+        \draw[ultra thick, #5] (#2,#1) -- (#3,#1);
+        \ifnum#4=1 \filldraw[#5] (#2,#1) circle (2.5pt);
+        \else \draw[#5, fill=white, thick] (#2,#1) circle (2.5pt); \fi
+        \ifnum#4=1 \filldraw[#5] (#3,#1) circle (2.5pt);
+        \else \draw[#5, fill=white, thick] (#3,#1) circle (2.5pt); \fi
+    }
+    \drawinterval{6}{1}{4}{1}{blue}  \node[left] at (-0.5,6) {Tancat $[a,b]$};
+    \drawinterval{4.5}{1}{4}{0}{blue} \node[left] at (-0.5,4.5) {Obert $(a,b)$};
+    \drawinterval{3}{1}{4}{2}{blue}  \node[left] at (-0.5,3) {Semiobert $[a,b)$};
+    \drawinterval{1.5}{1}{4}{3}{blue}\node[left] at (-0.5,1.5) {Semiobert $(a,b]$};
+\end{tikzpicture}
+\caption{Representació gràfica dels diferents tipus d'intervals finits.}
+\end{figure}
+\end{concept}
+
+\begin{exemple}
+\textbf{Operacions amb intervals (Unió i Intersecció)}
+\begin{itemize}
+    \item Intersecció ($\cap$): Elements comuns a tots dos intervals. \\
+    $[ -2, 5 ) \cap ( 1, 8 ] = ( 1, 5 )$
+    \item Unió ($\cup$): Elements que pertanyen a un o a l'altre interval. \\
+    $[ -2, 5 ) \cup ( 1, 8 ] = [ -2, 8 ]$
+\end{itemize}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 1.3}\\
+Expressa en totes les formes possibles (desigualtat, interval i representació gràfica):
+\begin{enumerate}[label=\alph*)]
+    \item Nombres compresos entre $-3$ i $4$, inclosos tots dos.
+    \item Nombres estrictament majors que $5$.
+    \item $\{x \in \mathbb{R} \mid -2 \le x < 6\}$
+    \item $(-\infty, 1) \cup [3, +\infty)$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: INEQUACIONS
+% ---------------------------------------------------------
+\subsection{Inequacions}
+
+\begin{concept}
+\textbf{Inequacions de 1r i 2n grau}\\
+Una inequació és una desigualtat algebraica.
+\begin{itemize}
+    \item \textbf{Propietat clau:} Si es multiplica o es divideix tota la inequació per un nombre negatiu, el sentit de la desigualtat s'inverteix ($<$ passa a $>$, $\le$ passa a $\ge$).
+    \item \textbf{Inequacions de 2n grau:} Per resoldre $ax^2 + bx + c \le 0$, es troben les arrels de l'equació $ax^2 + bx + c = 0$, es divideix la recta real en intervals i s'estudia el signe del polinomi en cadascun d'ells.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.7]
+    \draw[->, thick] (-3,0) -- (6,0) node[right] {$x$};
+    \draw[->, thick] (0,-5) -- (0,3) node[above] {$y$};
+    \draw[domain=-2.5:5.5, smooth, samples=100, blue, ultra thick]
+        plot (\x, {(\x+1)*(\x-4)/2});
+    \filldraw[red] (-1,0) circle (3pt) node[above left] {$-1$};
+    \filldraw[red] (4,0) circle (3pt) node[above right] {$4$};
+    \node[blue, above] at (2,-4) {$y = x^2-3x-4$};
+    \draw[<-, red, thick] (-1,-0.5) -- (4,-0.5);
+    \node[red, below] at (1.5,-0.5) {$y<0$};
+\end{tikzpicture}
+\caption{La paràbola \(y=x^2-3x-4<0\) a l'interval \((-1,4)\).}
+\end{figure}
+
+\end{concept}
+
+\begin{exemple}
+\textbf{Resolució d'inequacions}
+\begin{enumerate}[label=\alph*)]
+    \item $5x + 4 \le 7x + 10 \implies 5x - 7x \le 10 - 4 \implies -2x \le 6 \implies x \ge \frac{6}{-2} \implies x \ge -3$. \\
+    Solució: $[-3, +\infty)$
+    \item $x^2 - 3x - 4 < 0$. \\
+    Arrels: $x^2 - 3x - 4 = 0 \implies x = 4, x = -1$. \\
+    Intervals: $(-\infty, -1)$, $(-1, 4)$, $(4, +\infty)$. Provant valors, el signe és negatiu a $(-1, 4)$. \\
+    Solució: $(-1, 4)$
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 1.4}\\
+Resol les següents inequacions i expressa la solució en forma d'interval:
+\begin{enumerate}[label=\alph*)]
+    \item $3x - 2 \le 10$
+    \item $5(2 + x) > -5x$
+    \item $\frac{x - 1}{2} > x - 1$
+    \item $x^2 + 2x - 8 > 0$
+    \item $x^2 - 4 \le 0$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL TEMA 1
+% ---------------------------------------------------------
+\begin{resum}[title=Resum del Tema 1: Nombres Reals]
+\textbf{Conjunts numèrics i inclusions}
+\[
+\mathbb{N} \subset \mathbb{Z} \subset \mathbb{Q} \subset \mathbb{R}, \qquad \mathbb{R} = \mathbb{Q} \cup \mathbb{I}
+\]
+
+\textbf{Valor absolut}
+\[
+|a| = \begin{cases} a & \text{si } a \ge 0 \\ -a & \text{si } a < 0 \end{cases}
+\]
+\[
+|a| \ge 0, \quad |a \cdot b| = |a| \cdot |b|
+\]
+\[
+|x| = k \iff x = k \text{ o } x = -k \quad (k \ge 0)
+\]
+\[
+|x| \le k \iff -k \le x \le k \quad (k \ge 0)
+\]
+
+\textbf{Intervals}
+\begin{center}
+\small
+\begin{tabular}{lll}
+\toprule
+\textbf{Nom} & \textbf{Interval} & \textbf{Desigualtat} \\
+\midrule
+Obert & $(a,b)$ & $a < x < b$ \\
+Tancat & $[a,b]$ & $a \le x \le b$ \\
+Semiobert per la dreta & $[a,b)$ & $a \le x < b$ \\
+Semiobert per l'esquerra & $(a,b]$ & $a < x \le b$ \\
+Semirecta oberta & $(a,+\infty)$ & $x > a$ \\
+Semirecta tancada & $(-\infty,b]$ & $x \le b$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\textbf{Propietat clau de les inequacions}\\
+Si es multiplica o divideix per un nombre negatiu, el sentit de la desigualtat s'inverteix.
+\end{resum}
+
+\newpage
+
+\section{Productes Notables}
+
+\begin{concept}
+\textbf{Igualtats notables}\\
+Els productes notables (o identitats notables) són fórmules algebraiques que s'utilitzen per simplificar i calcular ràpidament certes expressions algèbriques sense necessitat de multiplicar terme a terme:
+
+\begin{enumerate}
+    \item \textbf{Quadrat d'una suma:}
+    \[ (a + b)^2 = a^2 + 2ab + b^2 \]
+    \textit{"El quadrat del primer, més el doble producte del primer pel segon, més el quadrat del segon."}
+
+    \begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.8]
+    % (a+b)^2
+    \draw[thick, fill=blue!20] (0,0) rectangle (4,4);
+    \draw[thick, fill=green!30] (0,0) rectangle (2.5,2.5);
+    \draw[thick, fill=yellow!40] (2.5,0) rectangle (4,2.5);
+    \draw[thick, fill=yellow!40] (0,2.5) rectangle (2.5,4);
+    \draw[thick, fill=red!20] (2.5,2.5) rectangle (4,4);
+    \node at (1.25,1.25) {$a^2$};
+    \node at (3.25,1.25) {$ab$};
+    \node at (1.25,3.25) {$ab$};
+    \node at (3.25,3.25) {$b^2$};
+    \node[below] at (1.25,0) {$a$};
+    \node[below] at (3.25,0) {$b$};
+    \node[left] at (0,1.25) {$a$};
+    \node[left] at (0,3.25) {$b$};
+    \node[above] at (2,4) {$(a+b)^2 = a^2+2ab+b^2$};
+\end{tikzpicture}
+\caption{Interpretació geomètrica del quadrat d'una suma.}
+\end{figure}
+
+    \item \textbf{Quadrat d'una diferència:}
+    \[ (a - b)^2 = a^2 - 2ab + b^2 \]
+    \textit{"El quadrat del primer, menys el doble producte del primer pel segon, més el quadrat del segon."}
+
+    \item \textbf{Suma per diferència (Diferència de quadrats):}
+    \[ (a + b)(a - b) = a^2 - b^2 \]
+    \textit{"El quadrat del primer menys el quadrat del segon."}
+\end{enumerate}
+
+
+
+\end{concept}
+
+\begin{exemple}
+\textbf{Desenvolupament de productes notables}
+\begin{enumerate}[label=\alph*)]
+    \item $(2x + 3)^2 = (2x)^2 + 2 \cdot (2x) \cdot 3 + 3^2 = 4x^2 + 12x + 9$
+    \item $(4z - 1)^2 = (4z)^2 - 2 \cdot (4z) \cdot 1 + 1^2 = 16z^2 - 8z + 1$
+    \item $(x + 3y)(x - 3y) = x^2 - (3y)^2 = x^2 - 9y^2$
+    \item $(3x^2 - 5)(3x^2 + 5) = (3x^2)^2 - 5^2 = 9x^4 - 25$
+\end{enumerate}
+\end{exemple}
+
+\begin{exemple}
+\textbf{Factorització mitjançant identitats notables}\\
+També s'utilitzen en sentit invers per descompondre polinomis en factors:
+\begin{enumerate}[label=\alph*)]
+    \item $x^2 - 16 = x^2 - 4^2 = (x + 4)(x - 4)$
+    \item $9x^2 + 12x + 4 = (3x)^2 + 2 \cdot (3x) \cdot 2 + 2^2 = (3x + 2)^2$
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 2.1}\\
+Desenvolupa els següents productes notables utilitzant la fórmula corresponent:
+\begin{enumerate}[label=\alph*)]
+    \item $(x + 7)^2$
+    \item $(9 - y)^2$
+    \item $(a + 6)(a - 6)$
+    \item $(3x + 5)^2$
+    \item $(2x - 4)^2$
+    \item $(5x + 2y)(5x - 2y)$
+    \item $(x^2 - 3)^2$
+    \item $\left(2x + \frac{1}{2}\right)^2$
+\end{enumerate}
+\end{exercici}
+
+\begin{exercici}
+\textbf{Exercici 2.2}\\
+Factoritza les següents expressions reconeixent la identitat notable corresponent:
+\begin{enumerate}[label=\alph*)]
+    \item $x^2 - 81$
+    \item $x^2 + 10x + 25$
+    \item $4x^2 - 12x + 9$
+    \item $25x^2 - 1$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL TEMA 2
+% ---------------------------------------------------------
+\begin{resum}[title=Resum del Tema 2: Productes Notables]
+\textbf{Identitats notables}
+\[
+(a+b)^2 = a^2 + 2ab + b^2
+\]
+\[
+(a-b)^2 = a^2 - 2ab + b^2
+\]
+\[
+(a+b)(a-b) = a^2 - b^2
+\]
+
+\textbf{Factorització (sentit invers)}
+\[
+a^2 - b^2 = (a+b)(a-b)
+\]
+\[
+a^2 + 2ab + b^2 = (a+b)^2
+\]
+\[
+a^2 - 2ab + b^2 = (a-b)^2
+\]
+\end{resum}
+
+\newpage
+
+\section{Potències}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: PROPIETATS DE LES POTÈNCIES
+% ---------------------------------------------------------
+\subsection{Definició i propietats de les potències}
+
+\begin{concept}
+\textbf{Definició}\\
+Una potència de base $a \in \mathbb{R}$ i exponent $n \in \mathbb{Z}$ és el resultat de multiplicar la base per ella mateixa $n$ vegades:
+\[ a^n = \underbrace{a \cdot a \cdot \dots \cdot a}_{n \text{ vegades}} \]
+
+\textbf{Casos especials d'exponents:}
+\begin{itemize}
+    \item $a^0 = 1 \quad (a \neq 0)$
+    \item $a^1 = a$
+    \item $a^{-n} = \frac{1}{a^n} \quad (a \neq 0)$
+    \item $\left(\frac{a}{b}\right)^{-n} = \left(\frac{b}{a}\right)^n \quad (a, b \neq 0)$
+\end{itemize}
+
+\textbf{Propietats operatòries:}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Propietat} & \textbf{Expressió algebraica} \\ \hline
+Multiplicació de la mateixa base & $a^n \cdot a^m = a^{n+m}$ \\ \hline
+Divisió de la mateixa base & $\frac{a^n}{a^m} = a^{n-m}$ \\ \hline
+Potència d'una potència & $(a^n)^m = a^{n \cdot m}$ \\ \hline
+Potència d'un producte & $(a \cdot b)^n = a^n \cdot b^n$ \\ \hline
+Potència d'un quocient & $\left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}$ \\ \hline
+\end{tabular}
+\end{table}
+\end{concept}
+
+\begin{concept}
+\textbf{Exponents fraccionaris}\\
+Una potència d'exponent fraccionari representa un radical:
+\[ a^{\frac{m}{n}} = \sqrt[n]{a^m} \]
+Les mateixes propietats de les potències d'exponent enter s'apliquen directament a les potències amb exponents fraccionaris.
+\end{concept}
+
+\begin{exemple}
+\textbf{Simplificació de potències}
+\begin{enumerate}[label=\alph*)]
+    \item $3^4 \cdot 3^{-2} \cdot 3^5 = 3^{4 + (-2) + 5} = 3^7$
+    \item $\frac{2^5 \cdot 2^{-3}}{2^4} = 2^{5 + (-3) - 4} = 2^{-2} = \frac{1}{2^2} = \frac{1}{4}$
+    \item $\left(\frac{2}{3}\right)^{-3} = \left(\frac{3}{2}\right)^3 = \frac{27}{8}$
+    \item $\frac{7^{\frac{5}{4}} \cdot 7^{\frac{5}{2}}}{7^{\frac{5}{3}}} = 7^{\frac{5}{4} + \frac{5}{2} - \frac{5}{3}} = 7^{\frac{15 + 30 - 20}{12}} = 7^{\frac{25}{12}} = \sqrt[12]{7^{25}}$
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 3.1}\\
+Simplifica les següents expressions expressant el resultat com una sola potència d'exponent positiu:
+\begin{enumerate}[label=\alph*)]
+    \item $2^3 \cdot 2^5 \cdot 2^{-2}$
+    \item $\frac{5^7 \cdot 5^{-2}}{5^8}$
+    \item $\left(a^3 \cdot a^{-5}\right)^{-2}$
+    \item $\frac{12^4 \cdot 3^{-2}}{4^3 \cdot 9^2}$
+    \item $\left(\frac{3}{5}\right)^{-2} \cdot \left(\frac{5}{3}\right)^3$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: NOTACIÓ CIENTÍFICA
+% ---------------------------------------------------------
+\subsection{Notació científica}
+
+\begin{concept}
+\textbf{Definició}\\
+Un nombre està escrit en \textbf{notació científica} quan s'expressa com el producte d'un nombre decimal (mantissa) el valor absolut del qual és major o igual que $1$ i menor que $10$, per una potència de deu d'exponent enter:
+\[ a \cdot 10^k \quad \text{on } 1 \le |a| < 10 \text{ i } k \in \mathbb{Z} \]
+
+\begin{itemize}
+    \item \textbf{Nombres molt grans ($k > 0$):} Distància Sol-Terra $\approx 150.000.000.000 \text{ m} = 1{,}5 \cdot 10^{11} \text{ m}$.
+    \item \textbf{Nombres molt petits ($k < 0$):} Radi de l'àtom d'hidrogen $\approx 0{,}00000000012 \text{ m} = 1{,}2 \cdot 10^{-10} \text{ m}$.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.75]
+    \draw[->, thick] (-5,0) -- (5,0);
+    \foreach \x/\lab in {-4/{$10^{-4}$},-3/{$10^{-3}$},-2/{$10^{-2}$},-1/{$10^{-1}$},
+                          0/{$10^{0}$},1/{$10^{1}$},2/{$10^{2}$},3/{$10^{3}$},4/{$10^{4}$}}
+        \draw (\x,0.1) -- (\x,-0.1) node[below, font=\scriptsize] {\lab};
+    \node[above, blue] at (-3.6,0.4) {\scriptsize àtom H};
+    \node[above, blue] at (3.5,0.4) {\scriptsize Sol-Terra};
+    \draw[->, red, thick] (-3.6,0.2) -- (-3.6,0);
+    \draw[->, red, thick] (3.5,0.2) -- (3.5,0);
+\end{tikzpicture}
+\caption{Comparació d'ordres de magnitud en notació científica.}
+\end{figure}
+
+\end{concept}
+
+\begin{exemple}
+\textbf{Operacions en notació científica}
+\begin{enumerate}[label=\alph*)]
+    \item \textbf{Multiplicació i divisió:}
+    \[ (3 \cdot 10^5) \cdot (4 \cdot 10^{-2}) = (3 \cdot 4) \cdot 10^{5 + (-2)} = 12 \cdot 10^3 = 1{,}2 \cdot 10^4 \]
+    \item \textbf{Suma i resta (cal igualar les potències de 10):}
+    \[ 3{,}5 \cdot 10^8 + 4{,}2 \cdot 10^7 = 3{,}5 \cdot 10^8 + 0{,}42 \cdot 10^8 = (3{,}5 + 0{,}42) \cdot 10^8 = 3{,}92 \cdot 10^8 \]
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 3.2}\\
+Escriu en notació científica i resol les següents operacions:
+\begin{enumerate}[label=\alph*)]
+    \item $0{,}0000045 \cdot 1.200.000$
+    \item $3{,}5 \cdot 10^8 + 4{,}72 \cdot 10^9 - 6{,}3 \cdot 10^7$
+    \item $\frac{7{,}6 \cdot 10^{12} \cdot 3{,}8 \cdot 10^{-9}}{6{,}2 \cdot 10^{-11}}$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL TEMA 3
+% ---------------------------------------------------------
+\begin{resum}[title=Resum del Tema 3: Potències i Notació Científica]
+\textbf{Definició i casos especials}
+\[
+a^n = \underbrace{a \cdot a \cdots a}_{n \text{ vegades}}, \quad
+a^0 = 1 \ (a \neq 0), \quad
+a^{-n} = \frac{1}{a^n} \ (a \neq 0)
+\]
+
+\textbf{Propietats operatòries}
+\[
+a^n \cdot a^m = a^{n+m}, \qquad \frac{a^n}{a^m} = a^{n-m}
+\]
+\[
+(a^n)^m = a^{n \cdot m}, \qquad (a \cdot b)^n = a^n \cdot b^n
+\]
+\[
+\left(\frac{a}{b}\right)^n = \frac{a^n}{b^n}, \qquad
+\left(\frac{a}{b}\right)^{-n} = \left(\frac{b}{a}\right)^n
+\]
+
+\textbf{Exponents fraccionaris}
+\[
+a^{\frac{m}{n}} = \sqrt[n]{a^m}
+\]
+
+\textbf{Notació científica}
+\[
+a \cdot 10^k \quad \text{amb } 1 \le |a| < 10, \ k \in \mathbb{Z}
+\]
+\end{resum}
+
+\newpage
+
+\section{Radicals}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: DEFINICIÓ I PROPIETATS
+% ---------------------------------------------------------
+\subsection{Definició i propietats de les operacions amb radicals}
+
+\begin{concept}
+\textbf{Definició de radical}\\
+Un radical és una expressió de la forma $\sqrt[n]{a} = b \iff b^n = a$, on $n \in \mathbb{N}$ és l'índex de l'arrel i $a$ és el radicand.
+\begin{itemize}
+    \item Si $n$ és parell i $a < 0$, no existeix cap solució en el conjunt dels nombres reals ($\sqrt[n]{a} \notin \mathbb{R}$).
+    \item Si $n$ és senar, l'arrel real sempre existeix, independentment del signe de $a$.
+\end{itemize}
+
+\textbf{Propietats de les operacions:}
+\begin{itemize}
+    \item \textbf{Suma i resta:} $\sqrt[n]{a} \pm \sqrt[n]{b} \neq \sqrt[n]{a \pm b}$. No es poden sumar o restar radicals directament si no són radicals semblants.
+    \item \textbf{Producte:} $\sqrt[n]{a} \cdot \sqrt[n]{b} = \sqrt[n]{a \cdot b}$
+    \item \textbf{Quocient:} $\frac{\sqrt[n]{a}}{\sqrt[n]{b}} = \sqrt[n]{\frac{a}{b}}$
+    \item \textbf{Potència:} $(\sqrt[n]{a})^p = \sqrt[n]{a^p}$
+    \item \textbf{Arrel d'una arrel:} $\sqrt[m]{\sqrt[n]{a}} = \sqrt[m \cdot n]{a}$
+\end{itemize}
+\end{concept}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: EXTRACCIÓ I INTRODUCCIÓ DE FACTORS
+% ---------------------------------------------------------
+\subsection{Extracció i introducció de factors}
+
+\begin{concept}
+\textbf{Extracció de factors}\\
+Per extreure factors d'un radical $\sqrt[n]{a^p}$, es divideix l'exponent entre l'índex ($p : n$):
+\[ p = n \cdot q + r \implies \sqrt[n]{a^p} = a^q \cdot \sqrt[n]{a^r} \]
+on el quocient $q$ indica l'exponent del factor que surt fora i el residu $r$ indica l'exponent del factor que es queda a l'interior.
+
+\textbf{Introducció de factors}\\
+Per introduir un factor dins d'un radical, s'eleva el factor a l'índex de la radicació:
+\[ a \cdot \sqrt[n]{b} = \sqrt[n]{a^n \cdot b} \]
+\end{concept}
+
+\begin{exemple}
+\textbf{Extracció i introducció de factors}
+\begin{enumerate}[label=\alph*)]
+    \item Extreure factors de $\sqrt{96}$: \\
+    $\sqrt{96} = \sqrt{2^5 \cdot 3} = \sqrt{2^4 \cdot 2^1 \cdot 3} = 2^2 \sqrt{2 \cdot 3} = 4\sqrt{6}$
+    \item Extreure factors de $\sqrt[3]{405}$: \\
+    $\sqrt[3]{405} = \sqrt[3]{3^4 \cdot 5} = 3\sqrt[3]{3 \cdot 5} = 3\sqrt[3]{15}$
+    \item Introduir factors: $3\sqrt{5} = \sqrt{3^2 \cdot 5} = \sqrt{9 \cdot 5} = \sqrt{45}$
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 4.1}\\
+Treu de cada arrel tots els factors possibles:
+\begin{enumerate}[label=\alph*)]
+    \item $\sqrt{16}$
+    \item $4\sqrt{8}$
+    \item $\sqrt{1000}$
+    \item $\sqrt{8a^5}$
+\end{enumerate}
+\end{exercici}
+
+\begin{exercici}
+\textbf{Exercici 4.2}\\
+Introdueix els factors dins de les arrels corresponents:
+\begin{enumerate}[label=\alph*)]
+    \item $2\sqrt{3}$
+    \item $4\sqrt{14}$
+    \item $2x\sqrt{3x^8}$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: RADICALS SEMBLANTS I ÍNDEX COMÚ
+% ---------------------------------------------------------
+\subsection{Radicals semblants i reducció a índex comú}
+
+\begin{concept}
+\textbf{Radicals semblants}\\
+Dos o més radicals són \textbf{semblants} si tenen exactament el mateix índex i el mateix radicand. Només els radicals semblants es poden sumar o restar.
+
+\textbf{Reducció a índex comú}\\
+Per multiplicar o dividir radicals amb diferent índex, cal transformar-los en radicals equivalents que tinguin com a índex comú el mínim comú múltiple ($\operatorname{mcm}$) dels seus índexs originals.
+\end{concept}
+
+\begin{exemple}
+\textbf{Suma i operacions amb índex comú}
+\begin{enumerate}[label=\alph*)]
+    \item $\sqrt{18} + \sqrt{50} - \sqrt{8} = \sqrt{3^2 \cdot 2} + \sqrt{5^2 \cdot 2} - \sqrt{2^2 \cdot 2} = 3\sqrt{2} + 5\sqrt{2} - 2\sqrt{2} = 6\sqrt{2}$
+    \item $\sqrt[3]{2} \cdot \sqrt{3} \implies \operatorname{mcm}(3,2) = 6 \implies \sqrt[6]{2^2} \cdot \sqrt[6]{3^3} = \sqrt[6]{4 \cdot 27} = \sqrt[6]{108}$
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 4.3}\\
+Calcula i simplifica les següents expressions:
+\begin{enumerate}[label=\alph*)]
+    \item $\sqrt{27} + \sqrt{50} + \sqrt{12} + \sqrt{8}$
+    \item $\sqrt[3]{16} + \sqrt[3]{54} - \sqrt[3]{250}$
+    \item $\sqrt[4]{8} \cdot \sqrt[4]{4}$
+    \item $\frac{\sqrt[5]{x}}{\sqrt[3]{x}}$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: RACIONALITZACIÓ
+% ---------------------------------------------------------
+\subsection{Racionalització}
+
+\begin{concept}
+\textbf{Racionalització}\\
+Racionalitzar una fracció consisteix a eliminar les arrels del seu denominador. Distinguim dos casos principals:
+
+\begin{enumerate}
+    \item \textbf{Un sol radical al denominador ($\sqrt[n]{a^m}$):} Es multiplica el numerador i el denominador per $\sqrt[n]{a^{n-m}}$.
+    \[ \frac{A}{\sqrt[n]{a^m}} = \frac{A \cdot \sqrt[n]{a^{n-m}}}{\sqrt[n]{a^m} \cdot \sqrt[n]{a^{n-m}}} = \frac{A \cdot \sqrt[n]{a^{n-m}}}{a} \]
+    \item \textbf{Un binomi amb arrels quadrades ($\sqrt{a} \pm \sqrt{b}$):} Es multiplica numerador i denominador pel \textbf{conjugat} del denominador, aprofitant la identitat de suma per diferència.
+    \[ \frac{A}{\sqrt{a} - \sqrt{b}} = \frac{A(\sqrt{a} + \sqrt{b})}{(\sqrt{a} - \sqrt{b})(\sqrt{a} + \sqrt{b})} = \frac{A(\sqrt{a} + \sqrt{b})}{a - b} \]
+\end{enumerate}
+\end{concept}
+
+\begin{exemple}
+\textbf{Racionalització de denominadors}
+\begin{enumerate}[label=\alph*)]
+    \item $\frac{2}{\sqrt[3]{5}} = \frac{2 \cdot \sqrt[3]{5^2}}{\sqrt[3]{5} \cdot \sqrt[3]{5^2}} = \frac{2\sqrt[3]{25}}{\sqrt[3]{5^3}} = \frac{2\sqrt[3]{25}}{5}$
+    \item $\frac{1}{5 - \sqrt{2}} = \frac{1 \cdot (5 + \sqrt{2})}{(5 - \sqrt{2})(5 + \sqrt{2})} = \frac{5 + \sqrt{2}}{5^2 - (\sqrt{2})^2} = \frac{5 + \sqrt{2}}{25 - 2} = \frac{5 + \sqrt{2}}{23}$
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 4.4}\\
+Racionalitza i simplifica les fraccions següents:
+\begin{enumerate}[label=\alph*)]
+    \item $\frac{5}{\sqrt{7}}$
+    \item $\frac{3}{\sqrt{2}}$
+    \item $\frac{1}{\sqrt{2} + 1}$
+    \item $\frac{4}{\sqrt{10} - \sqrt{2}}$
+    \item $\frac{2}{3 - \sqrt{5}}$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL TEMA 4
+% ---------------------------------------------------------
+\begin{resum}[title=Resum del Tema 4: Radicals]
+\textbf{Definició}
+\[
+\sqrt[n]{a} = b \iff b^n = a
+\]
+
+\textbf{Propietats operatòries}
+\[
+\sqrt[n]{a} \cdot \sqrt[n]{b} = \sqrt[n]{a \cdot b}, \qquad
+\frac{\sqrt[n]{a}}{\sqrt[n]{b}} = \sqrt[n]{\frac{a}{b}}
+\]
+\[
+(\sqrt[n]{a})^p = \sqrt[n]{a^p}, \qquad
+\sqrt[m]{\sqrt[n]{a}} = \sqrt[m \cdot n]{a}
+\]
+
+\textbf{Extracció i introducció de factors}
+\[
+\sqrt[n]{a^p} = a^q \cdot \sqrt[n]{a^r} \quad (p = n \cdot q + r)
+\]
+\[
+a \cdot \sqrt[n]{b} = \sqrt[n]{a^n \cdot b}
+\]
+
+\textbf{Racionalització}
+\[
+\frac{A}{\sqrt[n]{a^m}} = \frac{A \cdot \sqrt[n]{a^{n-m}}}{a}
+\]
+\[
+\frac{A}{\sqrt{a} - \sqrt{b}} = \frac{A(\sqrt{a} + \sqrt{b})}{a - b}
+\]
+\end{resum}
+
+\newpage
+
+\section{Logaritmes}
+
+% ---------------------------------------------------------
+% SUBSECCIÓ: DEFINICIÓ I PROPIETATS
+% ---------------------------------------------------------
+\subsection{Definició i propietats dels logaritmes}
+
+\begin{concept}
+\textbf{Definició de logaritme}\\
+Sigui $a > 0$ i $a \neq 1$, el \textbf{logaritme en base $a$} d'un nombre real positiu $x$ és l'exponent al qual cal elevar la base $a$ per obtenir com a resultat $x$:
+\[ \log_a(x) = y \iff a^y = x \quad (x > 0) \]
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.85]
+    \draw[->, thick] (-3,0) -- (4,0) node[right] {$x$};
+    \draw[->, thick] (0,-3) -- (0,4) node[above] {$y$};
+    \draw[dashed, gray] (-2.5,-2.5) -- (3.5,3.5) node[right, black] {\scriptsize $y=x$};
+    \draw[domain=-2.5:1.3, smooth, samples=100, red, ultra thick]
+        plot (\x, {exp(\x)}) node[right, black] {\scriptsize $y=e^x$};
+    \draw[domain=0.05:3.5, smooth, samples=100, blue, ultra thick]
+        plot (\x, {ln(\x)}) node[right, black] {\scriptsize $y=\ln(x)$};
+    \filldraw (0,1) circle (2pt) node[left] {\scriptsize $(0,1)$};
+    \filldraw (1,0) circle (2pt) node[below] {\scriptsize $(1,0)$};
+    \filldraw (1,2.718) circle (2pt);
+    \filldraw (2.718,1) circle (2pt);
+\end{tikzpicture}
+
+\end{figure}
+
+\textbf{Bases especials:}
+\begin{itemize}
+    \item \textbf{Logaritme decimal:} Quan la base és $10$, s'escriu directament com $\log(x)$ (s'omet la base).
+    \item \textbf{Logaritme neperià o natural:} Quan la base és el nombre d'Euler $e \approx 2{,}71828\dots$, s'escriu com $\ln(x)$.
+\end{itemize}
+
+\textbf{Propietats fonamentals dels logaritmes:}
+\begin{table}[H]
+\centering
+\small
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Propietat} & \textbf{Expressió algebraica} \\ \hline
+Logaritme de la base & $\log_a(a) = 1$ \\ \hline
+Logaritme de $1$ & $\log_a(1) = 0$ \\ \hline
+Logaritme d'un producte & $\log_a(x \cdot y) = \log_a(x) + \log_a(y)$ \\ \hline
+Logaritme d'un quocient & $\log_a\left(\frac{x}{y}\right) = \log_a(x) - \log_a(y)$ \\ \hline
+Logaritme d'una potència & $\log_a(x^k) = k \cdot \log_a(x)$ \\ \hline
+Logaritme d'un radical & $\log_a(\sqrt[n]{x}) = \frac{1}{n} \cdot \log_a(x)$ \\ \hline
+Fórmula de canvi de base & $\log_a(x) = \frac{\log_b(x)}{\log_b(a)}$ \\ \hline
+\end{tabular}
+\end{table}
+\end{concept}
+
+\begin{exemple}
+\textbf{Càlcul directe de logaritmes i propietats}
+\begin{enumerate}[label=\alph*)]
+    \item $\log_2(32) = 5$ ja que $2^5 = 32$.
+    \item $\log_3\left(\frac{1}{9}\right) = -2$ ja que $3^{-2} = \frac{1}{3^2} = \frac{1}{9}$.
+    \item Desenvolupar l'expressió $\log\left(\frac{a^2 \cdot \sqrt{b}}{c^3}\right)$:
+    \begin{align*}
+        \log\left(\frac{a^2 \cdot \sqrt{b}}{c^3}\right) &= \log(a^2 \cdot \sqrt{b}) - \log(c^3) \\
+        &= \log(a^2) + \log(b^{1/2}) - \log(c^3) \\
+        &= 2\log(a) + \frac{1}{2}\log(b) - 3\log(c)
+    \end{align*}
+\end{enumerate}
+\end{exemple}
+
+\begin{exercici}
+\textbf{Exercici 5.1}\\
+Aplica la definició de logaritme per calcular de manera exacta el valor de les següents expressions sense utilitzar la calculadora:
+\begin{enumerate}[label=\alph*)]
+    \item $\log_2(64)$
+    \item $\log_5(0{,}04)$
+    \item $\log_3(\sqrt{27})$
+    \item $\log\left(1000\right)$
+    \item $\ln(e^4)$
+    \item $\log_2\left(\frac{1}{16}\right)$
+\end{enumerate}
+\end{exercici}
+
+\begin{exercici}
+\textbf{Exercici 5.2}\\
+Desenvolupa les següents expressions aplicant les propietats dels logaritmes:
+\begin{enumerate}[label=\alph*)]
+    \item $\log_2\left(x^3 \cdot y^2\right)$
+    \item $\ln\left(\frac{\sqrt{x}}{y^4}\right)$
+    \item $\log\left(\frac{100 \cdot x^3}{\sqrt[3]{y}}\right)$
+\end{enumerate}
+\end{exercici}
+
+\begin{exercici}
+\textbf{Exercici 5.3}\\
+Agrupa les següents expressions en un sol logaritme (procés invers):
+\begin{enumerate}[label=\alph*)]
+    \item $2\log(x) + 3\log(y)$
+    \item $\frac{1}{2}\ln(x) - 4\ln(y)$
+    \item $1 + \log(a) - 2\log(b)$
+\end{enumerate}
+\end{exercici}
+
+% ---------------------------------------------------------
+% RESUM DEL TEMA 5
+% ---------------------------------------------------------
+\begin{resum}[title=Resum del Tema 5: Logaritmes]
+\textbf{Definició}
+\[
+\log_a(x) = y \iff a^y = x \quad (a > 0, \ a \neq 1, \ x > 0)
+\]
+
+\textbf{Propietats fonamentals}
+\[
+\log_a(a) = 1, \qquad \log_a(1) = 0
+\]
+\[
+\log_a(x \cdot y) = \log_a(x) + \log_a(y)
+\]
+\[
+\log_a\!\left(\frac{x}{y}\right) = \log_a(x) - \log_a(y)
+\]
+\[
+\log_a(x^k) = k \cdot \log_a(x)
+\]
+\[
+\log_a(\sqrt[n]{x}) = \frac{1}{n} \log_a(x)
+\]
+
+\textbf{Canvi de base}
+\[
+\log_a(x) = \frac{\log_b(x)}{\log_b(a)}
+\]
+
+\textbf{Bases especials}
+\[
+\log(x) = \log_{10}(x), \qquad \ln(x) = \log_e(x)
+\]
+\end{resum}
+
+\newpage
+
+\appendix
+\section{Solucions dels Exercicis Proposats}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 1: Nombres Reals}
+\begin{itemize}
+    \item \textbf{Exercici 1.1:} a) $\mathbb{N}$ (ja que $\frac{15}{3}=5$), b) $\mathbb{N}$ (ja que $\sqrt{16}=4$), c) $\mathbb{I}$, d) $\mathbb{I}$, e) $\mathbb{Q}$, f) $\mathbb{Q}$ (fracció de dos enters).
+    \item \textbf{Exercici 1.2:} a) $|-8|+|3|-|-5| = 8 + 3 - 5 = 6$, b) $x = \pm 9$, c) $x = 6$ o $x = 2$, d) $x = 2$ o $x = -8$.
+    \item \textbf{Exercici 1.3:}
+    \begin{itemize}
+        \item a) $[-3, 4] \quad \iff \quad -3 \le x \le 4$
+        \item b) $(5, +\infty) \quad \iff \quad x > 5$
+        \item c) Interval $[-2, 6)$ (semiobert per la dreta).
+        \item d) Desigualtat $x < 1$ o $x \ge 3$.
+    \end{itemize}
+    \item \textbf{Exercici 1.4:} a) $x \le 4 \implies (-\infty, 4]$, b) $x > -1 \implies (-1, +\infty)$, c) $x < 1 \implies (-\infty, 1)$, d) $(-\infty, -4) \cup (2, +\infty)$, e) $[-2, 2]$.
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 2: Productes Notables}
+\begin{itemize}
+    \item \textbf{Exercici 2.1:} a) $x^2+14x+49$, b) $81-18y+y^2$, c) $a^2-36$, d) $9x^2+30x+25$, e) $4x^2-16x+16$, f) $25x^2-4y^2$, g) $x^4-6x^2+9$, h) $4x^2+2x+\frac{1}{4}$.
+    \item \textbf{Exercici 2.2:} a) $(x+9)(x-9)$, b) $(x+5)^2$, c) $(2x-3)^2$, d) $(5x+1)(5x-1)$.
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 3: Potències}
+\begin{itemize}
+    \item \textbf{Exercici 3.1:} a) $2^6$, b) $5^{-3} = \frac{1}{5^3} = \frac{1}{125}$, c) $a^4$, d) $\frac{12^4 \cdot 3^{-2}}{4^3 \cdot 9^2} = \frac{2^8 \cdot 3^4 \cdot 3^{-2}}{2^6 \cdot 3^4} = 2^2 \cdot 3^{-2} = \frac{4}{9}$, e) $\left(\frac{5}{3}\right)^2 \cdot \left(\frac{5}{3}\right)^3 = \left(\frac{5}{3}\right)^5$.
+    \item \textbf{Exercici 3.2:} a) $(4{,}5 \cdot 10^{-6}) \cdot (1{,}2 \cdot 10^6) = 5{,}4$, b) $0{,}35 \cdot 10^9 + 4{,}72 \cdot 10^9 - 0{,}063 \cdot 10^9 = 5{,}007 \cdot 10^9$, c) $\frac{28{,}88 \cdot 10^3}{6{,}2 \cdot 10^{-11}} \approx 4{,}66 \cdot 10^{14}$.
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 4: Radicals}
+\begin{itemize}
+    \item \textbf{Exercici 4.1:} a) $4$, b) $8\sqrt{2}$, c) $10\sqrt{10}$, d) $2a^2\sqrt{2a}$.
+    \item \textbf{Exercici 4.2:} a) $\sqrt{12}$, b) $\sqrt{224}$, c) $\sqrt{12x^{10}}$.
+    \item \textbf{Exercici 4.3:} a) $3\sqrt{3} + 5\sqrt{2} + 2\sqrt{3} + 2\sqrt{2} = 5\sqrt{3} + 7\sqrt{2}$, b) $2\sqrt[3]{2} + 3\sqrt[3]{2} - 5\sqrt[3]{2} = 0$, c) $\sqrt[4]{32} = 2\sqrt[4]{2}$, d) $x^{1/5 - 1/3} = x^{-2/15} = \frac{1}{\sqrt[15]{x^2}}$.
+    \item \textbf{Exercici 4.4:} a) $\frac{5\sqrt{7}}{7}$, b) $\frac{3\sqrt{2}}{2}$, c) $\sqrt{2}-1$, d) $\frac{4(\sqrt{10}+\sqrt{2})}{8} = \frac{\sqrt{10}+\sqrt{2}}{2}$, e) $\frac{2(3+\sqrt{5})}{9-5} = \frac{3+\sqrt{5}}{2}$.
+\end{itemize}
+\end{solucio}
+
+\begin{solucio}
+\textbf{Solucions de l'Apartat 5: Logaritmes}
+\begin{itemize}
+    \item \textbf{Exercici 5.1:} a) $6$, b) $-2$, c) $3/2$, d) $3$, e) $4$, f) $-4$.
+    \item \textbf{Exercici 5.2:} a) $3\log_2(x) + 2\log_2(y)$, b) $\frac{1}{2}\ln(x) - 4\ln(y)$, c) $2 + 3\log(x) - \frac{1}{3}\log(y)$.
+    \item \textbf{Exercici 5.3:} a) $\log(x^2 \cdot y^3)$, b) $\ln\left(\frac{\sqrt{x}}{y^4}\right)$, c) $\log\left(\frac{10 \cdot a}{b^2}\right)$.
+\end{itemize}
+\end{solucio}
+
+\end{document}
