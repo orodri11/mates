@@ -636,12 +636,13 @@
             <div class="buttons-group">
         `;
 
-        botonsPerTema.forEach(boto => {
+botonsPerTema.forEach(boto => {
           const rutaPDF = `${cursSeleccionat.id}/Tema${numTema}_${boto.sufix}.pdf`;
           html += `
             <a class="btn-link ${boto.classe}" 
                href="${rutaPDF}" 
-               onclick="obrirRecurs(event, '${rutaPDF}')">
+               target="_blank" 
+               rel="noopener noreferrer">
               ${boto.etiqueta}
             </a>
           `;
