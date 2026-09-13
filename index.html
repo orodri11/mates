@@ -628,7 +628,7 @@
 
       let html = `<div class="topics-list">`;
 
-      cursSeleccionat.temes.forEach((nomTema, idx) => {
+cursSeleccionat.temes.forEach((nomTema, idx) => {
         const numTema = idx + 1;
         html += `
           <div class="topic-card">
@@ -636,7 +636,7 @@
             <div class="buttons-group">
         `;
 
-botonsPerTema.forEach(boto => {
+        botonsPerTema.forEach(boto => {
           const rutaPDF = `${cursSeleccionat.id}/Tema${numTema}_${boto.sufix}.pdf`;
           html += `
             <a class="btn-link ${boto.classe}" 
