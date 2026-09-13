@@ -1,97 +1,669 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matemàtiques de Batxillerat — Oscar Rodriguez</title>
-    <style>
-        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; max-width: 950px; margin: 40px auto; padding: 0 20px; background: #f4f6f9; color: #1f2937; }
-        header { text-align: center; margin-bottom: 35px; }
-        .author-badge { display: inline-block; background: #e0edff; color: #0284c7; font-size: 0.9em; font-weight: 700; padding: 6px 16px; border-radius: 20px; margin-bottom: 12px; }
-        h1 { color: #0f172a; font-size: 2.2em; margin: 0 0 8px 0; font-weight: 800; }
-        p.subtitle { color: #64748b; font-size: 1.05em; margin: 0; }
-        
-        .tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; flex-wrap: wrap; }
-        .tab-btn { padding: 10px 18px; border: none; background: #e2e8f0; color: #475569; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9em; transition: all 0.2s ease; }
-        .tab-btn:hover { background: #cbd5e1; }
-        .tab-btn.active { background: #0284c7; color: white; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3); }
-        
-        .tab-content { display: none; background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05); }
-        .tab-content.active { display: block; }
-        h2 { font-size: 1.3em; color: #0f172a; margin-top: 0; margin-bottom: 20px; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; }
-        
-        ul { list-style: none; padding: 0; margin: 0; }
-        li { background: #f8fafc; margin: 10px 0; padding: 14px 18px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #0284c7; }
-        .btn { background: #0284c7; color: white; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-weight: 700; font-size: 0.85em; }
-        .btn:hover { background: #0369a1; }
-        .empty-msg { color: #94a3b8; font-style: italic; text-align: center; padding: 20px 0; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Materials de Matemàtiques | Òscar Rodríguez</title>
+  <!-- Font Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #0284c7;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent: #0f172a;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 25px -5px rgba(2, 132, 199, 0.12), 0 8px 10px -6px rgba(0,0,0,0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* CAPÇALERA / HEADER */
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 35px 20px 40px 20px;
+      text-align: center;
+      position: relative;
+      box-shadow: var(--shadow-md);
+    }
+
+    .header-content {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .teacher-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #93c5fd;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      color: #94a3b8;
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .contact-btn:hover {
+      color: #7dd3fc;
+      text-decoration: underline;
+    }
+
+    /* BARRA DE NAVEGACIÓ I CERCA */
+    .toolbar {
+      max-width: 900px;
+      margin: -20px auto 25px auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .navigation-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-back {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-back:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .breadcrumb {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* CONTENIDOR PRINCIPAL */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 40px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* TARGETES DE NAVEGACIÓ PRINCIPAL (INICI) */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .nav-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px 24px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .nav-card-icon {
+      width: 54px;
+      height: 54px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+
+    .nav-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .nav-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* TÍTOLS DE SUBSECCIÓ */
+    .section-header {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 30px 0 14px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* LLISTA DE TEMES */
+    .topics-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .topic-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s;
+    }
+
+    .topic-card:hover {
+      border-color: #cbd5e1;
+    }
+
+    .topic-title {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: var(--text);
+    }
+
+    .buttons-group {
+      display: flex;
+      gap: 8px;
+    }
+
+    /* BOTONS DE RECURSOS (APUNTS I EXERCICIS) */
+    .btn-link {
+      padding: 7px 14px;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .btn-link.primary {
+      background-color: var(--primary);
+    }
+    .btn-link.primary:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-link.secondary {
+      background-color: #334155;
+    }
+    .btn-link.secondary:hover {
+      background-color: #1e293b;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 25px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+
+    footer p {
+      margin-bottom: 4px;
+    }
+
+    .hidden { display: none !important; }
+  </style>
 </head>
 <body>
 
-    <header>
-        <span class="author-badge">👨‍🏫 Prof. Oscar Rodriguez</span>
-        <h1>Matemàtiques de Batxillerat</h1>
-        <p class="subtitle">Dossiers, apunts i materials d'estudi de classe</p>
-    </header>
-
-    <div class="tabs">
-        <button class="tab-btn active" onclick="openTab('1macs')">1r BATX — MACS</button>
-        <button class="tab-btn" onclick="openTab('1cctt')">1r BATX — CCTT</button>
-        <button class="tab-btn" onclick="openTab('2macs')">2n BATX — MACS</button>
-        <button class="tab-btn" onclick="openTab('2cctt')">2n BATX — CCTT</button>
+  <!-- CAPÇALERA -->
+  <header>
+    <div class="header-content">
+      <div class="teacher-badge">
+        <span>👨‍🏫 Professor: Òscar Rodríguez</span>
+      </div>
+      <h1>Materials de Matemàtiques</h1>
+      <p class="subtitle">Apunts, col·leccions d'exercicis i recursos didàctics per a ESO i Batxillerat</p>
+      <a href="mailto:orodri11@xtec.cat" class="contact-btn">
+        ✉️ orodri11@xtec.cat
+      </a>
     </div>
+  </header>
 
-    <!-- 1r BATX MACS -->
-    <div id="1macs" class="tab-content active">
-        <h2>1r de Batxillerat — MACS (Social)</h2>
-        <ul>
-            <li><span><strong>UD 1:</strong> Nombres reals</span><a class="btn" href="./1BATX_MACS/Tema1.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 2:</strong> Polinomis i fraccions algebraiques</span><a class="btn" href="./1BATX_MACS/Tema2.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 3:</strong> Equacions, inequacions i sistemes</span><a class="btn" href="./1BATX_MACS/Tema3.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 4:</strong> Successions i progressions</span><a class="btn" href="./1BATX_MACS/Tema4.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 5:</strong> Matemàtica financera</span><a class="btn" href="./1BATX_MACS/Tema5.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 6:</strong> Introducció a les funcions i Funcions elementals</span><a class="btn" href="./1BATX_MACS/Tema6.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 7:</strong> Límits i continuïtat</span><a class="btn" href="./1BATX_MACS/Tema7.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 8:</strong> Derivades</span><a class="btn" href="./1BATX_MACS/Tema8.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>UD 9:</strong> Conceptes d’estadística i probabilitat</span><a class="btn" href="./1BATX_MACS/Tema9.pdf" target="_blank">📄 Obrir PDF</a></li>
-        </ul>
+  <!-- BARRA DE NAVEGACIÓ SUPORT -->
+  <div class="toolbar">
+    <div class="navigation-bar hidden" id="navBar">
+      <button class="btn-back" onclick="tornarEnrere()">
+        ← Tornar
+      </button>
+      <span class="breadcrumb" id="breadcrumb"></span>
     </div>
+  </div>
 
-    <!-- 1r BATX CCTT -->
-    <div id="1cctt" class="tab-content">
-        <h2>1r de Batxillerat — CCTT (Científic-Tecnològic)</h2>
-        <p class="empty-msg">Pròximament es afegiran els dossiers d'aquest curs.</p>
-    </div>
+  <!-- CONTENIDOR DINÀMIC -->
+  <main class="container" id="app">
+    <!-- El contingut es genera amb JS -->
+  </main>
 
-    <!-- 2n BATX MACS -->
-    <div id="2macs" class="tab-content">
-        <h2>2n de Batxillerat — MACS (Social)</h2>
-        <p class="empty-msg">Pròximament es afegiran els dossiers d'aquest curs.</p>
-    </div>
+  <!-- PEU DE PÀGINA -->
+  <footer>
+    <p><strong>Espai Docent de Matemàtiques</strong> — Òscar Rodríguez</p>
+    <p>Departament de Matemàtiques | <a href="mailto:orodri11@xtec.cat" style="color: var(--primary); text-decoration: none;">orodri11@xtec.cat</a></p>
+  </footer>
 
-    <!-- 2n BATX CCTT -->
-    <div id="2cctt" class="tab-content">
-        <h2>2n de Batxillerat — CCTT (Científic-Tecnològic)</h2>
-        <ul>
-            <li><span><strong>Tema 1:</strong> Límits i continuïtat</span><a class="btn" href="./2BATX_CCTT/Tema1.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 2:</strong> Derivades i aplicacions</span><a class="btn" href="./2BATX_CCTT/Tema2.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 3:</strong> Estudi de funcions</span><a class="btn" href="./2BATX_CCTT/Tema3.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 4:</strong> Integrals i càlcul d'àrees</span><a class="btn" href="./2BATX_CCTT/Tema4.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 5:</strong> Matrius i determinants</span><a class="btn" href="./2BATX_CCTT/Tema5.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 6:</strong> Sistemes d'equacions lineals</span><a class="btn" href="./2BATX_CCTT/Tema6.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 7:</strong> Geometria en l'espai 3D</span><a class="btn" href="./2BATX_CCTT/Tema7.pdf" target="_blank">📄 Obrir PDF</a></li>
-            <li><span><strong>Tema 8:</strong> Probabilitat i Distribucions</span><a class="btn" href="./2BATX_CCTT/Tema8.pdf" target="_blank">📄 Obrir PDF</a></li>
-        </ul>
-    </div>
+  <script>
+    // =================================================================
+    // 1. CONFIGURACIÓ DE BOTONS DE RECURSOS (NOMÉS 2 BOTONS)
+    // =================================================================
+    const botonsPerTema = [
+      { etiqueta: "📄 Apunts", sufix: "apunts", classe: "primary" },
+      { etiqueta: "✏️ Exercicis", sufix: "exercicis", classe: "secondary" }
+    ];
 
-    <script>
-        function openTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            document.getElementById(tabName).classList.add('active');
-            event.currentTarget.classList.add('active');
+    // =================================================================
+    // 2. ESTRUCTURA DE CURSOS I TEMES
+    // =================================================================
+    const estructuraWeb = [
+      {
+        idNivell: "ESO",
+        titolNivell: "ESO",
+        desc: "Educació Secundària Obligatòria (1r a 4t ESO)",
+        icona: "📐",
+        subseccions: [
+          {
+            titolSubseccio: "Cursos d'ESO",
+            cursos: [
+              {
+                id: "1ESO",
+                nom: "1r ESO",
+                temes: [
+                  "1. Nombres naturals i divisibilitat",
+                  "2. Nombres enters",
+                  "3. Fraccions i decimals",
+                  "4. Àlgebra elemental",
+                  "5. Proporcionalitat i percentatges",
+                  "6. Geometria plana"
+                ]
+              },
+              {
+                id: "2ESO",
+                nom: "2n ESO",
+                temes: [
+                  "1. Divisibilitat i nombres enters",
+                  "2. Fraccions i decimals",
+                  "3. Expressions algebraicàries i equacions",
+                  "4. Sistemes d'equacions",
+                  "5. Proporcionalitat directa i inversa",
+                  "6. Teorema de Pitàgores i àrees"
+                ]
+              },
+              {
+                id: "3ESO",
+                nom: "3r ESO",
+                temes: [
+                  "1. Conjunts de nombres i potències",
+                  "2. Successions i progressions",
+                  "3. Polinomis i equacions",
+                  "4. Sistemes d'equacions",
+                  "5. Funcions i gràfiques",
+                  "6. Geometria de l'espai",
+                  "7. Estadística",
+                  "8. Probabilitat"
+                ]
+              },
+              {
+                id: "4ESO",
+                nom: "4t ESO",
+                temes: [
+                  "1. Nombres reals i radicals",
+                  "2. Polinomis i fraccions algebraicàries",
+                  "3. Equacions, inequacions i sistemes",
+                  "4. Trigonometria",
+                  "5. Funcions elementals",
+                  "6. Geometria analítica",
+                  "7. Estadística bidimensional",
+                  "8. Probabilitat combinatòria"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        idNivell: "BATXILLERAT",
+        titolNivell: "BATXILLERAT",
+        desc: "Modalitats Social (MACS) i Científica (CCTT)",
+        icona: "📊",
+        subseccions: [
+          {
+            titolSubseccio: "CCSS — Matemàtiques Aplicades a les Ciències Socials",
+            cursos: [
+              {
+                id: "1BATX_MACS",
+                nom: "1r Batxillerat MACS",
+                temes: [
+                  "1. Nombres reals i percentatges",
+                  "2. Àlgebra i equacions",
+                  "3. Funcions reals",
+                  "4. Continuïtat i límit de funcions",
+                  "5. Derivades i aplicacions",
+                  "6. Estadística unidimensional i bidimensional",
+                  "7. Probabilitat",
+                  "8. Distribucions de probabilitat",
+                  "9. Inferència estadística"
+                ]
+              },
+              {
+                id: "2BATX_MACS",
+                nom: "2n Batxillerat MACS",
+                temes: [
+                  "1. Matrius i operacions",
+                  "2. Determinants i sistemes d'equacions",
+                  "3. Programació lineal",
+                  "4. Límits i continuïtat",
+                  "5. Derivades i optimització",
+                  "6. Integració",
+                  "7. Probabilitat condicional",
+                  "8. Mostratge i intervals de confiança"
+                ]
+              }
+            ]
+          },
+          {
+            titolSubseccio: "CCTT — Matemàtiques Científic-Tecnològic",
+            cursos: [
+              {
+                id: "1BATX_CCTT",
+                nom: "1r Batxillerat CCTT",
+                temes: [
+                  "1. Nombres reals i números complexos",
+                  "2. Polinomis i equacions",
+                  "3. Trigonometria",
+                  "4. Geometria analítica plana",
+                  "5. Funcions i propietats",
+                  "6. Límits i continuïtat",
+                  "7. Derivació",
+                  "8. Estadística i probabilitat",
+                  "9. Vectors al pla"
+                ]
+              },
+              {
+                id: "2BATX_CCTT",
+                nom: "2n Batxillerat CCTT",
+                temes: [
+                  "1. Matrius i operacions",
+                  "2. Determinants",
+                  "3. Sistemes d'equacions lineals",
+                  "4. Vectors a l'espai",
+                  "5. Punts, línies i plans a l'espai",
+                  "6. Problemes mètrics a l'espai",
+                  "7. Límits i continuïtat",
+                  "8. Derivades i aplicacions"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        idNivell: "PAU_PAP",
+        titolNivell: "PAU i PAP",
+        desc: "Preparació i simulacres de les proves d'accés",
+        icona: "🎓",
+        subseccions: [
+          {
+            titolSubseccio: "Proves d'Accés Universitàries i de Magisteri",
+            cursos: [
+              {
+                id: "PAU",
+                nom: "Proves PAU",
+                temes: [
+                  "1. Exàmens d'Àlgebra resolts",
+                  "2. Exàmens de Geometria resolts",
+                  "3. Exàmens d'Anàlisi resolts",
+                  "4. Exàmens de Probabilitat resolts",
+                  "5. Recopilació de Proves Anteriors"
+                ]
+              },
+              {
+                id: "PAP",
+                nom: "Proves PAP",
+                temes: [
+                  "1. Nombres i operacions",
+                  "2. Geometria bàsica",
+                  "3. Resolució de problemes",
+                  "4. Taules i gràfics",
+                  "5. Simulacres d'examen"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ];
+
+    // =================================================================
+    // 3. NAVEGACIÓ I RENDERITZAT (SPA)
+    // =================================================================
+    let nivellSeleccionat = null;
+    let cursSeleccionat = null;
+
+    const appContainer = document.getElementById('app');
+    const navBar = document.getElementById('navBar');
+    const breadcrumb = document.getElementById('breadcrumb');
+
+    // 1. Mostrar Nivells Principals (Pantalla d'Inici)
+    function mostrarNivells() {
+      nivellSeleccionat = null;
+      cursSeleccionat = null;
+      navBar.classList.add('hidden');
+
+      let html = `<div class="cards-grid">`;
+      estructuraWeb.forEach(n => {
+        html += `
+          <div class="nav-card" onclick="seleccionarNivell('${n.idNivell}')">
+            <div class="nav-card-icon">${n.icona}</div>
+            <div class="nav-card-title">${n.titolNivell}</div>
+            <div class="nav-card-desc">${n.desc}</div>
+          </div>
+        `;
+      });
+      html += `</div>`;
+
+      appContainer.innerHTML = html;
+    }
+
+    // 2. Seleccionar un Nivell
+    function seleccionarNivell(idNivell) {
+      nivellSeleccionat = estructuraWeb.find(n => n.idNivell === idNivell);
+      cursSeleccionat = null;
+
+      navBar.classList.remove('hidden');
+      breadcrumb.innerText = nivellSeleccionat.titolNivell;
+
+      let html = '';
+      nivellSeleccionat.subseccions.forEach(sub => {
+        if (sub.titolSubseccio) {
+          html += `<div class="section-header">${sub.titolSubseccio}</div>`;
         }
-    </script>
+        html += `<div class="cards-grid">`;
+        sub.cursos.forEach(curs => {
+          html += `
+            <div class="nav-card" onclick="seleccionarCurs('${curs.id}')">
+              <div class="nav-card-title">${curs.nom}</div>
+              <div class="nav-card-desc">${curs.temes.length} temes disponibles</div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      });
+
+      appContainer.innerHTML = html;
+    }
+
+    // 3. Seleccionar un Curs i mostrar els temes amb enllaços target="_blank"
+    function seleccionarCurs(idCurs) {
+      let trobat = null;
+      nivellSeleccionat.subseccions.forEach(sub => {
+        const c = sub.cursos.find(item => item.id === idCurs);
+        if (c) trobat = c;
+      });
+
+      cursSeleccionat = trobat;
+      breadcrumb.innerText = `${nivellSeleccionat.titolNivell} > ${cursSeleccionat.nom}`;
+
+      let html = `<div class="topics-list">`;
+
+      cursSeleccionat.temes.forEach((nomTema, idx) => {
+        const numTema = idx + 1;
+        html += `
+          <div class="topic-card">
+            <span class="topic-title">${nomTema}</span>
+            <div class="buttons-group">
+        `;
+
+        botonsPerTema.forEach(boto => {
+          const rutaPDF = `${cursSeleccionat.id}/Tema${numTema}_${boto.sufix}.pdf`;
+          html += `
+            <a class="btn-link ${boto.classe}" 
+               href="${rutaPDF}" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               onerror="this.href='en_construccio.html'">
+              ${boto.etiqueta}
+            </a>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      appContainer.innerHTML = html;
+    }
+
+    // Botó de tornar enrere
+    function tornarEnrere() {
+      if (cursSeleccionat) {
+        seleccionarNivell(nivellSeleccionat.idNivell);
+      } else if (nivellSeleccionat) {
+        mostrarNivells();
+      }
+    }
+
+    // Inicialitzar la pàgina
+    mostrarNivells();
+  </script>
 </body>
 </html>

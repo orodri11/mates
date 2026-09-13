@@ -21,41 +21,62 @@ jobs:
         run: |
           mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT
 
-      # ==================== COMPILACIÓ DINÀMICA ====================
-      - name: Compilar tots els fitxers .tex dels temes
+      # -----------------------------------------------------------------
+      # COMPILACIÓ DINÀMICA DE TOTS ELS FITXERS LATEX EXISTENTS
+      # -----------------------------------------------------------------
+      - name: Compilar tots els fitxers main.tex i exercicis.tex
         run: |
-          sudo apt-get update && sudo apt-get install -y texlive-latex-extra texlive-fonts-recommended latexmk
-          
+          # Installem xelatex / pdflatex i paquets bàsics
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-lang-spanish texlive-fonts-recommended
+
           for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT; do
             for i in {1..10}; do
               dir="$curs/Tema$i"
               if [ -d "$dir" ]; then
-                cd "$dir"
-                # Compilar main.tex o apunts.tex com a TemaX_apunts.pdf
-                if [ -f "apunts.tex" ]; then
-                  pdflatex -interaction=nonstopmode apunts.tex || true
-                  cp apunts.pdf "../../public/$curs/Tema${i}_apunts.pdf" 2>/dev/null || true
-                elif [ -f "main.tex" ]; then
-                  pdflatex -interaction=nonstopmode main.tex || true
-                  cp main.pdf "../../public/$curs/Tema${i}_apunts.pdf" 2>/dev/null || true
-                fi
+                echo "🔍 Revisant directori: $dir"
                 
-                # Compilar exercicis.tex com a TemaX_exercicis.pdf
-                if [ -f "exercicis.tex" ]; then
-                  pdflatex -interaction=nonstopmode exercicis.tex || true
-                  cp exercicis.pdf "../../public/$curs/Tema${i}_exercicis.pdf" 2>/dev/null || true
+                # Compilar apunts (main.tex)
+                if [ -f "$dir/main.tex" ]; then
+                  echo "⚙️ Compilant $dir/main.tex..."
+                  pdflatex -interaction=nonstopmode -output-directory="$dir" "$dir/main.tex" || true
                 fi
-                
-                cd - > /dev/null
+
+                # Compilar exercicis (exercicis.tex)
+                if [ -f "$dir/exercicis.tex" ]; then
+                  echo "⚙️ Compilant $dir/exercicis.tex..."
+                  pdflatex -interaction=nonstopmode -output-directory="$dir" "$dir/exercicis.tex" || true
+                fi
               fi
             done
           done
 
-      - name: Copiar fitxers de la web
-        run: cp index.html public/
+      # -----------------------------------------------------------------
+      # ORGANITZAR PDFS PER A GITHUB PAGES
+      # -----------------------------------------------------------------
+      - name: Organitzar PDFs i copiar a public
+        run: |
+          for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT; do
+            for i in {1..10}; do
+              # Apunts
+              if [ -f "$curs/Tema$i/main.pdf" ]; then
+                cp "$curs/Tema$i/main.pdf" "public/$curs/Tema${i}_apunts.pdf"
+                echo "✅ Copiat: public/$curs/Tema${i}_apunts.pdf"
+              fi
+              
+              # Exercicis
+              if [ -f "$curs/Tema$i/exercicis.pdf" ]; then
+                cp "$curs/Tema$i/exercicis.pdf" "public/$curs/Tema${i}_exercicis.pdf"
+                echo "✅ Copiat: public/$curs/Tema${i}_exercicis.pdf"
+              fi
+            done
+          done
+          
+          # Copiar l'index.html principal
+          cp index.html public/
 
       - name: Preparar artefacte
-        uses: uses/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v3
         with:
           path: 'public'
 
