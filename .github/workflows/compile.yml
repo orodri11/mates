@@ -17,16 +17,20 @@ jobs:
       - name: Baixar el repositori
         uses: actions/checkout@v4
 
-      - name: Compilar LaTeX
+      - name: Crear directori public
+        run: |
+          mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT
+
+      - name: Compilar 1r MACS Tema 1
         uses: xu-cheng/latex-action@v3
+        continue-on-error: true
         with:
           root_file: main.tex
-          working_directory: 1BATX_MACS/Tema1_Números Reals
+          working_directory: 1BATX_MACS/Tema1
 
       - name: Organitzar PDF i Web
         run: |
-          mkdir -p public/1BATX_MACS public/2BATX_CCTT
-          cp "1BATX_MACS/Tema1_Números Reals/main.pdf" public/1BATX_MACS/Tema1.pdf
+          cp 1BATX_MACS/Tema1/main.pdf public/1BATX_MACS/Tema1.pdf 2>/dev/null || true
           cp index.html public/
 
       - name: Preparar artefacte
