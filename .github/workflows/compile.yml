@@ -20,12 +20,13 @@ jobs:
       - name: Compilar LaTeX
         uses: xu-cheng/latex-action@v3
         with:
-          root_file: 1BATX_MACS/Tema1/main.tex
+          root_file: main.tex
+          working_directory: 1BATX_MACS/Tema1_Números Reals
 
       - name: Organitzar PDF i Web
         run: |
           mkdir -p public/1BATX_MACS public/2BATX_CCTT
-          cp 1BATX_MACS/Tema1/main.pdf public/1BATX_MACS/Tema1.pdf
+          cp "1BATX_MACS/Tema1_Números Reals/main.pdf" public/1BATX_MACS/Tema1.pdf
           cp index.html public/
 
       - name: Preparar artefacte
