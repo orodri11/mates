@@ -25,7 +25,7 @@
 
     header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 30px;
     }
 
     h1 {
@@ -38,197 +38,333 @@
       margin: 0;
     }
 
-    /* Contenidor Principal */
-    .sections-container {
-      max-width: 1200px;
-      margin: 0 auto;
+    /* Navegació Superior / Breadcrumb */
+    .navigation-bar {
+      max-width: 900px;
+      margin: 0 auto 20px auto;
       display: flex;
-      flex-direction: column;
-      gap: 30px;
+      align-items: center;
+      gap: 10px;
     }
 
-    .main-section {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    .btn-back {
+      background: #e2e8f0;
+      color: #1e293b;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.2s;
     }
 
-    .main-section h2 {
-      margin-top: 0;
-      border-bottom: 2px solid var(--primary);
-      padding-bottom: 8px;
-      color: var(--primary);
-      font-size: 1.5rem;
+    .btn-back:hover {
+      background: #cbd5e1;
     }
 
-    /* Subseccions / Modalitats */
-    .subsection {
-      margin-top: 20px;
-    }
-
-    .subsection-title {
-      font-weight: bold;
+    .breadcrumb {
+      font-size: 1.1rem;
+      font-weight: 600;
       color: var(--text-muted);
-      margin-bottom: 12px;
-      font-size: 1.05rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
-    /* Grid de Cursos */
-    .courses-grid {
+    /* Contenidor Principal */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* Grids de Targetes */
+    .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
     }
 
-    .course-card {
+    .nav-card {
+      background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 16px;
-      background: #fafafa;
-      transition: transform 0.2s, box-shadow 0.2s;
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: bold;
+      color: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
     }
 
-    .course-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    .nav-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
       border-color: var(--primary);
     }
 
-    .course-card h3 {
-      margin: 0 0 16px 0;
+    /* Títols de Secció */
+    .section-header {
       font-size: 1.2rem;
-      color: #1e293b;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin: 24px 0 12px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 4px;
     }
 
-    .topic-links {
+    /* Llista de Temes */
+    .topics-list {
       display: flex;
       flex-direction: column;
+      gap: 12px;
     }
 
-    /* Estils per a la fila de cada tema */
-    .topic-row {
+    .topic-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
       display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px dashed var(--border);
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
 
-    .topic-row:last-child {
-      border-bottom: none;
-      margin-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .topic-name {
+    .topic-title {
       font-weight: 600;
-      font-size: 0.9rem;
-      color: #334155;
+      font-size: 1.05rem;
+      color: #1e293b;
     }
 
     .buttons-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 8px;
     }
 
-    /* Enllaços i botons */
+    /* Botons de Recursos */
     .btn-link {
-      padding: 4px 8px;
+      padding: 6px 12px;
       color: white;
       text-decoration: none;
-      border-radius: 4px;
-      font-size: 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
       font-weight: 500;
       transition: opacity 0.2s;
-      display: inline-block;
     }
 
-    .btn-link:hover {
-      opacity: 0.85;
-    }
+    .btn-link:hover { opacity: 0.85; }
 
-    /* Colors dels botons segons el tipus */
     .btn-link.primary   { background-color: #0284c7; } /* Blau - Apunts */
     .btn-link.secondary { background-color: #64748b; } /* Gris - Exercicis */
     .btn-link.success   { background-color: #16a34a; } /* Verd - Solucions */
     .btn-link.warning   { background-color: #d97706; } /* Taronja - Formulari */
-    .btn-link.danger    { background-color: #dc2626; } /* Vermell - Exàmens */
+
+    /* Estat ocult */
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
   <header>
     <h1>📚 Materials de Matemàtiques</h1>
-    <p class="subtitle">Apunts, exercicis, solucions i recursos d'ESO, Batxillerat i Proves d'Accés</p>
+    <p class="subtitle">Apunts, exercicis, solucions i recursos</p>
   </header>
 
-  <main class="sections-container" id="app">
-    <!-- El contingut es genera automàticament amb JavaScript -->
+  <div class="navigation-bar hidden" id="navBar">
+    <button class="btn-back" onclick="tornarEnrere()">⬅ Tornar</button>
+    <span class="breadcrumb" id="breadcrumb"></span>
+  </div>
+
+  <main class="container" id="app">
+    <!-- El contingut canvia dinàmicament -->
   </main>
 
   <script>
     // =================================================================
-    // 1. DEFINEIX ELS BOTONS QUE VOLS QUE APAREGUIN A CADA TEMA
+    // 1. CONFIGURACIÓ DE BOTONS DE RECURSOS
     // =================================================================
-    // Pots afegir, treure o canviar l'ordre dels botons des d'aquí.
     const botonsPerTema = [
       { etiqueta: "Apunts", sufix: "apunts", classe: "primary" },
-      { etiqueta: "Ex.", sufix: "exercicis", classe: "secondary" },
+      { etiqueta: "Exercicis", sufix: "exercicis", classe: "secondary" },
       { etiqueta: "Solucions", sufix: "solucions", classe: "success" },
       { etiqueta: "Formulari", sufix: "formulari", classe: "warning" }
     ];
 
     // =================================================================
-    // 2. CONFIGURACIÓ DE L'ESTRUCTURA DE CURSOS I TEMES
+    // 2. ESTRUCTURA COMPLETA AMB NOMS PERSONALITZATS PER TEMA
     // =================================================================
     const estructuraWeb = [
       {
+        idNivell: "ESO",
         titolNivell: "ESO",
         subseccions: [
           {
-            titolSubseccio: "",
+            titolSubseccio: "Cursos ESO",
             cursos: [
-              { id: "1ESO", nom: "1r ESO", temes: 6 },
-              { id: "2ESO", nom: "2n ESO", temes: 6 },
-              { id: "3ESO", nom: "3r ESO", temes: 8 },
-              { id: "4ESO", nom: "4t ESO", temes: 8 }
+              {
+                id: "1ESO",
+                nom: "1r ESO",
+                temes: [
+                  "1. Nombres naturals i divisibilitat",
+                  "2. Nombres enters",
+                  "3. Fraccions i decimals",
+                  "4. Àlgebra elemental",
+                  "5. Proporcionalitat i percentatges",
+                  "6. Geometria plana"
+                ]
+              },
+              {
+                id: "2ESO",
+                nom: "2n ESO",
+                temes: [
+                  "1. Divisibilitat i nombres enters",
+                  "2. Fraccions i decimals",
+                  "3. Expressions algebraicàries i equacions",
+                  "4. Sistemes d'equacions",
+                  "5. Proporcionalitat directa i inversa",
+                  "6. Teorema de Pitàgores i àrees"
+                ]
+              },
+              {
+                id: "3ESO",
+                nom: "3r ESO",
+                temes: [
+                  "1. Conjunts de nombres i potències",
+                  "2. Sucesions i progressions",
+                  "3. Polinomis i equacions",
+                  "4. Sistemes d'equacions",
+                  "5. Funcions i gràfiques",
+                  "6. Geometria de l'espai",
+                  "7. Estadística",
+                  "8. Probabilitat"
+                ]
+              },
+              {
+                id: "4ESO",
+                nom: "4t ESO",
+                temes: [
+                  "1. Nombres reals i radicals",
+                  "2. Polinomis i fraccions algebraicàries",
+                  "3. Equacions, inequacions i sistemes",
+                  "4. Trigonometria",
+                  "5. Funcions elementals",
+                  "6. Geometria analítica",
+                  "7. Estadística bidimensional",
+                  "8. Probabilitat combinatòria"
+                ]
+              }
             ]
           }
         ]
       },
       {
+        idNivell: "BATXILLERAT",
         titolNivell: "BATXILLERAT",
         subseccions: [
           {
             titolSubseccio: "CCSS - Matemàtiques Aplicades a les Ciències Socials",
             cursos: [
-              { id: "1BATX_MACS", nom: "1r Batxillerat MACS", temes: 9 },
-              { id: "2BATX_MACS", nom: "2n Batxillerat MACS", temes: 8 }
+              {
+                id: "1BATX_MACS",
+                nom: "1r Batxillerat MACS",
+                temes: [
+                  "1. Nombres reals i percentatges",
+                  "2. Àlgebra i equacions",
+                  "3. Funcions reals",
+                  "4. Continuïtat i límit de funcions",
+                  "5. Derivades i aplicacions",
+                  "6. Estadística unidimensional i bidimensional",
+                  "7. Probabilitat",
+                  "8. Distribucions de probabilitat",
+                  "9. Inferència estadística"
+                ]
+              },
+              {
+                id: "2BATX_MACS",
+                nom: "2n Batxillerat MACS",
+                temes: [
+                  "1. Matrius i operacions",
+                  "2. Determinants i sistemes d'equacions",
+                  "3. Programació lineal",
+                  "4. Límits i continuïtat",
+                  "5. Derivades i optimització",
+                  "6. Integració",
+                  "7. Probabilitat condicional",
+                  "8. Mostratge i intervals de confiança"
+                ]
+              }
             ]
           },
           {
             titolSubseccio: "CCTT - Matemàtiques Científic Tecnològic",
             cursos: [
-              { id: "1BATX_CCTT", nom: "1r Batxillerat CCTT", temes: 9 },
-              { id: "2BATX_CCTT", nom: "2n Batxillerat CCTT", temes: 8 }
+              {
+                id: "1BATX_CCTT",
+                nom: "1r Batxillerat CCTT",
+                temes: [
+                  "1. Nombres reals i números complexos",
+                  "2. Polinomis i equacions",
+                  "3. Trigonometria",
+                  "4. Geometria analítica plana",
+                  "5. Funcions i propietats",
+                  "6. Límits i continuïtat",
+                  "7. Derivació",
+                  "8. Estadística i probabilitat",
+                  "9. Vectors al pla"
+                ]
+              },
+              {
+                id: "2BATX_CCTT",
+                nom: "2n Batxillerat CCTT",
+                temes: [
+                  "1. Matrius i operacions",
+                  "2. Determinants",
+                  "3. Sistemes d'equacions lineals",
+                  "4. Vectors a l'espai",
+                  "5. Punts, línies i plans a l'espai",
+                  "6. Problemes mètrics a l'espai",
+                  "7. Límits i continuïtat",
+                  "8. Derivades i aplicacions"
+                ]
+              }
             ]
           }
         ]
       },
       {
+        idNivell: "PAU_PAP",
         titolNivell: "PAU i PAP",
         subseccions: [
           {
-            titolSubseccio: "Preparació de Proves d'Accés",
+            titolSubseccio: "Proves d'Accés",
             cursos: [
-              { id: "PAU", nom: "Proves PAU", temes: 5 },
-              { id: "PAP", nom: "Proves PAP", temes: 5 }
+              {
+                id: "PAU",
+                nom: "Proves PAU",
+                temes: [
+                  "1. Exàmens d'Àlgebra resolts",
+                  "2. Exàmens de Geometria resolts",
+                  "3. Exàmens d'Anàlisi resolts",
+                  "4. Exàmens de Probabilitat resolts",
+                  "5. Recopilació de Proves Anteriors"
+                ]
+              },
+              {
+                id: "PAP",
+                nom: "Proves PAP",
+                temes: [
+                  "1. Nombres i operacions",
+                  "2. Geometria bàsica",
+                  "3. Resolució de problemes",
+                  "4. Taules i gràfics",
+                  "5. Simulacres d'examen"
+                ]
+              }
             ]
           }
         ]
@@ -236,68 +372,106 @@
     ];
 
     // =================================================================
-    // 3. GENERADOR AUTOMÀTIC DE L'HTML
+    // 3. CONTROL DE NAVEGACIÓ I RENDERITZAT (SPA)
     // =================================================================
+    let nivellSeleccionat = null;
+    let cursSeleccionat = null;
+
     const appContainer = document.getElementById('app');
+    const navBar = document.getElementById('navBar');
+    const breadcrumb = document.getElementById('breadcrumb');
 
-    estructuraWeb.forEach(nivell => {
-      const sectionEl = document.createElement('section');
-      sectionEl.className = 'main-section';
+    // 1. Mostrar Nivells Principals (ESO, Batxillerat, PAU/PAP)
+    function mostrarNivells() {
+      nivellSeleccionat = null;
+      cursSeleccionat = null;
+      navBar.classList.add('hidden');
 
-      let htmlContent = `<h2>${nivell.titolNivell}</h2>`;
+      let html = `<div class="cards-grid">`;
+      estructuraWeb.forEach(n => {
+        html += `<div class="nav-card" onclick="seleccionarNivell('${n.idNivell}')">${n.titolNivell}</div>`;
+      });
+      html += `</div>`;
 
-      nivell.subseccions.forEach(sub => {
-        htmlContent += `<div class="subsection">`;
-        if (sub.titolSubseccio) {
-          htmlContent += `<div class="subsection-title">${sub.titolSubseccio}</div>`;
+      appContainer.innerHTML = html;
+    }
+
+    // 2. Seleccionar un Nivell i mostrar els cursos
+    function seleccionarNivell(idNivell) {
+      nivellSeleccionat = estructuraWeb.find(n => n.idNivell === idNivell);
+      cursSeleccionat = null;
+
+      navBar.classList.remove('hidden');
+      breadcrumb.innerText = nivellSeleccionat.titolNivell;
+
+      let html = '';
+      nivellSeleccionat.subseccions.forEach(sub => {
+        if (sub.titolSubseccio && nivellSeleccionat.subseccions.length > 1) {
+          html += `<div class="section-header">${sub.titolSubseccio}</div>`;
         }
-
-        htmlContent += `<div class="courses-grid">`;
+        html += `<div class="cards-grid">`;
         sub.cursos.forEach(curs => {
-          htmlContent += `
-            <div class="course-card">
-              <h3>${curs.nom}</h3>
-              <div class="topic-links">
-          `;
-
-          const numTemes = curs.temes || 8;
-
-          for (let i = 1; i <= numTemes; i++) {
-            htmlContent += `
-              <div class="topic-row">
-                <span class="topic-name">Tema ${i}</span>
-                <div class="buttons-group">
-            `;
-
-            // Genera els botons configurats a botonsPerTema
-            botonsPerTema.forEach(boto => {
-              const rutaPDF = `${curs.id}/Tema${i}_${boto.sufix}.pdf`;
-              htmlContent += `
-                <a class="btn-link ${boto.classe}" 
-                   href="${rutaPDF}" 
-                   onerror="this.href='en_construccio.html'">
-                  ${boto.etiqueta}
-                </a>
-              `;
-            });
-
-            htmlContent += `
-                </div>
-              </div>
-            `;
-          }
-
-          htmlContent += `
-              </div>
-            </div>
-          `;
+          html += `<div class="nav-card" onclick="seleccionarCurs('${curs.id}')">${curs.nom}</div>`;
         });
-        htmlContent += `</div></div>`;
+        html += `</div>`;
       });
 
-      sectionEl.innerHTML = htmlContent;
-      appContainer.appendChild(sectionEl);
-    });
+      appContainer.innerHTML = html;
+    }
+
+    // 3. Seleccionar un Curs i mostrar els temes específics
+    function seleccionarCurs(idCurs) {
+      let trobat = null;
+      nivellSeleccionat.subseccions.forEach(sub => {
+        const c = sub.cursos.find(item => item.id === idCurs);
+        if (c) trobat = c;
+      });
+
+      cursSeleccionat = trobat;
+      breadcrumb.innerText = `${nivellSeleccionat.titolNivell} > ${cursSeleccionat.nom}`;
+
+      let html = `<div class="topics-list">`;
+
+      cursSeleccionat.temes.forEach((nomTema, idx) => {
+        const numTema = idx + 1;
+        html += `
+          <div class="topic-card">
+            <span class="topic-title">${nomTema}</span>
+            <div class="buttons-group">
+        `;
+
+        botonsPerTema.forEach(boto => {
+          const rutaPDF = `${cursSeleccionat.id}/Tema${numTema}_${boto.sufix}.pdf`;
+          html += `
+            <a class="btn-link ${boto.classe}" 
+               href="${rutaPDF}" 
+               onerror="this.href='en_construccio.html'">
+              ${boto.etiqueta}
+            </a>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      appContainer.innerHTML = html;
+    }
+
+    // Botó de tornar enrere
+    function tornarEnrere() {
+      if (cursSeleccionat) {
+        seleccionarNivell(nivellSeleccionat.idNivell);
+      } else if (nivellSeleccionat) {
+        mostrarNivells();
+      }
+    }
+
+    // Inicialitzar la pàgina
+    mostrarNivells();
   </script>
 </body>
 </html>
