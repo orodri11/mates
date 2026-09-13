@@ -3,118 +3,239 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Materials de Matemàtiques</title>
+  <title>Materials de Matemàtiques | Òscar Rodríguez</title>
+  <!-- Font Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --primary: #0284c7;
-      --primary-hover: #0369a1;
+      --primary-dark: #0369a1;
+      --primary-light: #e0f2fe;
+      --accent: #0f172a;
       --bg: #f8fafc;
       --card-bg: #ffffff;
-      --text: #0f172a;
+      --text: #1e293b;
       --text-muted: #64748b;
       --border: #e2e8f0;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+      --shadow-lg: 0 10px 25px -5px rgba(2, 132, 199, 0.12), 0 8px 10px -6px rgba(0,0,0,0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      margin: 0;
-      padding: 20px;
-    }
-
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    h1 {
-      color: var(--primary);
-      margin-bottom: 8px;
-    }
-
-    p.subtitle {
-      color: var(--text-muted);
-      margin: 0;
-    }
-
-    /* Navegació Superior / Breadcrumb */
-    .navigation-bar {
-      max-width: 900px;
-      margin: 0 auto 20px auto;
+      line-height: 1.5;
       display: flex;
-      align-items: center;
-      gap: 10px;
+      flex-direction: column;
+      min-height: 100vh;
     }
 
-    .btn-back {
-      background: #e2e8f0;
-      color: #1e293b;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: background 0.2s;
+    /* CAPÇALERA / HEADER */
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: white;
+      padding: 35px 20px 40px 20px;
+      text-align: center;
+      position: relative;
+      box-shadow: var(--shadow-md);
     }
 
-    .btn-back:hover {
-      background: #cbd5e1;
-    }
-
-    .breadcrumb {
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    /* Contenidor Principal */
-    .container {
+    .header-content {
       max-width: 900px;
       margin: 0 auto;
     }
 
-    /* Grids de Targetes */
+    .teacher-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #93c5fd;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    p.subtitle {
+      color: #94a3b8;
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .contact-btn:hover {
+      color: #7dd3fc;
+      text-decoration: underline;
+    }
+
+    /* BARRA DE NAVEGACIÓ I CERCA */
+    .toolbar {
+      max-width: 900px;
+      margin: -20px auto 25px auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .navigation-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-back {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.88rem;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-back:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .breadcrumb {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      background: var(--card-bg);
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* CONTENIDOR PRINCIPAL */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px 40px 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    /* TARGETES DE NAVEGACIÓ PRINCIPAL (INICI) */
     .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
 
     .nav-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 30px 20px;
+      border-radius: 14px;
+      padding: 32px 24px;
       text-align: center;
-      font-size: 1.3rem;
-      font-weight: bold;
-      color: var(--primary);
       cursor: pointer;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     .nav-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
       border-color: var(--primary);
     }
 
-    /* Títols de Secció */
-    .section-header {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin: 24px 0 12px 0;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 4px;
+    .nav-card-icon {
+      width: 54px;
+      height: 54px;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin-bottom: 16px;
     }
 
-    /* Llista de Temes */
+    .nav-card-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .nav-card-desc {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* TÍTOLS DE SUBSECCIÓ */
+    .section-header {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 30px 0 14px 0;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-header::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* LLISTA DE TEMES */
     .topics-list {
       display: flex;
       flex-direction: column;
@@ -124,87 +245,141 @@
     .topic-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 16px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+      box-shadow: var(--shadow-sm);
+      transition: border-color 0.2s;
+    }
+
+    .topic-card:hover {
+      border-color: #cbd5e1;
     }
 
     .topic-title {
       font-weight: 600;
-      font-size: 1.05rem;
-      color: #1e293b;
+      font-size: 0.98rem;
+      color: var(--text);
     }
 
     .buttons-group {
       display: flex;
-      flex-wrap: wrap;
       gap: 8px;
     }
 
-    /* Botons de Recursos */
+    /* BOTONS DE RECURSOS (APUNTS I EXERCICIS) */
     .btn-link {
-      padding: 6px 12px;
+      padding: 7px 14px;
       color: white;
       text-decoration: none;
       border-radius: 6px;
       font-size: 0.85rem;
-      font-weight: 500;
-      transition: opacity 0.2s;
+      font-weight: 600;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .btn-link:hover { opacity: 0.85; }
+    .btn-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
 
-    .btn-link.primary   { background-color: #0284c7; } /* Blau - Apunts */
-    .btn-link.secondary { background-color: #64748b; } /* Gris - Exercicis */
-    .btn-link.success   { background-color: #16a34a; } /* Verd - Solucions */
-    .btn-link.warning   { background-color: #d97706; } /* Taronja - Formulari */
+    .btn-link.primary {
+      background-color: var(--primary);
+    }
+    .btn-link.primary:hover {
+      background-color: var(--primary-dark);
+    }
 
-    /* Estat ocult */
+    .btn-link.secondary {
+      background-color: #334155;
+    }
+    .btn-link.secondary:hover {
+      background-color: #1e293b;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 25px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: auto;
+    }
+
+    footer p {
+      margin-bottom: 4px;
+    }
+
     .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
+  <!-- CAPÇALERA -->
   <header>
-    <h1>📚 Materials de Matemàtiques</h1>
-    <p class="subtitle">Apunts, exercicis, solucions i recursos</p>
+    <div class="header-content">
+      <div class="teacher-badge">
+        <span>👨‍🏫 Professor: Òscar Rodríguez</span>
+      </div>
+      <h1>Materials de Matemàtiques</h1>
+      <p class="subtitle">Apunts, col·leccions d'exercicis i recursos didàctics per a ESO i Batxillerat</p>
+      <a href="mailto:orodri11@xtec.cat" class="contact-btn">
+        ✉️ orodri11@xtec.cat
+      </a>
+    </div>
   </header>
 
-  <div class="navigation-bar hidden" id="navBar">
-    <button class="btn-back" onclick="tornarEnrere()">⬅ Tornar</button>
-    <span class="breadcrumb" id="breadcrumb"></span>
+  <!-- BARRA DE NAVEGACIÓ SUPORT -->
+  <div class="toolbar">
+    <div class="navigation-bar hidden" id="navBar">
+      <button class="btn-back" onclick="tornarEnrere()">
+        ← Tornar
+      </button>
+      <span class="breadcrumb" id="breadcrumb"></span>
+    </div>
   </div>
 
+  <!-- CONTENIDOR DINÀMIC -->
   <main class="container" id="app">
-    <!-- El contingut canvia dinàmicament -->
+    <!-- El contingut es genera amb JS -->
   </main>
+
+  <!-- PEU DE PÀGINA -->
+  <footer>
+    <p><strong>Espai Docent de Matemàtiques</strong> — Òscar Rodríguez</p>
+    <p>Departament de Matemàtiques | <a href="mailto:orodri11@xtec.cat" style="color: var(--primary); text-decoration: none;">orodri11@xtec.cat</a></p>
+  </footer>
 
   <script>
     // =================================================================
-    // 1. CONFIGURACIÓ DE BOTONS DE RECURSOS
+    // 1. CONFIGURACIÓ DE BOTONS DE RECURSOS (NOMÉS 2 BOTONS)
     // =================================================================
     const botonsPerTema = [
-      { etiqueta: "Apunts", sufix: "apunts", classe: "primary" },
-      { etiqueta: "Exercicis", sufix: "exercicis", classe: "secondary" },
-      { etiqueta: "Solucions", sufix: "solucions", classe: "success" },
-      { etiqueta: "Formulari", sufix: "formulari", classe: "warning" }
+      { etiqueta: "📄 Apunts", sufix: "apunts", classe: "primary" },
+      { etiqueta: "✏️ Exercicis", sufix: "exercicis", classe: "secondary" }
     ];
 
     // =================================================================
-    // 2. ESTRUCTURA COMPLETA AMB NOMS PERSONALITZATS PER TEMA
+    // 2. ESTRUCTURA DE CURSOS I TEMES
     // =================================================================
     const estructuraWeb = [
       {
         idNivell: "ESO",
         titolNivell: "ESO",
+        desc: "Educació Secundària Obligatòria (1r a 4t ESO)",
+        icona: "📐",
         subseccions: [
           {
-            titolSubseccio: "Cursos ESO",
+            titolSubseccio: "Cursos d'ESO",
             cursos: [
               {
                 id: "1ESO",
@@ -235,7 +410,7 @@
                 nom: "3r ESO",
                 temes: [
                   "1. Conjunts de nombres i potències",
-                  "2. Sucesions i progressions",
+                  "2. Successions i progressions",
                   "3. Polinomis i equacions",
                   "4. Sistemes d'equacions",
                   "5. Funcions i gràfiques",
@@ -265,9 +440,11 @@
       {
         idNivell: "BATXILLERAT",
         titolNivell: "BATXILLERAT",
+        desc: "Modalitats Social (MACS) i Científica (CCTT)",
+        icona: "📊",
         subseccions: [
           {
-            titolSubseccio: "CCSS - Matemàtiques Aplicades a les Ciències Socials",
+            titolSubseccio: "CCSS — Matemàtiques Aplicades a les Ciències Socials",
             cursos: [
               {
                 id: "1BATX_MACS",
@@ -301,7 +478,7 @@
             ]
           },
           {
-            titolSubseccio: "CCTT - Matemàtiques Científic Tecnològic",
+            titolSubseccio: "CCTT — Matemàtiques Científic-Tecnològic",
             cursos: [
               {
                 id: "1BATX_CCTT",
@@ -339,9 +516,11 @@
       {
         idNivell: "PAU_PAP",
         titolNivell: "PAU i PAP",
+        desc: "Preparació i simulacres de les proves d'accés",
+        icona: "🎓",
         subseccions: [
           {
-            titolSubseccio: "Proves d'Accés",
+            titolSubseccio: "Proves d'Accés Universitàries i de Magisteri",
             cursos: [
               {
                 id: "PAU",
@@ -372,7 +551,7 @@
     ];
 
     // =================================================================
-    // 3. CONTROL DE NAVEGACIÓ I RENDERITZAT (SPA)
+    // 3. NAVEGACIÓ I RENDERITZAT (SPA)
     // =================================================================
     let nivellSeleccionat = null;
     let cursSeleccionat = null;
@@ -381,7 +560,7 @@
     const navBar = document.getElementById('navBar');
     const breadcrumb = document.getElementById('breadcrumb');
 
-    // 1. Mostrar Nivells Principals (ESO, Batxillerat, PAU/PAP)
+    // 1. Mostrar Nivells Principals (Pantalla d'Inici)
     function mostrarNivells() {
       nivellSeleccionat = null;
       cursSeleccionat = null;
@@ -389,14 +568,20 @@
 
       let html = `<div class="cards-grid">`;
       estructuraWeb.forEach(n => {
-        html += `<div class="nav-card" onclick="seleccionarNivell('${n.idNivell}')">${n.titolNivell}</div>`;
+        html += `
+          <div class="nav-card" onclick="seleccionarNivell('${n.idNivell}')">
+            <div class="nav-card-icon">${n.icona}</div>
+            <div class="nav-card-title">${n.titolNivell}</div>
+            <div class="nav-card-desc">${n.desc}</div>
+          </div>
+        `;
       });
       html += `</div>`;
 
       appContainer.innerHTML = html;
     }
 
-    // 2. Seleccionar un Nivell i mostrar els cursos
+    // 2. Seleccionar un Nivell
     function seleccionarNivell(idNivell) {
       nivellSeleccionat = estructuraWeb.find(n => n.idNivell === idNivell);
       cursSeleccionat = null;
@@ -406,12 +591,17 @@
 
       let html = '';
       nivellSeleccionat.subseccions.forEach(sub => {
-        if (sub.titolSubseccio && nivellSeleccionat.subseccions.length > 1) {
+        if (sub.titolSubseccio) {
           html += `<div class="section-header">${sub.titolSubseccio}</div>`;
         }
         html += `<div class="cards-grid">`;
         sub.cursos.forEach(curs => {
-          html += `<div class="nav-card" onclick="seleccionarCurs('${curs.id}')">${curs.nom}</div>`;
+          html += `
+            <div class="nav-card" onclick="seleccionarCurs('${curs.id}')">
+              <div class="nav-card-title">${curs.nom}</div>
+              <div class="nav-card-desc">${curs.temes.length} temes disponibles</div>
+            </div>
+          `;
         });
         html += `</div>`;
       });
@@ -419,7 +609,7 @@
       appContainer.innerHTML = html;
     }
 
-    // 3. Seleccionar un Curs i mostrar els temes específics
+    // 3. Seleccionar un Curs i mostrar els temes amb enllaços target="_blank"
     function seleccionarCurs(idCurs) {
       let trobat = null;
       nivellSeleccionat.subseccions.forEach(sub => {
@@ -445,6 +635,8 @@
           html += `
             <a class="btn-link ${boto.classe}" 
                href="${rutaPDF}" 
+               target="_blank" 
+               rel="noopener noreferrer" 
                onerror="this.href='en_construccio.html'">
               ${boto.etiqueta}
             </a>
