@@ -297,6 +297,25 @@
       background-color: #1e293b;
     }
 
+    /* Caixa d'avís de Propietat Intel·lectual */
+    .disclaimer-card {
+      margin-top: 40px;
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 20px 24px;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .disclaimer-card strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+
     footer {
       background: #ffffff;
       border-top: 1px solid var(--border);
@@ -322,7 +341,7 @@
         <span>👨‍🏫 Professor: Òscar Rodríguez</span>
       </div>
       <h1>Materials de Matemàtiques</h1>
-      <p class="subtitle">Apunts, exercicis i recursos didàctics per a ESO, Batxillerat i PAU/PAP</p>
+      <p class="subtitle">Apunts, exercicis i recursos didàctics per a Batxillerat i PAU/PAP</p>
       <a href="mailto:orodri11@xtec.cat" class="contact-btn">
         ✉️ orodri11@xtec.cat
       </a>
@@ -338,12 +357,22 @@
     </div>
   </div>
 
-  <main class="container" id="app">
-    <!-- Contingut generat dinàmicament -->
+  <main class="container">
+    <div id="app">
+      <!-- Contingut de la navegació generat dinàmicament -->
+    </div>
+
+    <!-- Secció de Propietat Intel·lectual -->
+    <div class="disclaimer-card">
+      <strong>📜 Propietat Intel·lectual i Ús dels Materials</strong>
+      Tots els materials continguts en aquest espai web són d'accés lliure i es poden utilitzar, descarregar i compartir lliurement amb fins educatius i no comercials, respectant sempre la llicència i reconeixent-ne l'autoria. 
+      <br><br>
+      S'ha posat especial cura en la redacció dels continguts i exercicis. Tanmateix, si trobeu qualsevol errada o teniu cap suggeriment de millora, us agrairia molt que m'ho comuniquéssiu mitjançant un correu electrònic a <a href="mailto:orodri11@xtec.cat" style="color: var(--primary); font-weight: 600;">orodri11@xtec.cat</a>.
+    </div>
   </main>
 
   <footer>
-    <p><strong>Espai Docent de Matemàtiques</strong> — Òscar Rodríguez</p>
+    <p><strong>Professor — Òscar Rodríguez</strong></p>
     <p>Departament de Matemàtiques | <a href="mailto:orodri11@xtec.cat" style="color: var(--primary); text-decoration: none;">orodri11@xtec.cat</a></p>
   </footer>
 
@@ -373,86 +402,9 @@
     }
 
     // =================================================================
-    // 2. ESTRUCTURA DE CURSOS I TEMES
+    // 2. ESTRUCTURA DE CURSOS I TEMES (SENSE ESO)
     // =================================================================
     const estructuraWeb = [
-      {
-        idNivell: "ESO",
-        titolNivell: "ESO",
-        desc: "Educació Secundària Obligatòria (1r a 4t ESO)",
-        icona: "📐",
-        subseccions: [
-          {
-            titolSubseccio: "Cursos d'ESO (Projecte Santillana)",
-            cursos: [
-              {
-                id: "1ESO",
-                nom: "1r ESO",
-                temes: [
-                  "1. Nombres naturals i divisibilitat",
-                  "2. Nombres enters",
-                  "3. Fraccions i nombres decimals",
-                  "4. Proporcionalitat i percentatges",
-                  "5. Expressions algebraicàries i equacions",
-                  "6. Taules i gràfiques",
-                  "7. Elementals de geometria i figures planes",
-                  "8. Perímetres, àrees i cossos geomètrics",
-                  "9. Estadística i probabilitat"
-                ]
-              },
-              {
-                id: "2ESO",
-                nom: "2n ESO",
-                temes: [
-                  "1. Divisibilitat i nombres enters",
-                  "2. Fraccions i decimals",
-                  "3. Potències i arrels",
-                  "4. Proporcionalitat directa i inversa",
-                  "5. Expressions algebraicàries",
-                  "6. Equacions de primer i segon grau",
-                  "7. Sistemes d'equacions lineals",
-                  "8. Funcions i representació gràfica",
-                  "9. Teorema de Pitàgores i àrees planes",
-                  "10. Cossos geomètrics, àrees i volums",
-                  "11. Estadística i mesura de dades"
-                ]
-              },
-              {
-                id: "3ESO",
-                nom: "3r ESO",
-                temes: [
-                  "1. Nombres racionals i potències",
-                  "2. Realitat numèrica: radicals i notació científica",
-                  "3. Successions i progressions",
-                  "4. Polinomis i operacions",
-                  "5. Equacions i inequacions",
-                  "6. Sistemes d'equacions",
-                  "7. Funcions característiques i línies",
-                  "8. Geometria plana i semblança",
-                  "9. Cossos de revolució i àrees/volums",
-                  "10. Estadística unidimensional",
-                  "11. Probabilitat i esdeveniments"
-                ]
-              },
-              {
-                id: "4ESO",
-                nom: "4t ESO",
-                temes: [
-                  "1. Nombres reals, potències i radicals",
-                  "2. Polinomis i fraccions algebraicàries",
-                  "3. Equacions, inequacions i sistemes",
-                  "4. Trigonometria plana i resolució de triangles",
-                  "5. Geometria analítica al pla",
-                  "6. Estudi de funcions i propietats",
-                  "7. Funcions elementals",
-                  "8. Estadística bidimensional",
-                  "9. Combinatòria i càlcul de probabilitats"
-                ]
-              }
-            ]
-          }
-        ]
-      },
       {
         idNivell: "BATXILLERAT",
         titolNivell: "BATXILLERAT",
@@ -501,18 +453,18 @@
               {
                 id: "1BATX_CCTT",
                 nom: "1r Batxillerat CCTT",
+                iniciaZero: true,
                 temes: [
-                  "1. Nombres reals, potències i radicals",
-                  "2. Nombres complexos",
-                  "3. Polinomis, equacions i sistemes",
-                  "4. Trigonometria i resolució de triangles",
-                  "5. Vectors al pla",
-                  "6. Geometria analítica plana",
-                  "7. Llocs geomètrics i còniques",
-                  "8. Funcions, límits i continuïtat",
-                  "9. Concepte de derivada i càlcul",
-                  "10. Estadística bidimensional",
-                  "11. Probabilitat i distribucions"
+                  "Tema 0 - Introducció",
+                  "Tema 1 - Nombres reals",
+                  "Tema 2 - Trigonometria",
+                  "Tema 3 - Nombres complexos",
+                  "Tema 4 - Geometria del pla",
+                  "Tema 5 - Polinomis",
+                  "Tema 6 - Equacions, Inequacions i Sistemes",
+                  "Tema 7 - Funcions",
+                  "Tema 8 - Successions i Límits",
+                  "Tema 9 - Introducció a les derivades"
                 ]
               },
               {
@@ -640,7 +592,8 @@
       let html = `<div class="topics-list">`;
 
       cursSeleccionat.temes.forEach((nomTema, idx) => {
-        const numTema = idx + 1;
+        const numTema = cursSeleccionat.iniciaZero ? idx : idx + 1;
+
         html += `
           <div class="topic-card">
             <span class="topic-title">${nomTema}</span>
