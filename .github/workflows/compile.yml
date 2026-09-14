@@ -19,19 +19,19 @@ jobs:
 
       - name: Crear directoris public
         run: |
-          mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT
+          mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT public/PAU public/PAP
 
       # -----------------------------------------------------------------
       # COMPILACIÓ DINÀMICA DE TOTS ELS FITXERS LATEX EXISTENTS
       # -----------------------------------------------------------------
       - name: Compilar tots els fitxers main.tex i exercicis.tex
         run: |
-          # Installem xelatex / pdflatex i paquets bàsics
           sudo apt-get update
           sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-lang-spanish texlive-fonts-recommended
 
-          for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT; do
-            for i in {1..10}; do
+          for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
+            # Bucle ajustat de 0 a 10 per incloure el Tema 0
+            for i in {0..10}; do
               dir="$curs/Tema$i"
               if [ -d "$dir" ]; then
                 echo "🔍 Revisant directori: $dir"
@@ -56,18 +56,20 @@ jobs:
       # -----------------------------------------------------------------
       - name: Organitzar PDFs i copiar a public
         run: |
-          for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT; do
-            for i in {1..10}; do
-              # Apunts
+          for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
+            # 1. Copiar PDFs pujats directament a l'arrel de la carpeta del curs (ex: 1BATX_CCTT/Tema0_apunts.pdf)
+            cp $curs/*.pdf public/$curs/ 2>/dev/null || true
+
+            # 2. Copiar PDFs compilats des de subcarpetes (ex: 1BATX_CCTT/Tema0/main.pdf)
+            for i in {0..10}; do
               if [ -f "$curs/Tema$i/main.pdf" ]; then
                 cp "$curs/Tema$i/main.pdf" "public/$curs/Tema${i}_apunts.pdf"
-                echo "✅ Copiat: public/$curs/Tema${i}_apunts.pdf"
+                echo "✅ Copiat apunts: public/$curs/Tema${i}_apunts.pdf"
               fi
               
-              # Exercicis
               if [ -f "$curs/Tema$i/exercicis.pdf" ]; then
                 cp "$curs/Tema$i/exercicis.pdf" "public/$curs/Tema${i}_exercicis.pdf"
-                echo "✅ Copiat: public/$curs/Tema${i}_exercicis.pdf"
+                echo "✅ Copiat exercicis: public/$curs/Tema${i}_exercicis.pdf"
               fi
             done
           done
