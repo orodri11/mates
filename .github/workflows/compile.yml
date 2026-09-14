@@ -57,17 +57,18 @@ jobs:
       - name: Organitzar PDFs i copiar a public
         run: |
           for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT; do
+            # Copiar PDFs directes que ja estiguin formats (com el teu Tema0_apunts.pdf)
+            cp $curs/*.pdf public/$curs/ 2>/dev/null || true
+
             for i in {1..10}; do
-              # Apunts
+              # Apunts compilats des de subcarpetes
               if [ -f "$curs/Tema$i/main.pdf" ]; then
                 cp "$curs/Tema$i/main.pdf" "public/$curs/Tema${i}_apunts.pdf"
-                echo "✅ Copiat: public/$curs/Tema${i}_apunts.pdf"
               fi
               
-              # Exercicis
+              # Exercicis compilats des de subcarpetes
               if [ -f "$curs/Tema$i/exercicis.pdf" ]; then
                 cp "$curs/Tema$i/exercicis.pdf" "public/$curs/Tema${i}_exercicis.pdf"
-                echo "✅ Copiat: public/$curs/Tema${i}_exercicis.pdf"
               fi
             done
           done
