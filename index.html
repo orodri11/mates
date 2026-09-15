@@ -24,11 +24,7 @@
       --shadow-lg: 0 10px 25px -5px rgba(2, 132, 199, 0.12), 0 8px 10px -6px rgba(0,0,0,0.04);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -49,10 +45,7 @@
       box-shadow: var(--shadow-md);
     }
 
-    .header-content {
-      max-width: 900px;
-      margin: 0 auto;
-    }
+    .header-content { max-width: 900px; margin: 0 auto; }
 
     .teacher-badge {
       display: inline-flex;
@@ -69,19 +62,8 @@
       margin-bottom: 12px;
     }
 
-    h1 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    p.subtitle {
-      color: #94a3b8;
-      font-size: 1rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    h1 { font-size: 2.2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px; }
+    p.subtitle { color: #94a3b8; font-size: 1rem; max-width: 600px; margin: 0 auto; }
 
     .contact-btn {
       display: inline-flex;
@@ -92,12 +74,6 @@
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .contact-btn:hover {
-      color: #7dd3fc;
-      text-decoration: underline;
     }
 
     .toolbar {
@@ -112,11 +88,7 @@
       z-index: 10;
     }
 
-    .navigation-bar {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+    .navigation-bar { display: flex; align-items: center; gap: 12px; }
 
     .btn-back {
       background: var(--card-bg);
@@ -128,15 +100,6 @@
       font-weight: 600;
       font-size: 0.88rem;
       box-shadow: var(--shadow-sm);
-      transition: all 0.2s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-back:hover {
-      background: #f1f5f9;
-      border-color: #cbd5e1;
     }
 
     .breadcrumb {
@@ -172,18 +135,13 @@
       text-align: center;
       cursor: pointer;
       box-shadow: var(--shadow-sm);
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.25s;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
     }
 
-    .nav-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--primary);
-    }
+    .nav-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
 
     .nav-card-icon {
       width: 54px;
@@ -198,17 +156,8 @@
       margin-bottom: 16px;
     }
 
-    .nav-card-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-
-    .nav-card-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
+    .nav-card-title { font-size: 1.25rem; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .nav-card-desc { font-size: 0.85rem; color: var(--text-muted); }
 
     .section-header {
       font-size: 0.95rem;
@@ -222,48 +171,31 @@
       gap: 8px;
     }
 
-    .section-header::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
+    .section-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-    .topics-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .topics-list { display: flex; flex-direction: column; gap: 12px; }
 
-    .topic-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      box-shadow: var(--shadow-sm);
-      transition: border-color 0.2s;
-    }
+.topic-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column; /* Força que el contingut es col·loqui en vertical (títol a dalt, botons a baix) */
+  align-items: flex-start; /* Alinea tot a l'esquerra */
+  gap: 12px; /* Distància constant entre el títol i els botons */
+  box-shadow: var(--shadow-sm);
+}
 
-    .topic-card:hover {
-      border-color: #cbd5e1;
-    }
-
-    .topic-title {
-      font-weight: 600;
-      font-size: 0.98rem;
-      color: var(--text);
-    }
-
-    .buttons-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .topic-title { font-weight: 600; font-size: 0.98rem; color: var(--text); }
+.buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 32px;
+  align-items: center;
+  width: 100%; /* Ocupa tot l'ample de la targeta */
+}
 
     .btn-link {
       padding: 6px 12px;
@@ -276,36 +208,14 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
-      cursor: pointer;
     }
 
-    .btn-link:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
+    .btn-link.primary { background-color: var(--primary); }
+    .btn-link.secondary { background-color: #334155; }
+    .btn-link.success { background-color: #16a34a; }
 
-    .btn-link.primary {
-      background-color: var(--primary);
-    }
-    .btn-link.primary:hover {
-      background-color: var(--primary-dark);
-    }
+    .loading-text { font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
 
-    .btn-link.secondary {
-      background-color: #334155;
-    }
-    .btn-link.secondary:hover {
-      background-color: #1e293b;
-    }
-
-    .btn-link.success {
-      background-color: #16a34a;
-    }
-    .btn-link.success:hover {
-      background-color: #15803d;
-    }
-
-    /* Caixa d'avís de Propietat Intel·lectual */
     .disclaimer-card {
       margin-top: 40px;
       background: #f1f5f9;
@@ -317,12 +227,7 @@
       line-height: 1.6;
     }
 
-    .disclaimer-card strong {
-      color: var(--accent);
-      display: block;
-      margin-bottom: 6px;
-      font-size: 0.95rem;
-    }
+    .disclaimer-card strong { color: var(--accent); display: block; margin-bottom: 6px; }
 
     footer {
       background: #ffffff;
@@ -334,10 +239,6 @@
       margin-top: auto;
     }
 
-    footer p {
-      margin-bottom: 4px;
-    }
-
     .hidden { display: none !important; }
   </style>
 </head>
@@ -345,74 +246,98 @@
 
   <header>
     <div class="header-content">
-      <div class="teacher-badge">
-        <span>👨‍🏫 Professor: Òscar Rodríguez</span>
-      </div>
+      <div class="teacher-badge"><span>👨‍🏫 Professor: Òscar Rodríguez</span></div>
       <h1>Materials de Matemàtiques</h1>
       <p class="subtitle">Apunts, exercicis i recursos didàctics per a Batxillerat i PAU/PAP</p>
-      <a href="mailto:orodri11@xtec.cat" class="contact-btn">
-        ✉️ orodri11@xtec.cat
-      </a>
+      <a href="mailto:orodri11@xtec.cat" class="contact-btn">✉️ orodri11@xtec.cat</a>
     </div>
   </header>
 
   <div class="toolbar">
     <div class="navigation-bar hidden" id="navBar">
-      <button class="btn-back" onclick="tornarEnrere()">
-        ← Tornar
-      </button>
+      <button class="btn-back" onclick="tornarEnrere()">← Tornar</button>
       <span class="breadcrumb" id="breadcrumb"></span>
     </div>
   </div>
 
   <main class="container">
-    <div id="app">
-      <!-- Contingut de la navegació generat dinàmicament -->
-    </div>
+    <div id="app"></div>
 
-    <!-- Secció de Propietat Intel·lectual -->
     <div class="disclaimer-card">
       <strong>📜 Propietat Intel·lectual i Ús dels Materials</strong>
-      Tots els materials continguts en aquest espai web són d'accés lliure i es poden utilitzar, descarregar i compartir lliurement amb fins educatius i no comercials, respectant sempre la llicència i reconeixent-ne l'autoria. 
+      Tots els materials continguts en aquest espai web són d'accés lliure i es poden utilitzar, descarregar i compartir lliurement amb fins educatius i no comercials.
       <br><br>
-      S'ha posat especial cura en la redacció dels continguts i exercicis. Tanmateix, si trobeu qualsevol errada o teniu cap suggeriment de millora, us agrairia molt que m'ho comuniquéssiu mitjançant un correu electrònic a <a href="mailto:orodri11@xtec.cat" style="color: var(--primary); font-weight: 600;">orodri11@xtec.cat</a>.
+      Si trobeu qualsevol errada, podeu escriure a <a href="mailto:orodri11@xtec.cat" style="color: var(--primary); font-weight: 600;">orodri11@xtec.cat</a>.
     </div>
   </main>
 
   <footer>
     <p><strong>Professor — Òscar Rodríguez</strong></p>
-    <p>Departament de Matemàtiques | <a href="mailto:orodri11@xtec.cat" style="color: var(--primary); text-decoration: none;">orodri11@xtec.cat</a></p>
+    <p>Departament de Matemàtiques | orodri11@xtec.cat</p>
   </footer>
 
   <script>
-    async function obrirPDF(event, rutaPDF) {
-      event.preventDefault();
-
+    // =================================================================
+    // COMPROVACIÓ AUTOMÀTICA DE FITXERS EXISTENTS
+    // =================================================================
+    async function comprovarFitxer(url) {
       try {
-        const resposta = await fetch(rutaPDF, { method: 'HEAD' });
-
-        if (resposta.ok) {
-          window.open(rutaPDF, '_blank', 'noopener,noreferrer');
-        } else {
-          alert("⚠️ Aquest material encara està en construcció. Disculpa les molèsties!");
-        }
-      } catch (error) {
-        alert("⚠️ Aquest material encara està en construcció. Disculpa les molèsties!");
+        const res = await fetch(url, { method: 'HEAD' });
+        return res.ok;
+      } catch (e) {
+        return false;
       }
     }
 
-    // =================================================================
-    // FUNCIÓ PER GENERAR FITXERS ESTÀNDARD PER A TEMES SIMPLES
-    // =================================================================
-    function crearFitxersEstandard(cursId, numTema) {
-      return [
-        { nom: "📄 Apunts", url: `${cursId}/Tema${numTema}_apunts.pdf`, classe: "primary" },
-        { nom: "✏️ Exercicis", url: `${cursId}/Tema${numTema}_exercicis.pdf`, classe: "secondary" }
-      ];
+    async function carregarBotonsTema(cursId, numTema, containerId) {
+      const container = document.getElementById(containerId);
+      let htmlBotons = '';
+
+      // 1. Comprovar Apunts
+      const urlApunts = `${cursId}/Tema${numTema}_apunts.pdf`;
+      if (await comprovarFitxer(urlApunts)) {
+        htmlBotons += `<a class="btn-link primary" href="${urlApunts}" target="_blank">📄 Apunts</a>`;
+      }
+
+      // 2. Buscar Exercicis (TemaX_ex1.pdf, TemaX_ex2.pdf... o TemaX_exercicis.pdf)
+      const urlExUnic = `${cursId}/Tema${numTema}_exercicis.pdf`;
+      if (await comprovarFitxer(urlExUnic)) {
+        htmlBotons += `<a class="btn-link secondary" href="${urlExUnic}" target="_blank">✏️ Exercicis</a>`;
+      } else {
+        let i = 1;
+        while (i <= 10) { // Cerca fins a un màxim de 10 blocs d'exercicis
+          const urlEx = `${cursId}/Tema${numTema}_ex${i}.pdf`;
+          if (await comprovarFitxer(urlEx)) {
+            htmlBotons += `<a class="btn-link secondary" href="${urlEx}" target="_blank">✏️ Ex. Part ${i}</a>`;
+            i++;
+          } else {
+            break; // Si no en troba un, atura la cerca
+          }
+        }
+      }
+
+      // 3. Buscar Solucions (TemaX_sol1.pdf, TemaX_sol2.pdf... o TemaX_solucions.pdf)
+      const urlSolUnica = `${cursId}/Tema${numTema}_solucions.pdf`;
+      if (await comprovarFitxer(urlSolUnica)) {
+        htmlBotons += `<a class="btn-link success" href="${urlSolUnica}" target="_blank">✅ Solucions</a>`;
+      } else {
+        let j = 1;
+        while (j <= 10) { // Cerca fins a un màxim de 10 solucions
+          const urlSol = `${cursId}/Tema${numTema}_sol${j}.pdf`;
+          if (await comprovarFitxer(urlSol)) {
+            htmlBotons += `<a class="btn-link success" href="${urlSol}" target="_blank">✅ Sol. Part ${j}</a>`;
+            j++;
+          } else {
+            break;
+          }
+        }
+      }
+
+      container.innerHTML = htmlBotons || `<span class="loading-text">Cap material disponible</span>`;
     }
 
     // =================================================================
-    // ESTRUCTURA DE CURSOS I FITXERS PERSONALITZATS PER TEMA
+    // ESTRUCTURA DE CURSOS (MOLT MÉS NET)
     // =================================================================
     const estructuraWeb = [
       {
@@ -428,44 +353,31 @@
                 id: "1BATX_MACS",
                 nom: "1r Batxillerat MACS",
                 temes: [
-                  // Exemple del Tema 1 amb MÚLTIPLES fitxers d'exercicis i solucions:
-                  {
-                    titol: "UD 1. Nombres reals",
-                    fitxers: [
-                      { nom: "📄 Apunts", url: "1BATX_MACS/Tema1_apunts.pdf", classe: "primary" },
-                      { nom: "✏️ Ex. Part 1", url: "1BATX_MACS/Tema1_ex1.pdf", classe: "secondary" },
-                      { nom: "✏️ Ex. Part 2", url: "1BATX_MACS/Tema1_ex2.pdf", classe: "secondary" },
-                      { nom: "✏️ Ex. Part 3", url: "1BATX_MACS/Tema1_ex3.pdf", classe: "secondary" },
-                      { nom: "✅ Sol. Part 1", url: "1BATX_MACS/Tema1_sol1.pdf", classe: "success" },
-                      { nom: "✅ Sol. Part 2", url: "1BATX_MACS/Tema1_sol2.pdf", classe: "success" },
-                      { nom: "✅ Sol. Part 3", url: "1BATX_MACS/Tema1_sol3.pdf", classe: "success" }
-                    ]
-                  },
-                  // La resta de temes usen el format estàndard (1 apunts + 1 exercicis)
-                  { titol: "UD 2. Polinomis i fraccions algebraiques", fitxers: crearFitxersEstandard("1BATX_MACS", 2) },
-                  { titol: "UD 3. Equacions, inequacions i sistemes", fitxers: crearFitxersEstandard("1BATX_MACS", 3) },
-                  { titol: "UD 4. Successions i progressions", fitxers: crearFitxersEstandard("1BATX_MACS", 4) },
-                  { titol: "UD 5. Matemàtica financera", fitxers: crearFitxersEstandard("1BATX_MACS", 5) },
-                  { titol: "UD 6. Introducció a les funcions i funcions elementals", fitxers: crearFitxersEstandard("1BATX_MACS", 6) },
-                  { titol: "UD 7. Límits i continuïtat", fitxers: crearFitxersEstandard("1BATX_MACS", 7) },
-                  { titol: "UD 8. Derivades", fitxers: crearFitxersEstandard("1BATX_MACS", 8) },
-                  { titol: "UD 9. Conceptes d’estadística i probabilitat", fitxers: crearFitxersEstandard("1BATX_MACS", 9) }
+                  { num: 1, titol: "UD 1. Nombres reals" },
+                  { num: 2, titol: "UD 2. Polinomis i fraccions algebraiques" },
+                  { num: 3, titol: "UD 3. Equacions, inequacions i sistemes" },
+                  { num: 4, titol: "UD 4. Successions i progressions" },
+                  { num: 5, titol: "UD 5. Matemàtica financera" },
+                  { num: 6, titol: "UD 6. Introducció a les funcions i funcions elementals" },
+                  { num: 7, titol: "UD 7. Límits i continuïtat" },
+                  { num: 8, titol: "UD 8. Derivades" },
+                  { num: 9, titol: "UD 9. Conceptes d’estadística i probabilitat" }
                 ]
               },
               {
                 id: "2BATX_MACS",
                 nom: "2n Batxillerat MACS",
                 temes: [
-                  { titol: "1. Matrius i operacions", fitxers: crearFitxersEstandard("2BATX_MACS", 1) },
-                  { titol: "2. Determinants i inversió de matrius", fitxers: crearFitxersEstandard("2BATX_MACS", 2) },
-                  { titol: "3. Sistemes d'equacions i mètode de Gauss", fitxers: crearFitxersEstandard("2BATX_MACS", 3) },
-                  { titol: "4. Programació lineal bidimensional", fitxers: crearFitxersEstandard("2BATX_MACS", 4) },
-                  { titol: "5. Límits de funcions i continuïtat", fitxers: crearFitxersEstandard("2BATX_MACS", 5) },
-                  { titol: "6. Derivades, regles i aplicacions", fitxers: crearFitxersEstandard("2BATX_MACS", 6) },
-                  { titol: "7. Estudi global i optimització de funcions", fitxers: crearFitxersEstandard("2BATX_MACS", 7) },
-                  { titol: "8. Integració i càlcul d'àrees planes", fitxers: crearFitxersEstandard("2BATX_MACS", 8) },
-                  { titol: "9. Probabilitat i teoremes fonamentals", fitxers: crearFitxersEstandard("2BATX_MACS", 9) },
-                  { titol: "10. Inferencia estadística, mostratge i intervals", fitxers: crearFitxersEstandard("2BATX_MACS", 10) }
+                  { num: 1, titol: "1. Matrius i operacions" },
+                  { num: 2, titol: "2. Determinants i inversió de matrius" },
+                  { num: 3, titol: "3. Sistemes d'equacions i mètode de Gauss" },
+                  { num: 4, titol: "4. Programació lineal bidimensional" },
+                  { num: 5, titol: "5. Límits de funcions i continuïtat" },
+                  { num: 6, titol: "6. Derivades, regles i aplicacions" },
+                  { num: 7, titol: "7. Estudi global i optimització de funcions" },
+                  { num: 8, titol: "8. Integració i càlcul d'àrees planes" },
+                  { num: 9, titol: "9. Probabilitat i teoremes fonamentals" },
+                  { num: 10, titol: "10. Inferencia estadística, mostratge i intervals" }
                 ]
               }
             ]
@@ -477,30 +389,30 @@
                 id: "1BATX_CCTT",
                 nom: "1r Batxillerat CCTT",
                 temes: [
-                  { titol: "Tema 0 - Introducció", fitxers: crearFitxersEstandard("1BATX_CCTT", 0) },
-                  { titol: "Tema 1 - Nombres reals", fitxers: crearFitxersEstandard("1BATX_CCTT", 1) },
-                  { titol: "Tema 2 - Trigonometria", fitxers: crearFitxersEstandard("1BATX_CCTT", 2) },
-                  { titol: "Tema 3 - Nombres complexos", fitxers: crearFitxersEstandard("1BATX_CCTT", 3) },
-                  { titol: "Tema 4 - Geometria del pla", fitxers: crearFitxersEstandard("1BATX_CCTT", 4) },
-                  { titol: "Tema 5 - Polinomis", fitxers: crearFitxersEstandard("1BATX_CCTT", 5) },
-                  { titol: "Tema 6 - Equacions, Inequacions i Sistemes", fitxers: crearFitxersEstandard("1BATX_CCTT", 6) },
-                  { titol: "Tema 7 - Funcions", fitxers: crearFitxersEstandard("1BATX_CCTT", 7) },
-                  { titol: "Tema 8 - Successions i Límits", fitxers: crearFitxersEstandard("1BATX_CCTT", 8) },
-                  { titol: "Tema 9 - Introducció a les derivades", fitxers: crearFitxersEstandard("1BATX_CCTT", 9) }
+                  { num: 0, titol: "Tema 0 - Introducció" },
+                  { num: 1, titol: "Tema 1 - Nombres reals" },
+                  { num: 2, titol: "Tema 2 - Trigonometria" },
+                  { num: 3, titol: "Tema 3 - Nombres complexos" },
+                  { num: 4, titol: "Tema 4 - Geometria del pla" },
+                  { num: 5, titol: "Tema 5 - Polinomis" },
+                  { num: 6, titol: "Tema 6 - Equacions, Inequacions i Sistemes" },
+                  { num: 7, titol: "Tema 7 - Funcions" },
+                  { num: 8, titol: "Tema 8 - Successions i Límits" },
+                  { num: 9, titol: "Tema 9 - Introducció a les derivades" }
                 ]
               },
               {
                 id: "2BATX_CCTT",
                 nom: "2n Batxillerat CCTT",
                 temes: [
-                  { titol: "Tema 1: Límits i continuïtat", fitxers: crearFitxersEstandard("2BATX_CCTT", 1) },
-                  { titol: "Tema 2: Derivades i aplicacions", fitxers: crearFitxersEstandard("2BATX_CCTT", 2) },
-                  { titol: "Tema 3: Estudi de funcions", fitxers: crearFitxersEstandard("2BATX_CCTT", 3) },
-                  { titol: "Tema 4: Integrals i càlcul d'àrees", fitxers: crearFitxersEstandard("2BATX_CCTT", 4) },
-                  { titol: "Tema 5: Matrius i determinants", fitxers: crearFitxersEstandard("2BATX_CCTT", 5) },
-                  { titol: "Tema 6: Sistemes d'equacions lineals", fitxers: crearFitxersEstandard("2BATX_CCTT", 6) },
-                  { titol: "Tema 7: Geometria en l'espai 3D", fitxers: crearFitxersEstandard("2BATX_CCTT", 7) },
-                  { titol: "Tema 8: Probabilitat i Distribucions", fitxers: crearFitxersEstandard("2BATX_CCTT", 8) }
+                  { num: 1, titol: "Tema 1: Límits i continuïtat" },
+                  { num: 2, titol: "Tema 2: Derivades i aplicacions" },
+                  { num: 3, titol: "Tema 3: Estudi de funcions" },
+                  { num: 4, titol: "Tema 4: Integrals i càlcul d'àrees" },
+                  { num: 5, titol: "Tema 5: Matrius i determinants" },
+                  { num: 6, titol: "Tema 6: Sistemes d'equacions lineals" },
+                  { num: 7, titol: "Tema 7: Geometria en l'espai 3D" },
+                  { num: 8, titol: "Tema 8: Probabilitat i Distribucions" }
                 ]
               }
             ]
@@ -520,22 +432,22 @@
                 id: "PAU",
                 nom: "Proves PAU",
                 temes: [
-                  { titol: "1. Bloc Àlgebra Lineal (Matrius i Sistemes)", fitxers: crearFitxersEstandard("PAU", 1) },
-                  { titol: "2. Bloc Geometria 3D (Vectors, Línies i Plans)", fitxers: crearFitxersEstandard("PAU", 2) },
-                  { titol: "3. Bloc Anàlisi Matemàtica (Funcions, Derivades i Integrals)", fitxers: crearFitxersEstandard("PAU", 3) },
-                  { titol: "4. Bloc Probabilitat i Estadística", fitxers: crearFitxersEstandard("PAU", 4) },
-                  { titol: "5. Recopilació de Proves PAU dels últims anys", fitxers: crearFitxersEstandard("PAU", 5) }
+                  { num: 1, titol: "1. Bloc Àlgebra Lineal (Matrius i Sistemes)" },
+                  { num: 2, titol: "2. Bloc Geometria 3D (Vectors, Línies i Plans)" },
+                  { num: 3, titol: "3. Bloc Anàlisi Matemàtica (Funcions, Derivades i Integrals)" },
+                  { num: 4, titol: "4. Bloc Probabilitat i Estadística" },
+                  { num: 5, titol: "5. Recopilació de Proves PAU dels últims anys" }
                 ]
               },
               {
                 id: "PAP",
                 nom: "Proves PAP (Competència Matemàtica)",
                 temes: [
-                  { titol: "1. Nombres, proporcions i percentatges", fitxers: crearFitxersEstandard("PAP", 1) },
-                  { titol: "2. Mesura, propietats i geometria plana", fitxers: crearFitxersEstandard("PAP", 2) },
-                  { titol: "3. Resolució de problemes de la vida quotidiana", fitxers: crearFitxersEstandard("PAP", 3) },
-                  { titol: "4. Interpretació de taules, gràfics i dades", fitxers: crearFitxersEstandard("PAP", 4) },
-                  { titol: "5. Simulacres d'examen oficials resolts", fitxers: crearFitxersEstandard("PAP", 5) }
+                  { num: 1, titol: "1. Nombres, proporcions i percentatges" },
+                  { num: 2, titol: "2. Mesura, propietats i geometria plana" },
+                  { num: 3, titol: "3. Resolució de problemes de la vida quotidiana" },
+                  { num: 4, titol: "4. Interpretació de taules, gràfics i dades" },
+                  { num: 5, titol: "5. Simulacres d'examen oficials resolts" }
                 ]
               }
             ]
@@ -545,7 +457,7 @@
     ];
 
     // =================================================================
-    // LÒGICA DE NAVEGACIÓ I RENDERITZAT
+    // LÒGICA DE NAVEGACIÓ
     // =================================================================
     let nivellSeleccionat = null;
     let cursSeleccionat = null;
@@ -614,23 +526,12 @@
       let html = `<div class="topics-list">`;
 
       cursSeleccionat.temes.forEach((tema) => {
+        const containerId = `btn-group-${cursSeleccionat.id}-${tema.num}`;
         html += `
           <div class="topic-card">
             <span class="topic-title">${tema.titol}</span>
-            <div class="buttons-group">
-        `;
-
-        tema.fitxers.forEach(fitxer => {
-          html += `
-            <a class="btn-link ${fitxer.classe}" 
-               href="${fitxer.url}" 
-               onclick="obrirPDF(event, '${fitxer.url}')">
-              ${fitxer.nom}
-            </a>
-          `;
-        });
-
-        html += `
+            <div class="buttons-group" id="${containerId}">
+              <span class="loading-text">Comprovant materials...</span>
             </div>
           </div>
         `;
@@ -638,6 +539,12 @@
 
       html += `</div>`;
       appContainer.innerHTML = html;
+
+      // Un cop creat l'HTML, demanem la comprovació automàtica de fitxers en segon pla
+      cursSeleccionat.temes.forEach((tema) => {
+        const containerId = `btn-group-${cursSeleccionat.id}-${tema.num}`;
+        carregarBotonsTema(cursSeleccionat.id, tema.num, containerId);
+      });
     }
 
     function tornarEnrere() {
@@ -648,7 +555,6 @@
       }
     }
 
-    // Inicialització
     mostrarNivells();
   </script>
 </body>
