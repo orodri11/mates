@@ -21,7 +21,7 @@ jobs:
         run: |
           mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT public/PAU public/PAP
 
-      # COMPILACIÓ DE TOTS ELS FITXERS .TEX
+      # COMPILACIÓ DE TOTS ELS FITXERS .TEX (TANT MAIN COM EXERCICIS I SOLUCIONS)
       - name: Compilar TOTS els fitxers .tex
         run: |
           sudo apt-get update
@@ -41,24 +41,25 @@ jobs:
             done
           done
 
-      # ORGANITZAR PDFs I GENERAR ÍNDEX D'ARXIUS (files.json)
+      # ORGANITZAR PDFs I GENERAR EL MANIFEST JSON
       - name: Organitzar PDFs i crear manifest de fitxers
         run: |
           for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
-            # Copiar PDFs directes de l'arrel del curs
+            # Copiar PDFs que es pugin directament a l'arrel del curs
             cp $curs/*.pdf public/$curs/ 2>/dev/null || true
 
             for i in {0..10}; do
               dir="$curs/Tema$i"
               if [ -d "$dir" ]; then
-                # Copiar Apunts
+                # 1. Copiar Apunts principals
                 [ -f "$dir/main.pdf" ] && cp "$dir/main.pdf" "public/$curs/Tema${i}_apunts.pdf"
+                [ -f "$dir/apunts.pdf" ] && cp "$dir/apunts.pdf" "public/$curs/Tema${i}_apunts.pdf"
                 
-                # Copiar Exercicis / Solucions generals
+                # 2. Copiar Exercicis / Solucions generals
                 [ -f "$dir/exercicis.pdf" ] && cp "$dir/exercicis.pdf" "public/$curs/Tema${i}_exercicis.pdf"
                 [ -f "$dir/solucions.pdf" ] && cp "$dir/solucions.pdf" "public/$curs/Tema${i}_solucions.pdf"
 
-                # Copiar qualsevol ex*.pdf o sol*.pdf (mantenint el títol si en té, ex: ex1_Intervals.pdf -> Tema1_ex1_Intervals.pdf)
+                # 3. Copiar qualsevol ex*.pdf o sol*.pdf amb títols personalitzats
                 for f in "$dir"/ex*.pdf "$dir"/sol*.pdf; do
                   if [ -f "$f" ]; then
                     fname=$(basename "$f")
@@ -78,6 +79,7 @@ with open(os.path.join(path, 'files.json'), 'w') as f:
 "
           done
           
+          # Copiar el fitxer principal de la web
           cp index.html public/
 
       - name: Preparar artefacte
