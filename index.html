@@ -175,21 +175,27 @@
 
     .topics-list { display: flex; flex-direction: column; gap: 12px; }
 
-    .topic-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      box-shadow: var(--shadow-sm);
-    }
+.topic-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column; /* Força que el contingut es col·loqui en vertical (títol a dalt, botons a baix) */
+  align-items: flex-start; /* Alinea tot a l'esquerra */
+  gap: 12px; /* Distància constant entre el títol i els botons */
+  box-shadow: var(--shadow-sm);
+}
 
     .topic-title { font-weight: 600; font-size: 0.98rem; color: var(--text); }
-    .buttons-group { display: flex; flex-wrap: wrap; gap: 6px; min-height: 32px; align-items: center; }
+.buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 32px;
+  align-items: center;
+  width: 100%; /* Ocupa tot l'ample de la targeta */
+}
 
     .btn-link {
       padding: 6px 12px;
