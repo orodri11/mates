@@ -21,11 +21,11 @@ jobs:
         run: |
           mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT public/PAU public/PAP
 
-      # COMPILACIÓ DE TOTS ELS FITXERS .TEX (TANT MAIN COM EXERCICIS I SOLUCIONS)
+      # COMPILACIÓ DE TOTS ELS FITXERS .TEX
       - name: Compilar TOTS els fitxers .tex
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-lang-spanish texlive-fonts-recommended python3
+          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-lang-spanish texlive-fonts-recommended
 
           for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
             for i in {0..10}; do
@@ -69,14 +69,18 @@ jobs:
               fi
             done
 
-            # Generar el fitxer JSON amb la llista real de PDFs d'aquest curs
-            python3 -c "
-import os, json
-path = 'public/$curs'
-files = [f for f in os.listdir(path) if f.endswith('.pdf')] if os.path.exists(path) else []
-with open(os.path.join(path, 'files.json'), 'w') as f:
-    json.dump(files, f)
-"
+            # Generar el JSON directament amb Bash (sense dependre de scripts externs)
+            cd public/$curs
+            list=""
+            for f in *.pdf; do
+              if [ -f "$f" ]; then
+                list="$list\"$f\","
+              fi
+            done
+            # Treure l'última coma i tancar l'array JSON
+            list=${list%,}
+            echo "[$list]" > files.json
+            cd ../..
           done
           
           # Copiar el fitxer principal de la web
