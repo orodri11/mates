@@ -261,20 +261,21 @@
 
     .buttons-group {
       display: flex;
-      gap: 8px;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .btn-link {
-      padding: 7px 14px;
+      padding: 6px 12px;
       color: white;
       text-decoration: none;
       border-radius: 6px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       transition: all 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       cursor: pointer;
     }
 
@@ -295,6 +296,13 @@
     }
     .btn-link.secondary:hover {
       background-color: #1e293b;
+    }
+
+    .btn-link.success {
+      background-color: #16a34a;
+    }
+    .btn-link.success:hover {
+      background-color: #15803d;
     }
 
     /* Caixa d'avís de Propietat Intel·lectual */
@@ -377,14 +385,6 @@
   </footer>
 
   <script>
-    // =================================================================
-    // 1. CONFIGURACIÓ DE BOTONS I VERIFICACIÓ DE PDF
-    // =================================================================
-    const botonsPerTema = [
-      { etiqueta: "📄 Apunts", sufix: "apunts", classe: "primary" },
-      { etiqueta: "✏️ Exercicis", sufix: "exercicis", classe: "secondary" }
-    ];
-
     async function obrirPDF(event, rutaPDF) {
       event.preventDefault();
 
@@ -402,7 +402,17 @@
     }
 
     // =================================================================
-    // 2. ESTRUCTURA DE CURSOS I TEMES (SENSE ESO)
+    // FUNCIÓ PER GENERAR FITXERS ESTÀNDARD PER A TEMES SIMPLES
+    // =================================================================
+    function crearFitxersEstandard(cursId, numTema) {
+      return [
+        { nom: "📄 Apunts", url: `${cursId}/Tema${numTema}_apunts.pdf`, classe: "primary" },
+        { nom: "✏️ Exercicis", url: `${cursId}/Tema${numTema}_exercicis.pdf`, classe: "secondary" }
+      ];
+    }
+
+    // =================================================================
+    // ESTRUCTURA DE CURSOS I FITXERS PERSONALITZATS PER TEMA
     // =================================================================
     const estructuraWeb = [
       {
@@ -418,31 +428,44 @@
                 id: "1BATX_MACS",
                 nom: "1r Batxillerat MACS",
                 temes: [
-                  "UD 1. Nombres reals",
-                  "UD 2. Polinomis i fraccions algebraiques",
-                  "UD 3. Equacions, inequacions i sistemes",
-                  "UD 4. Successions i progressions",
-                  "UD 5. Matemàtica financera",
-                  "UD 6. Introducció a les funcions i funcions elementals",
-                  "UD 7. Límits i continuïtat",
-                  "UD 8. Derivades",
-                  "UD 9. Conceptes d’estadística i probabilitat"
+                  // Exemple del Tema 1 amb MÚLTIPLES fitxers d'exercicis i solucions:
+                  {
+                    titol: "UD 1. Nombres reals",
+                    fitxers: [
+                      { nom: "📄 Apunts", url: "1BATX_MACS/Tema1_apunts.pdf", classe: "primary" },
+                      { nom: "✏️ Ex. Part 1", url: "1BATX_MACS/Tema1_ex1.pdf", classe: "secondary" },
+                      { nom: "✏️ Ex. Part 2", url: "1BATX_MACS/Tema1_ex2.pdf", classe: "secondary" },
+                      { nom: "✏️ Ex. Part 3", url: "1BATX_MACS/Tema1_ex3.pdf", classe: "secondary" },
+                      { nom: "✅ Sol. Part 1", url: "1BATX_MACS/Tema1_sol1.pdf", classe: "success" },
+                      { nom: "✅ Sol. Part 2", url: "1BATX_MACS/Tema1_sol2.pdf", classe: "success" },
+                      { nom: "✅ Sol. Part 3", url: "1BATX_MACS/Tema1_sol3.pdf", classe: "success" }
+                    ]
+                  },
+                  // La resta de temes usen el format estàndard (1 apunts + 1 exercicis)
+                  { titol: "UD 2. Polinomis i fraccions algebraiques", fitxers: crearFitxersEstandard("1BATX_MACS", 2) },
+                  { titol: "UD 3. Equacions, inequacions i sistemes", fitxers: crearFitxersEstandard("1BATX_MACS", 3) },
+                  { titol: "UD 4. Successions i progressions", fitxers: crearFitxersEstandard("1BATX_MACS", 4) },
+                  { titol: "UD 5. Matemàtica financera", fitxers: crearFitxersEstandard("1BATX_MACS", 5) },
+                  { titol: "UD 6. Introducció a les funcions i funcions elementals", fitxers: crearFitxersEstandard("1BATX_MACS", 6) },
+                  { titol: "UD 7. Límits i continuïtat", fitxers: crearFitxersEstandard("1BATX_MACS", 7) },
+                  { titol: "UD 8. Derivades", fitxers: crearFitxersEstandard("1BATX_MACS", 8) },
+                  { titol: "UD 9. Conceptes d’estadística i probabilitat", fitxers: crearFitxersEstandard("1BATX_MACS", 9) }
                 ]
               },
               {
                 id: "2BATX_MACS",
                 nom: "2n Batxillerat MACS",
                 temes: [
-                  "1. Matrius i operacions",
-                  "2. Determinants i inversió de matrius",
-                  "3. Sistemes d'equacions i mètode de Gauss",
-                  "4. Programació lineal bidimensional",
-                  "5. Límits de funcions i continuïtat",
-                  "6. Derivades, regles i aplicacions",
-                  "7. Estudi global i optimització de funcions",
-                  "8. Integració i càlcul d'àrees planes",
-                  "9. Probabilitat i teoremes fonamentals",
-                  "10. Inferencia estadística, mostratge i intervals"
+                  { titol: "1. Matrius i operacions", fitxers: crearFitxersEstandard("2BATX_MACS", 1) },
+                  { titol: "2. Determinants i inversió de matrius", fitxers: crearFitxersEstandard("2BATX_MACS", 2) },
+                  { titol: "3. Sistemes d'equacions i mètode de Gauss", fitxers: crearFitxersEstandard("2BATX_MACS", 3) },
+                  { titol: "4. Programació lineal bidimensional", fitxers: crearFitxersEstandard("2BATX_MACS", 4) },
+                  { titol: "5. Límits de funcions i continuïtat", fitxers: crearFitxersEstandard("2BATX_MACS", 5) },
+                  { titol: "6. Derivades, regles i aplicacions", fitxers: crearFitxersEstandard("2BATX_MACS", 6) },
+                  { titol: "7. Estudi global i optimització de funcions", fitxers: crearFitxersEstandard("2BATX_MACS", 7) },
+                  { titol: "8. Integració i càlcul d'àrees planes", fitxers: crearFitxersEstandard("2BATX_MACS", 8) },
+                  { titol: "9. Probabilitat i teoremes fonamentals", fitxers: crearFitxersEstandard("2BATX_MACS", 9) },
+                  { titol: "10. Inferencia estadística, mostratge i intervals", fitxers: crearFitxersEstandard("2BATX_MACS", 10) }
                 ]
               }
             ]
@@ -453,32 +476,31 @@
               {
                 id: "1BATX_CCTT",
                 nom: "1r Batxillerat CCTT",
-                iniciaZero: true,
                 temes: [
-                  "Tema 0 - Introducció",
-                  "Tema 1 - Nombres reals",
-                  "Tema 2 - Trigonometria",
-                  "Tema 3 - Nombres complexos",
-                  "Tema 4 - Geometria del pla",
-                  "Tema 5 - Polinomis",
-                  "Tema 6 - Equacions, Inequacions i Sistemes",
-                  "Tema 7 - Funcions",
-                  "Tema 8 - Successions i Límits",
-                  "Tema 9 - Introducció a les derivades"
+                  { titol: "Tema 0 - Introducció", fitxers: crearFitxersEstandard("1BATX_CCTT", 0) },
+                  { titol: "Tema 1 - Nombres reals", fitxers: crearFitxersEstandard("1BATX_CCTT", 1) },
+                  { titol: "Tema 2 - Trigonometria", fitxers: crearFitxersEstandard("1BATX_CCTT", 2) },
+                  { titol: "Tema 3 - Nombres complexos", fitxers: crearFitxersEstandard("1BATX_CCTT", 3) },
+                  { titol: "Tema 4 - Geometria del pla", fitxers: crearFitxersEstandard("1BATX_CCTT", 4) },
+                  { titol: "Tema 5 - Polinomis", fitxers: crearFitxersEstandard("1BATX_CCTT", 5) },
+                  { titol: "Tema 6 - Equacions, Inequacions i Sistemes", fitxers: crearFitxersEstandard("1BATX_CCTT", 6) },
+                  { titol: "Tema 7 - Funcions", fitxers: crearFitxersEstandard("1BATX_CCTT", 7) },
+                  { titol: "Tema 8 - Successions i Límits", fitxers: crearFitxersEstandard("1BATX_CCTT", 8) },
+                  { titol: "Tema 9 - Introducció a les derivades", fitxers: crearFitxersEstandard("1BATX_CCTT", 9) }
                 ]
               },
               {
                 id: "2BATX_CCTT",
                 nom: "2n Batxillerat CCTT",
                 temes: [
-                  "Tema 1: Límits i continuïtat",
-                  "Tema 2: Derivades i aplicacions",
-                  "Tema 3: Estudi de funcions",
-                  "Tema 4: Integrals i càlcul d'àrees",
-                  "Tema 5: Matrius i determinants",
-                  "Tema 6: Sistemes d'equacions lineals",
-                  "Tema 7: Geometria en l'espai 3D",
-                  "Tema 8: Probabilitat i Distribucions"
+                  { titol: "Tema 1: Límits i continuïtat", fitxers: crearFitxersEstandard("2BATX_CCTT", 1) },
+                  { titol: "Tema 2: Derivades i aplicacions", fitxers: crearFitxersEstandard("2BATX_CCTT", 2) },
+                  { titol: "Tema 3: Estudi de funcions", fitxers: crearFitxersEstandard("2BATX_CCTT", 3) },
+                  { titol: "Tema 4: Integrals i càlcul d'àrees", fitxers: crearFitxersEstandard("2BATX_CCTT", 4) },
+                  { titol: "Tema 5: Matrius i determinants", fitxers: crearFitxersEstandard("2BATX_CCTT", 5) },
+                  { titol: "Tema 6: Sistemes d'equacions lineals", fitxers: crearFitxersEstandard("2BATX_CCTT", 6) },
+                  { titol: "Tema 7: Geometria en l'espai 3D", fitxers: crearFitxersEstandard("2BATX_CCTT", 7) },
+                  { titol: "Tema 8: Probabilitat i Distribucions", fitxers: crearFitxersEstandard("2BATX_CCTT", 8) }
                 ]
               }
             ]
@@ -498,22 +520,22 @@
                 id: "PAU",
                 nom: "Proves PAU",
                 temes: [
-                  "1. Bloc Àlgebra Lineal (Matrius i Sistemes)",
-                  "2. Bloc Geometria 3D (Vectors, Línies i Plans)",
-                  "3. Bloc Anàlisi Matemàtica (Funcions, Derivades i Integrals)",
-                  "4. Bloc Probabilitat i Estadística",
-                  "5. Recopilació de Proves PAU dels últims anys"
+                  { titol: "1. Bloc Àlgebra Lineal (Matrius i Sistemes)", fitxers: crearFitxersEstandard("PAU", 1) },
+                  { titol: "2. Bloc Geometria 3D (Vectors, Línies i Plans)", fitxers: crearFitxersEstandard("PAU", 2) },
+                  { titol: "3. Bloc Anàlisi Matemàtica (Funcions, Derivades i Integrals)", fitxers: crearFitxersEstandard("PAU", 3) },
+                  { titol: "4. Bloc Probabilitat i Estadística", fitxers: crearFitxersEstandard("PAU", 4) },
+                  { titol: "5. Recopilació de Proves PAU dels últims anys", fitxers: crearFitxersEstandard("PAU", 5) }
                 ]
               },
               {
                 id: "PAP",
                 nom: "Proves PAP (Competència Matemàtica)",
                 temes: [
-                  "1. Nombres, proporcions i percentatges",
-                  "2. Mesura, propietats i geometria plana",
-                  "3. Resolució de problemes de la vida quotidiana",
-                  "4. Interpretació de taules, gràfics i dades",
-                  "5. Simulacres d'examen oficials resolts"
+                  { titol: "1. Nombres, proporcions i percentatges", fitxers: crearFitxersEstandard("PAP", 1) },
+                  { titol: "2. Mesura, propietats i geometria plana", fitxers: crearFitxersEstandard("PAP", 2) },
+                  { titol: "3. Resolució de problemes de la vida quotidiana", fitxers: crearFitxersEstandard("PAP", 3) },
+                  { titol: "4. Interpretació de taules, gràfics i dades", fitxers: crearFitxersEstandard("PAP", 4) },
+                  { titol: "5. Simulacres d'examen oficials resolts", fitxers: crearFitxersEstandard("PAP", 5) }
                 ]
               }
             ]
@@ -523,7 +545,7 @@
     ];
 
     // =================================================================
-    // 3. LÒGICA DE NAVEGACIÓ I RENDERITZAT
+    // LÒGICA DE NAVEGACIÓ I RENDERITZAT
     // =================================================================
     let nivellSeleccionat = null;
     let cursSeleccionat = null;
@@ -591,22 +613,19 @@
 
       let html = `<div class="topics-list">`;
 
-      cursSeleccionat.temes.forEach((nomTema, idx) => {
-        const numTema = cursSeleccionat.iniciaZero ? idx : idx + 1;
-
+      cursSeleccionat.temes.forEach((tema) => {
         html += `
           <div class="topic-card">
-            <span class="topic-title">${nomTema}</span>
+            <span class="topic-title">${tema.titol}</span>
             <div class="buttons-group">
         `;
 
-        botonsPerTema.forEach(boto => {
-          const rutaPDF = `${cursSeleccionat.id}/Tema${numTema}_${boto.sufix}.pdf`;
+        tema.fitxers.forEach(fitxer => {
           html += `
-            <a class="btn-link ${boto.classe}" 
-               href="${rutaPDF}" 
-               onclick="obrirPDF(event, '${rutaPDF}')">
-              ${boto.etiqueta}
+            <a class="btn-link ${fitxer.classe}" 
+               href="${fitxer.url}" 
+               onclick="obrirPDF(event, '${fitxer.url}')">
+              ${fitxer.nom}
             </a>
           `;
         });
