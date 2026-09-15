@@ -198,7 +198,7 @@
       width: 100%;
     }
 
-    /* Contenidor de parelles verticals (Exercici a dalt, Solució a baix) */
+    /* Parelles verticals per alineació d'exercicis i solucions */
     .item-pair {
       display: flex;
       flex-direction: column;
@@ -288,78 +288,74 @@
 
   <script>
     // =================================================================
-    // COMPROVACIÓ I CERCA DE FITXERS PDF I TÍTOLS PERSONALITZATS
+    // CERCA I PARSEIG D'ARXIUS A TRAVÉS DE FILES.JSON
     // =================================================================
-    async function comprovarFitxer(url) {
+    const cacheLlistaFitxers = {};
+
+    async function obtenirLlistaFitxersCurs(cursId) {
+      if (cacheLlistaFitxers[cursId]) return cacheLlistaFitxers[cursId];
       try {
-        const res = await fetch(url, { method: 'HEAD' });
-        return res.ok;
+        const res = await fetch(`${cursId}/files.json`);
+        if (res.ok) {
+          const data = await res.json();
+          cacheLlistaFitxers[cursId] = data;
+          return data;
+        }
       } catch (e) {
-        return false;
+        console.error("No s'ha pogut carregar el JSON de fitxers", e);
       }
-    }
-
-    // Cercador de nom personalitzat o per defecte (Opció A: cerca p.ex. Tema2_ex1_Derivades.pdf)
-    async function trobarNomIBoto(cursId, numTema, prefix, numPart, nomPerDefecte) {
-      // 1. Primer comprovem el nom bàsic (ex: Tema2_ex1.pdf)
-      const urlStandard = `${cursId}/Tema${numTema}_${prefix}${numPart}.pdf`;
-      if (await comprovarFitxer(urlStandard)) {
-        return { trobat: true, url: urlStandard, nom: nomPerDefecte };
-      }
-
-      // 2. Si no el troba, cerquem si existeix una versió amb títol (ex: Tema2_ex1_Derivades.pdf)
-      // Comprovarem si existeix algun PDF que comenci per aquest prefix
-      // Nota: Com que no tenim un servidor de directori, es pot intentar amb un patró o simplement mantenint l'estàndard
-      return { trobat: false };
+      return [];
     }
 
     async function carregarBotonsTema(cursId, numTema, containerId) {
       const container = document.getElementById(containerId);
+      const fitxers = await obtenirLlistaFitxersCurs(cursId);
       let htmlBotons = '';
 
+      const prefixTema = `Tema${numTema}_`;
+      const fitxersTema = fitxers.filter(f => f.startsWith(prefixTema));
+
       // 1. APUNTS
-      const urlApunts = `${cursId}/Tema${numTema}_apunts.pdf`;
-      if (await comprovarFitxer(urlApunts)) {
+      const pdfApunts = fitxersTema.find(f => f === `${prefixTema}apunts.pdf` || f === `${prefixTema}main.pdf`);
+      if (pdfApunts) {
         htmlBotons += `
           <div class="item-pair">
-            <a class="btn-link primary" href="${urlApunts}" target="_blank">📄 Apunts</a>
+            <a class="btn-link primary" href="${cursId}/${pdfApunts}" target="_blank">📄 Apunts</a>
           </div>`;
       }
 
       // 2. EXERCICIS I SOLUCIONS ÚNICS
-      const urlExUnic = `${cursId}/Tema${numTema}_exercicis.pdf`;
-      const urlSolUnica = `${cursId}/Tema${numTema}_solucions.pdf`;
+      const pdfExUnic = fitxersTema.find(f => f === `${prefixTema}exercicis.pdf`);
+      const pdfSolUnic = fitxersTema.find(f => f === `${prefixTema}solucions.pdf`);
 
-      if (await comprovarFitxer(urlExUnic)) {
-        const teSol = await comprovarFitxer(urlSolUnica);
+      if (pdfExUnic) {
         htmlBotons += `
           <div class="item-pair">
-            <a class="btn-link secondary" href="${urlExUnic}" target="_blank">✏️ Exercicis</a>
-            ${teSol ? `<a class="btn-link success" href="${urlSolUnica}" target="_blank">✅ Solucions</a>` : ''}
+            <a class="btn-link secondary" href="${cursId}/${pdfExUnic}" target="_blank">✏️ Exercicis</a>
+            ${pdfSolUnic ? `<a class="btn-link success" href="${cursId}/${pdfSolUnic}" target="_blank">✅ Solucions</a>` : ''}
           </div>`;
       }
 
-      // 3. EXERCICIS I SOLUCIONS PER PARTS (Ex 1 + Sol 1, Ex 2 + Sol 2...)
+      // 3. EXERCICIS I SOLUCIONS PER PARTS (ex1, ex2, ex1_Intervals, etc.)
       let i = 1;
       while (i <= 10) {
-        let urlEx = `${cursId}/Tema${numTema}_ex${i}.pdf`;
-        let urlSol = `${cursId}/Tema${numTema}_sol${i}.pdf`;
-        let nomEx = `Part ${i}`;
-        let nomSol = `Part ${i}`;
+        const pdfEx = fitxersTema.find(f => f.startsWith(`${prefixTema}ex${i}.pdf`) || f.startsWith(`${prefixTema}ex${i}_`));
+        const pdfSol = fitxersTema.find(f => f.startsWith(`${prefixTema}sol${i}.pdf`) || f.startsWith(`${prefixTema}sol${i}_`));
 
-        let teEx = await comprovarFitxer(urlEx);
-        let teSol = await comprovarFitxer(urlSol);
+        if (pdfEx || pdfSol) {
+          // Extreure el títol del fitxer si en té (ex: Tema1_ex1_Intervals.pdf -> Intervals)
+          let nomEx = `Part ${i}`;
+          if (pdfEx && pdfEx.includes(`_ex${i}_`)) {
+            const rawName = pdfEx.split(`_ex${i}_`)[1].replace('.pdf', '');
+            nomEx = rawName.replace(/[-_]/g, ' ');
+          } else if (pdfSol && pdfSol.includes(`_sol${i}_`)) {
+            const rawName = pdfSol.split(`_sol${i}_`)[1].replace('.pdf', '');
+            nomEx = rawName.replace(/[-_]/g, ' ');
+          }
 
-        // Opció A: Si el fitxer no existeix com a "ex1.pdf", cerquem un fitxer que inclogui el nom del tema
-        // intentant carregar el nom si s'ha mantingut la convenció amb nom
-        if (!teEx) {
-          // Provo de veure si existeix un format alternatiu
-        }
-
-        if (teEx || teSol) {
           htmlBotons += `<div class="item-pair">`;
-          if (teEx) htmlBotons += `<a class="btn-link secondary" href="${urlEx}" target="_blank">✏️ Ex. ${nomEx}</a>`;
-          if (teSol) htmlBotons += `<a class="btn-link success" href="${urlSol}" target="_blank">✅ Sol. ${nomSol}</a>`;
+          if (pdfEx) htmlBotons += `<a class="btn-link secondary" href="${cursId}/${pdfEx}" target="_blank">✏️ Ex. ${nomEx}</a>`;
+          if (pdfSol) htmlBotons += `<a class="btn-link success" href="${cursId}/${pdfSol}" target="_blank">✅ Sol. ${nomEx}</a>`;
           htmlBotons += `</div>`;
           i++;
         } else {
@@ -574,7 +570,6 @@
       html += `</div>`;
       appContainer.innerHTML = html;
 
-      // Executem la comprovació dels fitxers
       cursSeleccionat.temes.forEach((tema) => {
         const containerId = `btn-group-${cursSeleccionat.id}-${tema.num}`;
         carregarBotonsTema(cursSeleccionat.id, tema.num, containerId);
@@ -593,3 +588,4 @@
   </script>
 </body>
 </html>
+

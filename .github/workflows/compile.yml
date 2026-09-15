@@ -21,60 +21,69 @@ jobs:
         run: |
           mkdir -p public/1BATX_MACS public/1BATX_CCTT public/2BATX_MACS public/2BATX_CCTT public/PAU public/PAP
 
-      # -----------------------------------------------------------------
-      # COMPILACIÓ DINÀMICA DE TOTS ELS FITXERS LATEX EXISTENTS
-      # -----------------------------------------------------------------
-      - name: Compilar tots els fitxers main.tex i exercicis.tex
+      # COMPILACIÓ DE TOTS ELS FITXERS .TEX
+      - name: Compilar TOTS els fitxers .tex
         run: |
           sudo apt-get update
           sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-lang-spanish texlive-fonts-recommended
 
           for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
-            # Bucle ajustat de 0 a 10 per incloure el Tema 0
             for i in {0..10}; do
               dir="$curs/Tema$i"
               if [ -d "$dir" ]; then
-                echo "🔍 Revisant directori: $dir"
-                
-                # Compilar apunts (main.tex)
-                if [ -f "$dir/main.tex" ]; then
-                  echo "⚙️ Compilant $dir/main.tex..."
-                  pdflatex -interaction=nonstopmode -output-directory="$dir" "$dir/main.tex" || true
-                fi
-
-                # Compilar exercicis (exercicis.tex)
-                if [ -f "$dir/exercicis.tex" ]; then
-                  echo "⚙️ Compilant $dir/exercicis.tex..."
-                  pdflatex -interaction=nonstopmode -output-directory="$dir" "$dir/exercicis.tex" || true
-                fi
+                for tex_file in "$dir"/*.tex; do
+                  if [ -f "$tex_file" ]; then
+                    echo "⚙️ Compilant $tex_file..."
+                    pdflatex -interaction=nonstopmode -output-directory="$dir" "$tex_file" || true
+                  fi
+                done
               fi
             done
           done
 
-      # -----------------------------------------------------------------
-      # ORGANITZAR PDFS PER A GITHUB PAGES
-      # -----------------------------------------------------------------
-      - name: Organitzar PDFs i copiar a public
+      # ORGANITZAR PDFs I GENERAR EL MANIFEST JSON
+      - name: Organitzar PDFs i crear manifest de fitxers
         run: |
           for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
-            # 1. Copiar PDFs pujats directament a l'arrel de la carpeta del curs (ex: 1BATX_CCTT/Tema0_apunts.pdf)
+            # Copiar PDFs que es pugin directament a l'arrel del curs
             cp $curs/*.pdf public/$curs/ 2>/dev/null || true
 
-            # 2. Copiar PDFs compilats des de subcarpetes (ex: 1BATX_CCTT/Tema0/main.pdf)
             for i in {0..10}; do
-              if [ -f "$curs/Tema$i/main.pdf" ]; then
-                cp "$curs/Tema$i/main.pdf" "public/$curs/Tema${i}_apunts.pdf"
-                echo "✅ Copiat apunts: public/$curs/Tema${i}_apunts.pdf"
-              fi
-              
-              if [ -f "$curs/Tema$i/exercicis.pdf" ]; then
-                cp "$curs/Tema$i/exercicis.pdf" "public/$curs/Tema${i}_exercicis.pdf"
-                echo "✅ Copiat exercicis: public/$curs/Tema${i}_exercicis.pdf"
+              dir="$curs/Tema$i"
+              if [ -d "$dir" ]; then
+                # 1. Copiar Apunts principals
+                [ -f "$dir/main.pdf" ] && cp "$dir/main.pdf" "public/$curs/Tema${i}_apunts.pdf"
+                [ -f "$dir/apunts.pdf" ] && cp "$dir/apunts.pdf" "public/$curs/Tema${i}_apunts.pdf"
+                
+                # 2. Copiar Exercicis / Solucions generals
+                [ -f "$dir/exercicis.pdf" ] && cp "$dir/exercicis.pdf" "public/$curs/Tema${i}_exercicis.pdf"
+                [ -f "$dir/solucions.pdf" ] && cp "$dir/solucions.pdf" "public/$curs/Tema${i}_solucions.pdf"
+
+                # 3. Copiar qualsevol ex*.pdf o sol*.pdf amb títols personalitzats
+                for f in "$dir"/ex*.pdf "$dir"/sol*.pdf; do
+                  if [ -f "$f" ]; then
+                    fname=$(basename "$f")
+                    cp "$f" "public/$curs/Tema${i}_${fname}"
+                  fi
+                done
               fi
             done
+
+            # Generar el JSON directament amb Bash (sense dependre de scripts externs)
+            cd public/$curs
+            list=""
+            for f in *.pdf; do
+              if [ -f "$f" ]; then
+                list="$list\"$f\","
+              fi
+            done
+            # Treure l'última coma i tancar l'array JSON
+            list=${list%,}
+            echo "[$list]" > files.json
+            cd ../..
           done
           
-          # Copiar l'index.html principal
+          # Copiar el fitxer principal de la web
           cp index.html public/
 
       - name: Preparar artefacte
