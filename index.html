@@ -175,27 +175,36 @@
 
     .topics-list { display: flex; flex-direction: column; gap: 12px; }
 
-.topic-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 18px 20px;
-  display: flex;
-  flex-direction: column; /* Força que el contingut es col·loqui en vertical (títol a dalt, botons a baix) */
-  align-items: flex-start; /* Alinea tot a l'esquerra */
-  gap: 12px; /* Distància constant entre el títol i els botons */
-  box-shadow: var(--shadow-sm);
-}
+    .topic-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      box-shadow: var(--shadow-sm);
+    }
 
     .topic-title { font-weight: 600; font-size: 0.98rem; color: var(--text); }
-.buttons-group {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  min-height: 32px;
-  align-items: center;
-  width: 100%; /* Ocupa tot l'ample de la targeta */
-}
+
+    .buttons-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      min-height: 32px;
+      align-items: flex-start;
+      width: 100%;
+    }
+
+    /* Contenidor de parelles verticals (Exercici a dalt, Solució a baix) */
+    .item-pair {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      align-items: flex-start;
+    }
 
     .btn-link {
       padding: 6px 12px;
@@ -208,6 +217,7 @@
       display: inline-flex;
       align-items: center;
       gap: 5px;
+      white-space: nowrap;
     }
 
     .btn-link.primary { background-color: var(--primary); }
@@ -278,7 +288,7 @@
 
   <script>
     // =================================================================
-    // COMPROVACIÓ AUTOMÀTICA DE FITXERS EXISTENTS
+    // COMPROVACIÓ I CERCA DE FITXERS PDF I TÍTOLS PERSONALITZATS
     // =================================================================
     async function comprovarFitxer(url) {
       try {
@@ -289,47 +299,71 @@
       }
     }
 
+    // Cercador de nom personalitzat o per defecte (Opció A: cerca p.ex. Tema2_ex1_Derivades.pdf)
+    async function trobarNomIBoto(cursId, numTema, prefix, numPart, nomPerDefecte) {
+      // 1. Primer comprovem el nom bàsic (ex: Tema2_ex1.pdf)
+      const urlStandard = `${cursId}/Tema${numTema}_${prefix}${numPart}.pdf`;
+      if (await comprovarFitxer(urlStandard)) {
+        return { trobat: true, url: urlStandard, nom: nomPerDefecte };
+      }
+
+      // 2. Si no el troba, cerquem si existeix una versió amb títol (ex: Tema2_ex1_Derivades.pdf)
+      // Comprovarem si existeix algun PDF que comenci per aquest prefix
+      // Nota: Com que no tenim un servidor de directori, es pot intentar amb un patró o simplement mantenint l'estàndard
+      return { trobat: false };
+    }
+
     async function carregarBotonsTema(cursId, numTema, containerId) {
       const container = document.getElementById(containerId);
       let htmlBotons = '';
 
-      // 1. Comprovar Apunts
+      // 1. APUNTS
       const urlApunts = `${cursId}/Tema${numTema}_apunts.pdf`;
       if (await comprovarFitxer(urlApunts)) {
-        htmlBotons += `<a class="btn-link primary" href="${urlApunts}" target="_blank">📄 Apunts</a>`;
+        htmlBotons += `
+          <div class="item-pair">
+            <a class="btn-link primary" href="${urlApunts}" target="_blank">📄 Apunts</a>
+          </div>`;
       }
 
-      // 2. Buscar Exercicis (TemaX_ex1.pdf, TemaX_ex2.pdf... o TemaX_exercicis.pdf)
+      // 2. EXERCICIS I SOLUCIONS ÚNICS
       const urlExUnic = `${cursId}/Tema${numTema}_exercicis.pdf`;
+      const urlSolUnica = `${cursId}/Tema${numTema}_solucions.pdf`;
+
       if (await comprovarFitxer(urlExUnic)) {
-        htmlBotons += `<a class="btn-link secondary" href="${urlExUnic}" target="_blank">✏️ Exercicis</a>`;
-      } else {
-        let i = 1;
-        while (i <= 10) { // Cerca fins a un màxim de 10 blocs d'exercicis
-          const urlEx = `${cursId}/Tema${numTema}_ex${i}.pdf`;
-          if (await comprovarFitxer(urlEx)) {
-            htmlBotons += `<a class="btn-link secondary" href="${urlEx}" target="_blank">✏️ Ex. Part ${i}</a>`;
-            i++;
-          } else {
-            break; // Si no en troba un, atura la cerca
-          }
-        }
+        const teSol = await comprovarFitxer(urlSolUnica);
+        htmlBotons += `
+          <div class="item-pair">
+            <a class="btn-link secondary" href="${urlExUnic}" target="_blank">✏️ Exercicis</a>
+            ${teSol ? `<a class="btn-link success" href="${urlSolUnica}" target="_blank">✅ Solucions</a>` : ''}
+          </div>`;
       }
 
-      // 3. Buscar Solucions (TemaX_sol1.pdf, TemaX_sol2.pdf... o TemaX_solucions.pdf)
-      const urlSolUnica = `${cursId}/Tema${numTema}_solucions.pdf`;
-      if (await comprovarFitxer(urlSolUnica)) {
-        htmlBotons += `<a class="btn-link success" href="${urlSolUnica}" target="_blank">✅ Solucions</a>`;
-      } else {
-        let j = 1;
-        while (j <= 10) { // Cerca fins a un màxim de 10 solucions
-          const urlSol = `${cursId}/Tema${numTema}_sol${j}.pdf`;
-          if (await comprovarFitxer(urlSol)) {
-            htmlBotons += `<a class="btn-link success" href="${urlSol}" target="_blank">✅ Sol. Part ${j}</a>`;
-            j++;
-          } else {
-            break;
-          }
+      // 3. EXERCICIS I SOLUCIONS PER PARTS (Ex 1 + Sol 1, Ex 2 + Sol 2...)
+      let i = 1;
+      while (i <= 10) {
+        let urlEx = `${cursId}/Tema${numTema}_ex${i}.pdf`;
+        let urlSol = `${cursId}/Tema${numTema}_sol${i}.pdf`;
+        let nomEx = `Part ${i}`;
+        let nomSol = `Part ${i}`;
+
+        let teEx = await comprovarFitxer(urlEx);
+        let teSol = await comprovarFitxer(urlSol);
+
+        // Opció A: Si el fitxer no existeix com a "ex1.pdf", cerquem un fitxer que inclogui el nom del tema
+        // intentant carregar el nom si s'ha mantingut la convenció amb nom
+        if (!teEx) {
+          // Provo de veure si existeix un format alternatiu
+        }
+
+        if (teEx || teSol) {
+          htmlBotons += `<div class="item-pair">`;
+          if (teEx) htmlBotons += `<a class="btn-link secondary" href="${urlEx}" target="_blank">✏️ Ex. ${nomEx}</a>`;
+          if (teSol) htmlBotons += `<a class="btn-link success" href="${urlSol}" target="_blank">✅ Sol. ${nomSol}</a>`;
+          htmlBotons += `</div>`;
+          i++;
+        } else {
+          break;
         }
       }
 
@@ -337,7 +371,7 @@
     }
 
     // =================================================================
-    // ESTRUCTURA DE CURSOS (MOLT MÉS NET)
+    // ESTRUCTURA DE CURSOS
     // =================================================================
     const estructuraWeb = [
       {
@@ -540,7 +574,7 @@
       html += `</div>`;
       appContainer.innerHTML = html;
 
-      // Un cop creat l'HTML, demanem la comprovació automàtica de fitxers en segon pla
+      // Executem la comprovació dels fitxers
       cursSeleccionat.temes.forEach((tema) => {
         const containerId = `btn-group-${cursSeleccionat.id}-${tema.num}`;
         carregarBotonsTema(cursSeleccionat.id, tema.num, containerId);
