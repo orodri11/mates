@@ -38,7 +38,7 @@ jobs:
               [ -d "$tema_dir" ] || continue
               for tex in "$tema_dir"/*.tex; do
                 [ -f "$tex" ] || continue
-                echo "⚙️ Compilant $tex"
+                echo "Compilant $tex"
                 pdflatex -interaction=nonstopmode -output-directory="$tema_dir" "$tex" > /dev/null 2>&1 || true
                 pdflatex -interaction=nonstopmode -output-directory="$tema_dir" "$tex" > /dev/null 2>&1 || true
               done
@@ -48,28 +48,29 @@ jobs:
       - name: Organitzar PDFs a public/
         run: |
           mkdir -p public
-          
+
           for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
             [ -d "$curs" ] || continue
             mkdir -p "public/$curs"
-            
-            # PDFs solts a l'arrel del curs
+
             cp "$curs"/*.pdf "public/$curs/" 2>/dev/null || true
-            
+
             for tema_dir in "$curs"/Tema*; do
               [ -d "$tema_dir" ] || continue
               tema_num=$(basename "$tema_dir" | sed 's/Tema//')
-              
-              # main.pdf → TemaN_apunts.pdf
-              [ -f "$tema_dir/main.pdf" ] && cp "$tema_dir/main.pdf" "public/$curs/Tema${tema_num}_apunts.pdf"
-              
-              # exercicis.pdf → TemaN_exercicis.pdf
-              [ -f "$tema_dir/exercicis.pdf" ] && cp "$tema_dir/exercicis.pdf" "public/$curs/Tema${tema_num}_exercicis.pdf"
-              
-              # solucions.pdf → TemaN_solucions.pdf
-              [ -f "$tema_dir/solucions.pdf" ] && cp "$tema_dir/solucions.pdf" "public/$curs/Tema${tema_num}_solucions.pdf"
-              
-              # ex*.pdf i sol*.pdf → TemaN_ex*.pdf, TemaN_sol*.pdf
+
+              if [ -f "$tema_dir/main.pdf" ]; then
+                cp "$tema_dir/main.pdf" "public/$curs/Tema${tema_num}_apunts.pdf"
+              fi
+
+              if [ -f "$tema_dir/exercicis.pdf" ]; then
+                cp "$tema_dir/exercicis.pdf" "public/$curs/Tema${tema_num}_exercicis.pdf"
+              fi
+
+              if [ -f "$tema_dir/solucions.pdf" ]; then
+                cp "$tema_dir/solucions.pdf" "public/$curs/Tema${tema_num}_solucions.pdf"
+              fi
+
               for f in "$tema_dir"/ex*.pdf "$tema_dir"/sol*.pdf; do
                 [ -f "$f" ] || continue
                 fname=$(basename "$f")
@@ -85,12 +86,13 @@ jobs:
             cd "public/$curs"
             files=$(ls *.pdf 2>/dev/null | sed 's/.*/"&"/' | paste -sd ',' -)
             echo "[$files]" > files.json
-            echo "📝 $curs → $files"
+            echo "Generat $curs/files.json"
             cd - > /dev/null
           done
 
       - name: Copiar index.html
-        run: cp index.html public/ 2>/dev/null || echo "Avís: no hi ha index.html a l'arrel"
+        run: |
+          cp index.html public/ 2>/dev/null || echo "Avis: no hi ha index.html a l'arrel"
 
       - name: Pujar artefacte
         uses: actions/upload-pages-artifact@v3
