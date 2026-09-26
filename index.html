@@ -388,12 +388,38 @@
     async function carregarContingutTema(cursId, numTema, containerId) {
       const container = document.getElementById(containerId);
       const fitxers = await obtenirLlistaFitxersCurs(cursId);
-      const prefixTema = `Tema${numTema}_`;
+
+      const esPAP = cursId === "PAP";
+      const prefixTema = esPAP ? `${numTema}_` : `Tema${numTema}_`;
       const fitxersTema = fitxers.filter(f => f.startsWith(prefixTema));
 
       let html = '';
 
-      // 1. APUNTS (a dalt, destacat)
+      // ==========================================================
+      // CAS PAP: només Ex i Sol per any
+      // ==========================================================
+      if (esPAP) {
+        const pdfEx = fitxersTema.find(f => f === `${prefixTema}ex.pdf`);
+        const pdfSol = fitxersTema.find(f => f === `${prefixTema}sol.pdf`);
+
+        if (pdfEx) {
+          html += `<div class="ex-sol-row">`;
+          html += `<a class="btn-link secondary" href="${cursId}/${pdfEx}" target="_blank">✏️ Examen</a>`;
+          html += pdfSol
+            ? `<a class="btn-link success" href="${cursId}/${pdfSol}" target="_blank">✅ Solucions</a>`
+            : `<span></span>`;
+          html += `</div>`;
+        }
+
+        container.innerHTML = html || `<span class="loading-text">Cap material disponible</span>`;
+        return;
+      }
+
+      // ==========================================================
+      // CAS NORMAL: Apunts + Exercicis + Solucions
+      // ==========================================================
+
+      // 1. APUNTS
       const pdfApunts = fitxersTema.find(f => f === `${prefixTema}apunts.pdf` || f === `${prefixTema}main.pdf`);
       if (pdfApunts) {
         html += `
@@ -402,7 +428,6 @@
           </div>`;
       }
 
-      // 2. EXERCICIS I SOLUCIONS
       html += `<div class="ex-sol-grid">`;
 
       // 2a. Exercicis/Solucions generals
@@ -561,11 +586,10 @@
                 id: "PAP",
                 nom: "Proves PAP (Competència Matemàtica)",
                 temes: [
-                  { num: 1, titol: "1. Nombres, proporcions i percentatges" },
-                  { num: 2, titol: "2. Mesura, propietats i geometria plana" },
-                  { num: 3, titol: "3. Resolució de problemes de la vida quotidiana" },
-                  { num: 4, titol: "4. Interpretació de taules, gràfics i dades" },
-                  { num: 5, titol: "5. Simulacres d'examen oficials resolts" }
+                  { num: 2026, titol: "PAP 2026" },
+                  { num: 2025, titol: "PAP 2025" },
+                  { num: 2024, titol: "PAP 2024" },
+                  { num: 2023, titol: "PAP 2023" }
                 ]
               }
             ]
@@ -621,7 +645,7 @@
           html += `
             <div class="nav-card" onclick="seleccionarCurs('${curs.id}')">
               <div class="nav-card-title">${curs.nom}</div>
-              <div class="nav-card-desc">${curs.temes.length} temes disponibles</div>
+              <div class="nav-card-desc">${curs.temes.length} ${curs.id === 'PAP' ? 'anys' : 'temes'} disponibles</div>
             </div>
           `;
         });
@@ -677,7 +701,6 @@
     // RASTRE DE NAVEGACIÓ (BREADCRUMB)
     // =================================================================
     function actualitzarBreadcrumb() {
-      // Si no hi ha res seleccionat, amaguem el breadcrumb
       if (!nivellSeleccionat) {
         breadcrumb.classList.add('hidden');
         breadcrumb.innerHTML = '';
@@ -688,10 +711,8 @@
 
       let html = '';
 
-      // 1. Inici (sempre clicable)
       html += `<span class="breadcrumb-item" onclick="mostrarNivells()">🏠 Inici</span>`;
 
-      // 2. Nivell
       html += `<span class="breadcrumb-sep">›</span>`;
       if (cursSeleccionat) {
         html += `<span class="breadcrumb-item" onclick="seleccionarNivell('${nivellSeleccionat.idNivell}')">${nivellSeleccionat.titolNivell}</span>`;
@@ -699,7 +720,6 @@
         html += `<span class="breadcrumb-item current">${nivellSeleccionat.titolNivell}</span>`;
       }
 
-      // 3. Curs
       if (cursSeleccionat) {
         html += `<span class="breadcrumb-sep">›</span>`;
         if (temaSeleccionat) {
@@ -709,7 +729,6 @@
         }
       }
 
-      // 4. Tema (només si està seleccionat)
       if (temaSeleccionat) {
         html += `<span class="breadcrumb-sep">›</span>`;
         html += `<span class="breadcrumb-item current">${temaSeleccionat.titol}</span>`;
