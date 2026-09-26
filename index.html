@@ -232,10 +232,10 @@
       transform: translateX(3px);
     }
 
-    /* GRAELLA DE TARGETES PETITES (per a PAP) */
+    /* GRAELLA DE TARGETES PETITES (per a PAP) — 3 columnes fixes */
     .anys-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
 
@@ -349,6 +349,7 @@
       h1 { font-size: 1.6rem; }
       .breadcrumb { font-size: 0.82rem; padding: 6px 10px; }
       .breadcrumb-item { padding: 3px 6px; }
+      .anys-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     .disclaimer-card {
@@ -662,8 +663,7 @@
                   { num: 2024, titol: "PAP 2024" },
                   { num: 2023, titol: "PAP 2023" },
                   { num: 2022, titol: "PAP 2022" },
-                  { num: 2021, titol: "PAP 2021" },
-                  { num: 2020, titol: "PAP 2020" }
+                  { num: 2021, titol: "PAP 2021" }
                 ]
               }
             ]
@@ -743,7 +743,6 @@
       const esPAP = cursSeleccionat.id === "PAP";
 
       if (esPAP) {
-        // Graella de targetes petites
         let html = `<div class="anys-grid">`;
         cursSeleccionat.temes.forEach(tema => {
           html += `
@@ -756,7 +755,6 @@
         html += `</div>`;
         appContainer.innerHTML = html;
       } else {
-        // Llista de targetes amples (com abans)
         let html = `<div class="topics-list">`;
         cursSeleccionat.temes.forEach(tema => {
           html += `
