@@ -77,12 +77,6 @@ jobs:
                   solucions)
                     cp "$f" "public/$curs/${prefix}_solucions.pdf"
                     ;;
-                  ex|ex_*)
-                    cp "$f" "public/$curs/${prefix}_ex.pdf"
-                    ;;
-                  sol|sol_*)
-                    cp "$f" "public/$curs/${prefix}_sol.pdf"
-                    ;;
                   *)
                     cp "$f" "public/$curs/${prefix}_${fname_lower}.pdf"
                     ;;
