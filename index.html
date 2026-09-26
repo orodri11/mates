@@ -454,6 +454,8 @@
           return (ordreConv[sa] || 99) - (ordreConv[sb] || 99);
         });
 
+        html += `<div class="ex-sol-grid">`;
+
         totsExs.forEach(pdfEx => {
           const sensePrefix = pdfEx.substring(prefixTema.length);
           const match = sensePrefix.match(/^ex_?(.*)\.pdf$/i);
@@ -477,6 +479,8 @@
             : `<span></span>`;
           html += `</div>`;
         });
+
+        html += `</div>`;
 
         container.innerHTML = html || `<span class="loading-text">Cap material disponible</span>`;
         return;
