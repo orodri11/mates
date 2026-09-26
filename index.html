@@ -81,36 +81,56 @@
       margin: -20px auto 25px auto;
       padding: 0 20px;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      gap: 15px;
       position: relative;
       z-index: 10;
     }
 
-    .navigation-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
-
-    .btn-back {
-      background: var(--card-bg);
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 8px 16px;
-      border-radius: 8px;
-      cursor: pointer;
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.92rem;
       font-weight: 600;
-      font-size: 0.88rem;
+      background: var(--card-bg);
+      padding: 8px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+      justify-content: center;
     }
 
-    .breadcrumb {
-      font-size: 0.95rem;
-      font-weight: 600;
+    .breadcrumb-item {
       color: var(--text-muted);
-      background: var(--card-bg);
-      padding: 8px 16px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 6px;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .breadcrumb-item:hover {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .breadcrumb-item.current {
+      color: var(--text);
+      cursor: default;
+    }
+
+    .breadcrumb-item.current:hover {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .breadcrumb-sep {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      opacity: 0.5;
+      user-select: none;
     }
 
     .container {
@@ -173,7 +193,6 @@
 
     .section-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-    /* LLISTA DE TEMES (nivell 2) */
     .topics-list { display: flex; flex-direction: column; gap: 10px; }
 
     .tema-card {
@@ -213,7 +232,6 @@
       transform: translateX(3px);
     }
 
-    /* DETALL DEL TEMA (nivell 3) */
     .tema-detail {
       background: var(--card-bg);
       border: 1px solid var(--border);
@@ -285,6 +303,8 @@
     @media (max-width: 500px) {
       .ex-sol-row { grid-template-columns: 1fr; }
       h1 { font-size: 1.6rem; }
+      .breadcrumb { font-size: 0.82rem; padding: 6px 10px; }
+      .breadcrumb-item { padding: 3px 6px; }
     }
 
     .disclaimer-card {
@@ -325,10 +345,7 @@
   </header>
 
   <div class="toolbar">
-    <div class="navigation-bar hidden" id="navBar">
-      <button class="btn-back" onclick="tornarEnrere()">← Tornar</button>
-      <span class="breadcrumb" id="breadcrumb"></span>
-    </div>
+    <nav class="breadcrumb hidden" id="breadcrumb"></nav>
   </div>
 
   <main class="container">
@@ -388,7 +405,7 @@
       // 2. EXERCICIS I SOLUCIONS
       html += `<div class="ex-sol-grid">`;
 
-      // 2a. Exercicis/Solucions generals (sense número)
+      // 2a. Exercicis/Solucions generals
       const pdfExUnic = fitxersTema.find(f => f === `${prefixTema}exercicis.pdf`);
       const pdfSolUnic = fitxersTema.find(f => f === `${prefixTema}solucions.pdf`);
       if (pdfExUnic) {
@@ -400,7 +417,7 @@
         html += `</div>`;
       }
 
-      // 2b. Exercicis numerats ex1, ex2, ex3... (amb la seva solució a la dreta)
+      // 2b. Exercicis numerats
       const totsExs = fitxersTema
         .filter(f => /^Tema\d+_ex\d+(?:_|\.)/i.test(f))
         .sort((a, b) => {
@@ -431,7 +448,6 @@
 
       html += `</div>`;
 
-      // Si no hi ha res de res
       const teContingut = pdfApunts || pdfExUnic || totsExs.length > 0;
       container.innerHTML = teContingut
         ? html
@@ -566,14 +582,13 @@
     let temaSeleccionat = null;
 
     const appContainer = document.getElementById('app');
-    const navBar = document.getElementById('navBar');
     const breadcrumb = document.getElementById('breadcrumb');
 
     function mostrarNivells() {
       nivellSeleccionat = null;
       cursSeleccionat = null;
       temaSeleccionat = null;
-      navBar.classList.add('hidden');
+      actualitzarBreadcrumb();
 
       let html = `<div class="cards-grid">`;
       estructuraWeb.forEach(n => {
@@ -594,9 +609,7 @@
       nivellSeleccionat = estructuraWeb.find(n => n.idNivell === idNivell);
       cursSeleccionat = null;
       temaSeleccionat = null;
-
-      navBar.classList.remove('hidden');
-      breadcrumb.innerText = nivellSeleccionat.titolNivell;
+      actualitzarBreadcrumb();
 
       let html = '';
       nivellSeleccionat.subseccions.forEach(sub => {
@@ -627,7 +640,7 @@
 
       cursSeleccionat = trobat;
       temaSeleccionat = null;
-      breadcrumb.innerText = `${nivellSeleccionat.titolNivell} > ${cursSeleccionat.nom}`;
+      actualitzarBreadcrumb();
 
       let html = `<div class="topics-list">`;
       cursSeleccionat.temes.forEach(tema => {
@@ -646,7 +659,7 @@
     function seleccionarTema(numTema) {
       const tema = cursSeleccionat.temes.find(t => t.num === numTema);
       temaSeleccionat = tema;
-      breadcrumb.innerText = `${nivellSeleccionat.titolNivell} > ${cursSeleccionat.nom} > ${tema.titol}`;
+      actualitzarBreadcrumb();
 
       appContainer.innerHTML = `
         <div class="tema-detail">
@@ -660,14 +673,49 @@
       carregarContingutTema(cursSeleccionat.id, tema.num, 'tema-contingut');
     }
 
-    function tornarEnrere() {
-      if (temaSeleccionat) {
-        seleccionarCurs(cursSeleccionat.id);
-      } else if (cursSeleccionat) {
-        seleccionarNivell(nivellSeleccionat.idNivell);
-      } else if (nivellSeleccionat) {
-        mostrarNivells();
+    // =================================================================
+    // RASTRE DE NAVEGACIÓ (BREADCRUMB)
+    // =================================================================
+    function actualitzarBreadcrumb() {
+      // Si no hi ha res seleccionat, amaguem el breadcrumb
+      if (!nivellSeleccionat) {
+        breadcrumb.classList.add('hidden');
+        breadcrumb.innerHTML = '';
+        return;
       }
+
+      breadcrumb.classList.remove('hidden');
+
+      let html = '';
+
+      // 1. Inici (sempre clicable)
+      html += `<span class="breadcrumb-item" onclick="mostrarNivells()">🏠 Inici</span>`;
+
+      // 2. Nivell
+      html += `<span class="breadcrumb-sep">›</span>`;
+      if (cursSeleccionat) {
+        html += `<span class="breadcrumb-item" onclick="seleccionarNivell('${nivellSeleccionat.idNivell}')">${nivellSeleccionat.titolNivell}</span>`;
+      } else {
+        html += `<span class="breadcrumb-item current">${nivellSeleccionat.titolNivell}</span>`;
+      }
+
+      // 3. Curs
+      if (cursSeleccionat) {
+        html += `<span class="breadcrumb-sep">›</span>`;
+        if (temaSeleccionat) {
+          html += `<span class="breadcrumb-item" onclick="seleccionarCurs('${cursSeleccionat.id}')">${cursSeleccionat.nom}</span>`;
+        } else {
+          html += `<span class="breadcrumb-item current">${cursSeleccionat.nom}</span>`;
+        }
+      }
+
+      // 4. Tema (només si està seleccionat)
+      if (temaSeleccionat) {
+        html += `<span class="breadcrumb-sep">›</span>`;
+        html += `<span class="breadcrumb-item current">${temaSeleccionat.titol}</span>`;
+      }
+
+      breadcrumb.innerHTML = html;
     }
 
     mostrarNivells();
