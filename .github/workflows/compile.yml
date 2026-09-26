@@ -26,7 +26,6 @@ jobs:
             texlive-latex-recommended \
             texlive-fonts-recommended \
             texlive-lang-spanish \
-            texlive-lang-catalan \
             texlive-science \
             texlive-pictures
 
@@ -39,8 +38,8 @@ jobs:
               for tex in "$tema_dir"/*.tex; do
                 [ -f "$tex" ] || continue
                 echo "Compilant $tex"
-                pdflatex -interaction=nonstopmode -output-directory="$tema_dir" "$tex" > /dev/null 2>&1 || true
-                pdflatex -interaction=nonstopmode -output-directory="$tema_dir" "$tex" > /dev/null 2>&1 || true
+                pdflatex -interaction=nonstopmode -output-directory="$tema_dir" "$tex" || true
+                pdflatex -interaction=nonstopmode -output-directory="$tema_dir" "$tex" || true
               done
             done
           done
