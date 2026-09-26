@@ -396,20 +396,43 @@
       let html = '';
 
       // ==========================================================
-      // CAS PAP: només Ex i Sol per any
+      // CAS PAP: múltiples convocatòries per any
       // ==========================================================
       if (esPAP) {
-        const pdfEx = fitxersTema.find(f => f === `${prefixTema}ex.pdf`);
-        const pdfSol = fitxersTema.find(f => f === `${prefixTema}sol.pdf`);
+        const totsExs = fitxersTema
+          .filter(f => new RegExp(`^${prefixTema}ex(?:_|\\.)`, 'i').test(f));
 
-        if (pdfEx) {
+        // Ordenem: ordinària primer, extraordinària després, la resta al final
+        const ordreConv = { 'ordinaria': 1, 'extraordinaria': 2 };
+        totsExs.sort((a, b) => {
+          const sa = ((a.match(/ex_?(.*)\.pdf$/i) || [])[1] || '').toLowerCase();
+          const sb = ((b.match(/ex_?(.*)\.pdf$/i) || [])[1] || '').toLowerCase();
+          return (ordreConv[sa] || 99) - (ordreConv[sb] || 99);
+        });
+
+        totsExs.forEach(pdfEx => {
+          const sensePrefix = pdfEx.substring(prefixTema.length);
+          const match = sensePrefix.match(/^ex_?(.*)\.pdf$/i);
+          const sufix = match && match[1] ? match[1] : '';
+
+          let pdfSol = null;
+          if (sufix) {
+            pdfSol = fitxersTema.find(f => f === `${prefixTema}sol_${sufix}.pdf`);
+          } else {
+            pdfSol = fitxersTema.find(f => f === `${prefixTema}sol.pdf`);
+          }
+
+          let nomConv = sufix
+            ? sufix.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
+            : 'Examen';
+
           html += `<div class="ex-sol-row">`;
-          html += `<a class="btn-link secondary" href="${cursId}/${pdfEx}" target="_blank">✏️ Examen</a>`;
+          html += `<a class="btn-link secondary" href="${cursId}/${pdfEx}" target="_blank">✏️ ${nomConv}</a>`;
           html += pdfSol
-            ? `<a class="btn-link success" href="${cursId}/${pdfSol}" target="_blank">✅ Solucions</a>`
+            ? `<a class="btn-link success" href="${cursId}/${pdfSol}" target="_blank">✅ Sol. ${nomConv}</a>`
             : `<span></span>`;
           html += `</div>`;
-        }
+        });
 
         container.innerHTML = html || `<span class="loading-text">Cap material disponible</span>`;
         return;
@@ -589,7 +612,10 @@
                   { num: 2026, titol: "PAP 2026" },
                   { num: 2025, titol: "PAP 2025" },
                   { num: 2024, titol: "PAP 2024" },
-                  { num: 2023, titol: "PAP 2023" }
+                  { num: 2023, titol: "PAP 2023" },
+                  { num: 2022, titol: "PAP 2022" },
+                  { num: 2021, titol: "PAP 2021" },
+                  { num: 2020, titol: "PAP 2020" }
                 ]
               }
             ]
