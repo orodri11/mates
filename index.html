@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+
   <style>
     :root {
       --primary: #0284c7;
@@ -88,7 +88,7 @@
       z-index: 10;
     }
 
-    .navigation-bar { display: flex; align-items: center; gap: 12px; }
+    .navigation-bar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 
     .btn-back {
       background: var(--card-bg);
@@ -103,7 +103,7 @@
     }
 
     .breadcrumb {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       color: var(--text-muted);
       background: var(--card-bg);
@@ -173,58 +173,119 @@
 
     .section-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-    .topics-list { display: flex; flex-direction: column; gap: 12px; }
+    /* LLISTA DE TEMES (nivell 2) */
+    .topics-list { display: flex; flex-direction: column; gap: 10px; }
 
-    .topic-card {
+    .tema-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 18px 20px;
+      padding: 18px 22px;
+      cursor: pointer;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s;
       display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .tema-card:hover {
+      transform: translateX(4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .tema-card-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    .tema-card-arrow {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      transition: all 0.2s;
+    }
+
+    .tema-card:hover .tema-card-arrow {
+      color: var(--primary);
+      transform: translateX(3px);
+    }
+
+    /* DETALL DEL TEMA (nivell 3) */
+    .tema-detail {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
       box-shadow: var(--shadow-sm);
     }
 
-    .topic-title { font-weight: 600; font-size: 0.98rem; color: var(--text); }
-
-    .buttons-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      min-height: 32px;
-      align-items: flex-start;
-      width: 100%;
+    .tema-detail-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 22px;
+      padding-bottom: 18px;
+      border-bottom: 2px solid var(--primary-light);
     }
 
-    /* Parelles verticals per alineació d'exercicis i solucions */
-    .item-pair {
+    .apunts-row {
+      margin-bottom: 22px;
+      padding-bottom: 22px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .ex-sol-grid {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .ex-sol-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      align-items: stretch;
     }
 
     .btn-link {
-      padding: 6px 12px;
+      padding: 10px 14px;
       color: white;
       text-decoration: none;
-      border-radius: 6px;
-      font-size: 0.82rem;
+      border-radius: 8px;
+      font-size: 0.88rem;
       font-weight: 600;
       transition: all 0.2s;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      justify-content: center;
+      gap: 6px;
+      text-align: center;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
+
+    .btn-link:hover { filter: brightness(1.08); }
 
     .btn-link.primary { background-color: var(--primary); }
     .btn-link.secondary { background-color: #334155; }
     .btn-link.success { background-color: #16a34a; }
 
-    .loading-text { font-size: 0.8rem; color: var(--text-muted); font-style: italic; }
+    .apunts-row .btn-link {
+      width: 100%;
+      padding: 14px 20px;
+      font-size: 1rem;
+    }
+
+    .loading-text { font-size: 0.85rem; color: var(--text-muted); font-style: italic; }
+
+    @media (max-width: 500px) {
+      .ex-sol-row { grid-template-columns: 1fr; }
+      h1 { font-size: 1.6rem; }
+    }
 
     .disclaimer-card {
       margin-top: 40px;
@@ -307,63 +368,74 @@
       return [];
     }
 
-    async function carregarBotonsTema(cursId, numTema, containerId) {
+    async function carregarContingutTema(cursId, numTema, containerId) {
       const container = document.getElementById(containerId);
       const fitxers = await obtenirLlistaFitxersCurs(cursId);
-      let htmlBotons = '';
-
       const prefixTema = `Tema${numTema}_`;
       const fitxersTema = fitxers.filter(f => f.startsWith(prefixTema));
 
-      // 1. APUNTS
+      let html = '';
+
+      // 1. APUNTS (a dalt, destacat)
       const pdfApunts = fitxersTema.find(f => f === `${prefixTema}apunts.pdf` || f === `${prefixTema}main.pdf`);
       if (pdfApunts) {
-        htmlBotons += `
-          <div class="item-pair">
+        html += `
+          <div class="apunts-row">
             <a class="btn-link primary" href="${cursId}/${pdfApunts}" target="_blank">📄 Apunts</a>
           </div>`;
       }
 
-      // 2. EXERCICIS I SOLUCIONS ÚNICS
+      // 2. EXERCICIS I SOLUCIONS
+      html += `<div class="ex-sol-grid">`;
+
+      // 2a. Exercicis/Solucions generals (sense número)
       const pdfExUnic = fitxersTema.find(f => f === `${prefixTema}exercicis.pdf`);
       const pdfSolUnic = fitxersTema.find(f => f === `${prefixTema}solucions.pdf`);
-
       if (pdfExUnic) {
-        htmlBotons += `
-          <div class="item-pair">
-            <a class="btn-link secondary" href="${cursId}/${pdfExUnic}" target="_blank">✏️ Exercicis</a>
-            ${pdfSolUnic ? `<a class="btn-link success" href="${cursId}/${pdfSolUnic}" target="_blank">✅ Solucions</a>` : ''}
-          </div>`;
+        html += `<div class="ex-sol-row">`;
+        html += `<a class="btn-link secondary" href="${cursId}/${pdfExUnic}" target="_blank">✏️ Exercicis</a>`;
+        html += pdfSolUnic
+          ? `<a class="btn-link success" href="${cursId}/${pdfSolUnic}" target="_blank">✅ Solucions</a>`
+          : `<span></span>`;
+        html += `</div>`;
       }
 
-      // 3. EXERCICIS I SOLUCIONS PER PARTS (ex1, ex2, ex1_Intervals, etc.)
-      let i = 1;
-      while (i <= 10) {
-        const pdfEx = fitxersTema.find(f => f.startsWith(`${prefixTema}ex${i}.pdf`) || f.startsWith(`${prefixTema}ex${i}_`));
-        const pdfSol = fitxersTema.find(f => f.startsWith(`${prefixTema}sol${i}.pdf`) || f.startsWith(`${prefixTema}sol${i}_`));
+      // 2b. Exercicis numerats ex1, ex2, ex3... (amb la seva solució a la dreta)
+      const totsExs = fitxersTema
+        .filter(f => /^Tema\d+_ex\d+(?:_|\.)/i.test(f))
+        .sort((a, b) => {
+          const na = parseInt(a.match(/_ex(\d+)/i)[1], 10);
+          const nb = parseInt(b.match(/_ex(\d+)/i)[1], 10);
+          return na - nb;
+        });
 
-        if (pdfEx || pdfSol) {
-          // Extreure el títol del fitxer si en té (ex: Tema1_ex1_Intervals.pdf -> Intervals)
-          let nomEx = `Part ${i}`;
-          if (pdfEx && pdfEx.includes(`_ex${i}_`)) {
-            const rawName = pdfEx.split(`_ex${i}_`)[1].replace('.pdf', '');
-            nomEx = rawName.replace(/[-_]/g, ' ');
-          } else if (pdfSol && pdfSol.includes(`_sol${i}_`)) {
-            const rawName = pdfSol.split(`_sol${i}_`)[1].replace('.pdf', '');
-            nomEx = rawName.replace(/[-_]/g, ' ');
-          }
+      totsExs.forEach(pdfEx => {
+        const match = pdfEx.match(/_ex(\d+)(?:_(.+))?\.pdf$/i);
+        if (!match) return;
+        const numEx = match[1];
+        const nomExtra = match[2] ? match[2].replace(/[-_]/g, ' ') : '';
+        const nomEx = nomExtra || `Part ${numEx}`;
 
-          htmlBotons += `<div class="item-pair">`;
-          if (pdfEx) htmlBotons += `<a class="btn-link secondary" href="${cursId}/${pdfEx}" target="_blank">✏️ Ex. ${nomEx}</a>`;
-          if (pdfSol) htmlBotons += `<a class="btn-link success" href="${cursId}/${pdfSol}" target="_blank">✅ Sol. ${nomEx}</a>`;
-          htmlBotons += `</div>`;
-          i++;
-        } else {
-          break;
-        }
-      }
+        const pdfSol = fitxersTema.find(f =>
+          f.startsWith(`${prefixTema}sol${numEx}_`) ||
+          f === `${prefixTema}sol${numEx}.pdf`
+        );
 
-      container.innerHTML = htmlBotons || `<span class="loading-text">Cap material disponible</span>`;
+        html += `<div class="ex-sol-row">`;
+        html += `<a class="btn-link secondary" href="${cursId}/${pdfEx}" target="_blank">✏️ Ex. ${nomEx}</a>`;
+        html += pdfSol
+          ? `<a class="btn-link success" href="${cursId}/${pdfSol}" target="_blank">✅ Sol. ${nomEx}</a>`
+          : `<span></span>`;
+        html += `</div>`;
+      });
+
+      html += `</div>`;
+
+      // Si no hi ha res de res
+      const teContingut = pdfApunts || pdfExUnic || totsExs.length > 0;
+      container.innerHTML = teContingut
+        ? html
+        : `<span class="loading-text">Cap material disponible</span>`;
     }
 
     // =================================================================
@@ -391,7 +463,7 @@
                   { num: 6, titol: "UD 6. Introducció a les funcions i funcions elementals" },
                   { num: 7, titol: "UD 7. Límits i continuïtat" },
                   { num: 8, titol: "UD 8. Derivades" },
-                  { num: 9, titol: "UD 9. Conceptes d’estadística i probabilitat" }
+                  { num: 9, titol: "UD 9. Conceptes d'estadística i probabilitat" }
                 ]
               },
               {
@@ -491,6 +563,7 @@
     // =================================================================
     let nivellSeleccionat = null;
     let cursSeleccionat = null;
+    let temaSeleccionat = null;
 
     const appContainer = document.getElementById('app');
     const navBar = document.getElementById('navBar');
@@ -499,6 +572,7 @@
     function mostrarNivells() {
       nivellSeleccionat = null;
       cursSeleccionat = null;
+      temaSeleccionat = null;
       navBar.classList.add('hidden');
 
       let html = `<div class="cards-grid">`;
@@ -519,6 +593,7 @@
     function seleccionarNivell(idNivell) {
       nivellSeleccionat = estructuraWeb.find(n => n.idNivell === idNivell);
       cursSeleccionat = null;
+      temaSeleccionat = null;
 
       navBar.classList.remove('hidden');
       breadcrumb.innerText = nivellSeleccionat.titolNivell;
@@ -551,33 +626,44 @@
       });
 
       cursSeleccionat = trobat;
+      temaSeleccionat = null;
       breadcrumb.innerText = `${nivellSeleccionat.titolNivell} > ${cursSeleccionat.nom}`;
 
       let html = `<div class="topics-list">`;
-
-      cursSeleccionat.temes.forEach((tema) => {
-        const containerId = `btn-group-${cursSeleccionat.id}-${tema.num}`;
+      cursSeleccionat.temes.forEach(tema => {
         html += `
-          <div class="topic-card">
-            <span class="topic-title">${tema.titol}</span>
-            <div class="buttons-group" id="${containerId}">
-              <span class="loading-text">Comprovant materials...</span>
-            </div>
+          <div class="tema-card" onclick="seleccionarTema(${tema.num})">
+            <span class="tema-card-title">${tema.titol}</span>
+            <span class="tema-card-arrow">→</span>
           </div>
         `;
       });
-
       html += `</div>`;
-      appContainer.innerHTML = html;
 
-      cursSeleccionat.temes.forEach((tema) => {
-        const containerId = `btn-group-${cursSeleccionat.id}-${tema.num}`;
-        carregarBotonsTema(cursSeleccionat.id, tema.num, containerId);
-      });
+      appContainer.innerHTML = html;
+    }
+
+    function seleccionarTema(numTema) {
+      const tema = cursSeleccionat.temes.find(t => t.num === numTema);
+      temaSeleccionat = tema;
+      breadcrumb.innerText = `${nivellSeleccionat.titolNivell} > ${cursSeleccionat.nom} > ${tema.titol}`;
+
+      appContainer.innerHTML = `
+        <div class="tema-detail">
+          <h2 class="tema-detail-title">${tema.titol}</h2>
+          <div id="tema-contingut">
+            <span class="loading-text">Carregant materials...</span>
+          </div>
+        </div>
+      `;
+
+      carregarContingutTema(cursSeleccionat.id, tema.num, 'tema-contingut');
     }
 
     function tornarEnrere() {
-      if (cursSeleccionat) {
+      if (temaSeleccionat) {
+        seleccionarCurs(cursSeleccionat.id);
+      } else if (cursSeleccionat) {
         seleccionarNivell(nivellSeleccionat.idNivell);
       } else if (nivellSeleccionat) {
         mostrarNivells();
@@ -588,4 +674,3 @@
   </script>
 </body>
 </html>
-
