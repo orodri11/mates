@@ -31,7 +31,7 @@ jobs:
 
       - name: Compilar tots els .tex (2 passades)
         run: |
-          for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
+          for curs in 1ESO 2ESO 3ESO 4ESO 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
             [ -d "$curs" ] || continue
             for tema_dir in "$curs"/*/; do
               tema_dir="${tema_dir%/}"
@@ -48,10 +48,9 @@ jobs:
       - name: Organitzar PDFs a public/
         run: |
           shopt -s nullglob
-
           mkdir -p public
 
-          for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
+          for curs in 1ESO 2ESO 3ESO 4ESO 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
             [ -d "$curs" ] || continue
             mkdir -p "public/$curs"
 
@@ -87,7 +86,7 @@ jobs:
 
       - name: Generar files.json
         run: |
-          for curs in 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
+          for curs in 1ESO 2ESO 3ESO 4ESO 1BATX_MACS 1BATX_CCTT 2BATX_MACS 2BATX_CCTT PAU PAP; do
             [ -d "public/$curs" ] || continue
             cd "public/$curs"
             files=$(ls *.pdf 2>/dev/null | sed 's/.*/"&"/' | paste -sd ',' -)
