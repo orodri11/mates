@@ -384,7 +384,7 @@
     <div class="header-content">
       <div class="teacher-badge"><span>👨‍🏫 Professor: Òscar Rodríguez</span></div>
       <h1>Materials de Matemàtiques</h1>
-      <p class="subtitle">Apunts, exercicis i recursos didàctics per a Batxillerat i PAU/PAP</p>
+      <p class="subtitle">Apunts, exercicis i recursos didàctics per a ESO, Batxillerat i PAU/PAP</p>
       <a href="mailto:orodri11@xtec.cat" class="contact-btn">✉️ orodri11@xtec.cat</a>
     </div>
   </header>
@@ -447,7 +447,6 @@
         const totsExs = fitxersTema
           .filter(f => new RegExp(`^${prefixTema}ex(?:_|\\.)`, 'i').test(f));
 
-        // Ordenem: ordinària primer, extraordinària després, la resta al final
         const ordreConv = { 'ordinaria': 1, 'extraordinaria': 2 };
         totsExs.sort((a, b) => {
           const sa = ((a.match(/ex_?(.*)\.pdf$/i) || [])[1] || '').toLowerCase();
@@ -555,6 +554,84 @@
     // ESTRUCTURA DE CURSOS
     // =================================================================
     const estructuraWeb = [
+      {
+        idNivell: "ESO",
+        titolNivell: "ESO",
+        desc: "Educació Secundària Obligatòria",
+        icona: "📚",
+        subseccions: [
+          {
+            titolSubseccio: "Cursos d'ESO",
+            cursos: [
+              {
+                id: "1ESO",
+                nom: "1r ESO",
+                temes: [
+                  { num: 1, titol: "Tema 1. Nombres naturals" },
+                  { num: 2, titol: "Tema 2. Divisibilitat" },
+                  { num: 3, titol: "Tema 3. Nombres enters" },
+                  { num: 4, titol: "Tema 4. Fraccions" },
+                  { num: 5, titol: "Tema 5. Nombres decimals" },
+                  { num: 6, titol: "Tema 6. Proporcionalitat i percentatges" },
+                  { num: 7, titol: "Tema 7. Àlgebra" },
+                  { num: 8, titol: "Tema 8. Equacions" },
+                  { num: 9, titol: "Tema 9. Geometria" },
+                  { num: 10, titol: "Tema 10. Funcions" },
+                  { num: 11, titol: "Tema 11. Estadística i probabilitat" }
+                ]
+              },
+              {
+                id: "2ESO",
+                nom: "2n ESO",
+                temes: [
+                  { num: 1, titol: "Tema 1. Nombres enters i potències" },
+                  { num: 2, titol: "Tema 2. Fraccions i decimals" },
+                  { num: 3, titol: "Tema 3. Proporcionalitat" },
+                  { num: 4, titol: "Tema 4. Àlgebra i equacions" },
+                  { num: 5, titol: "Tema 5. Sistemes d'equacions" },
+                  { num: 6, titol: "Tema 6. Teorema de Pitàgores" },
+                  { num: 7, titol: "Tema 7. Semblança" },
+                  { num: 8, titol: "Tema 8. Cossos geomètrics" },
+                  { num: 9, titol: "Tema 9. Funcions" },
+                  { num: 10, titol: "Tema 10. Estadística i probabilitat" }
+                ]
+              },
+              {
+                id: "3ESO",
+                nom: "3r ESO",
+                temes: [
+                  { num: 1, titol: "Tema 1. Nombres racionals i irracionals" },
+                  { num: 2, titol: "Tema 2. Potències i arrels" },
+                  { num: 3, titol: "Tema 3. Polinomis" },
+                  { num: 4, titol: "Tema 4. Equacions i sistemes" },
+                  { num: 5, titol: "Tema 5. Successions" },
+                  { num: 6, titol: "Tema 6. Funcions i gràfiques" },
+                  { num: 7, titol: "Tema 7. Geometria del pla" },
+                  { num: 8, titol: "Tema 8. Moviments i transformacions" },
+                  { num: 9, titol: "Tema 9. Estadística" },
+                  { num: 10, titol: "Tema 10. Probabilitat" }
+                ]
+              },
+              {
+                id: "4ESO",
+                nom: "4t ESO",
+                temes: [
+                  { num: 1, titol: "Tema 1. Nombres reals" },
+                  { num: 2, titol: "Tema 2. Polinomis i fraccions algebraiques" },
+                  { num: 3, titol: "Tema 3. Equacions i inequacions" },
+                  { num: 4, titol: "Tema 4. Sistemes d'equacions" },
+                  { num: 5, titol: "Tema 5. Funcions elementals" },
+                  { num: 6, titol: "Tema 6. Trigonometria" },
+                  { num: 7, titol: "Tema 7. Geometria analítica" },
+                  { num: 8, titol: "Tema 8. Estadística" },
+                  { num: 9, titol: "Tema 9. Probabilitat" },
+                  { num: 10, titol: "Tema 10. Combinatòria" }
+                ]
+              }
+            ]
+          }
+        ]
+      },
       {
         idNivell: "BATXILLERAT",
         titolNivell: "BATXILLERAT",
